@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cyber CI · 100 Défis · Cours détaillés</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:#0a0e1a;color:#e2e8f0;line-height:1.65}
+header{background:#111827;padding:14px 20px;display:flex;justify-content:space-between;border-bottom:2px solid #00d4ff;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:50}
+header h1{color:#00d4ff;font-size:1rem;cursor:pointer}
+.stats{color:#94a3b8;font-size:0.85rem}
+.stats b{color:#00d4ff}
+main{max-width:980px;margin:0 auto;padding:16px}
+.card{background:#111827;border-radius:12px;padding:20px;margin-bottom:16px;border:1px solid #263243}
+h2{color:#00d4ff;margin-bottom:10px;font-size:1.3rem}
+h3{color:#22c55e;margin:14px 0 8px;font-size:1rem}
+p{margin:8px 0}
+ul,ol{padding-left:22px;margin:8px 0}
+li{margin-bottom:4px}
+code{background:#1f2937;padding:2px 6px;border-radius:4px;color:#00d4ff;font-size:0.9em}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:0.9em}
+th,td{border:1px solid #1f2937;padding:8px;text-align:left}
+th{background:#1f2937;color:#00d4ff}
+a{color:#00d4ff}
+.meta{display:flex;gap:12px;font-size:0.8rem;color:#94a3b8;margin-bottom:8px;flex-wrap:wrap}
+.intro{background:#0c4a6e;padding:14px;border-radius:10px;margin:12px 0;border-left:4px solid #00d4ff}
+.analogy{background:#164e63;padding:12px;border-radius:10px;margin:12px 0;border-left:4px solid #22d3ee;font-style:italic}
+.section{background:#0f172a;padding:16px;border-radius:10px;margin:14px 0;border-left:4px solid #a78bfa}
+.section h3{color:#c4b5fd;margin-top:0}
+.why{background:#4c1d95;padding:12px;border-radius:8px;margin:12px 0;border-left:3px solid #a78bfa}
+.bank{background:#14532d;padding:12px;border-radius:8px;margin:12px 0;border-left:3px solid #4ade80}
+.glo{background:#1e293b;padding:12px;border-radius:8px;margin:12px 0;border-left:3px solid #94a3b8}
+.glo b{color:#fbbf24}
+.pr{background:#052e16;padding:14px;border-radius:10px;margin:14px 0;border-left:4px solid #22c55e}
+.er{background:#7f1d1d;padding:12px;border-radius:8px;margin:12px 0;border-left:3px solid #ef4444}
+.df{background:#78350f;padding:12px;border-radius:8px;margin:12px 0;border-left:3px solid #fbbf24}
+.car{background:#1e1b4b;padding:14px;border-radius:10px;margin:12px 0;border-left:4px solid #a78bfa}
+.svg-box{background:#050914;border-radius:10px;padding:16px;margin:14px 0;text-align:center;border:1px solid #1e293b}
+.svg-box svg{max-width:100%;height:auto;display:block;margin:0 auto}
+.quiz{background:#1f2937;padding:14px;border-radius:10px;margin-top:14px}
+.q{margin-bottom:14px}
+.q label{display:block;padding:9px 12px;margin:5px 0;background:#111827;border-radius:7px;cursor:pointer}
+.q label:hover{background:#334155}
+.q input{margin-right:10px}
+.ok{background:#14532d!important;border-left:4px solid #22c55e!important}
+.ko{background:#7f1d1d!important;border-left:4px solid #ef4444!important}
+.exp{background:#050914;padding:10px;border-radius:6px;margin-top:8px;font-size:0.85em;color:#cbd5e1;border-left:3px solid #fbbf24;display:none}
+.nav{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+button{background:#00d4ff;color:#0a0e1a;border:none;padding:10px 18px;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.9rem}
+button:hover{background:#5ee0ff}
+button.sec{background:#1f2937;color:#e2e8f0}
+button.gold{background:#fbbf24;color:#0a0e1a}
+button.exam{background:#a855f7;color:#fff}
+button.exam:hover{background:#c084fc}
+.res{margin-top:12px;padding:12px;border-radius:8px;font-weight:700;text-align:center}
+.res.g{background:#14532d;color:#86efac}
+.res.r{background:#7f1d1d;color:#fca5a5}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;margin-top:10px}
+.btn{background:#1f2937;padding:10px;border-radius:8px;cursor:pointer;border:2px solid transparent}
+.btn:hover{border-color:#00d4ff}
+.btn.done{border-color:#22c55e;background:#14532d}
+.btn .n{font-weight:800;color:#00d4ff;display:block;font-size:0.75rem}
+.btn.done .n{color:#22c55e}
+.btn .ti{display:block;font-size:0.78rem;color:#94a3b8;margin-top:2px}
+.stat{background:#1e293b;padding:16px;border-radius:12px;border-left:4px solid #00d4ff;text-align:center}
+.stat .big{font-size:2em;font-weight:800;color:#00d4ff;display:block}
+.stat .lbl{font-size:0.85em;color:#94a3b8}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}
+.cert{background:#0c4a6e;padding:14px;border-radius:10px;margin:10px 0;border-left:4px solid #00d4ff}
+.cert h4{color:#7dd3fc;margin:0 0 6px}
+.cert.done{background:#14532d;border-left-color:#22c55e}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:0.7em;font-weight:700;margin-left:6px}
+.badge.free{background:#14532d;color:#86efac}
+.badge.partial{background:#78350f;color:#fde68a}
+.badge.exam{background:#a855f7;color:#fff}
+.job{background:#1f2937;padding:12px;border-radius:10px;border-left:4px solid #22c55e;margin-bottom:10px}
+.job h4{margin:0 0 4px;color:#86efac}
+.exam-card{background:linear-gradient(135deg,#4c1d95 0%,#1e1b4b 100%);padding:16px;border-radius:12px;margin:12px 0;border-left:4px solid #a855f7}
+.exam-card h4{color:#e9d5ff;margin:0 0 8px;font-size:1.05rem}
+.exam-card.locked{opacity:0.6;border-left-color:#475569;background:#1e293b}
+.exam-card.passed{background:linear-gradient(135deg,#14532d 0%,#052e16 100%);border-left-color:#22c55e}
+.exam-card.passed h4{color:#86efac}
+.exam-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:0.72em;font-weight:800;margin-bottom:6px}
+.exam-badge.locked{background:#334155;color:#94a3b8}
+.exam-badge.ready{background:#7c3aed;color:#fff}
+.exam-badge.passed{background:#22c55e;color:#052e16}
+.qcount{color:#cbd5e1;font-size:0.85em;margin:6px 0}
+footer{text-align:center;padding:20px;color:#94a3b8;font-size:0.78em}
+</style>
+</head>
+<body>
+<header>
+  <h1 onclick="render()">Cyber CI</h1>
+  <div class="stats" id="hs"></div>
+</header>
+<main id="app"></main>
+<footer>Etudiant L2 UVCI - Objectif Banque CI</footer>
+
+<script>
+var SVG = {
+PC: '<svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg"><rect x="140" y="20" width="220" height="150" fill="#1e293b" stroke="#00d4ff" stroke-width="2" rx="8"/><text x="250" y="42" fill="#00d4ff" text-anchor="middle" font-weight="bold" font-size="12">CARTE MERE</text><rect x="165" y="60" width="70" height="45" fill="#0c4a6e" stroke="#22c55e" stroke-width="2"/><text x="200" y="82" fill="#22c55e" text-anchor="middle" font-weight="bold" font-size="12">CPU</text><rect x="255" y="60" width="85" height="12" fill="#0c4a6e" stroke="#fbbf24"/><text x="297" y="69" fill="#fbbf24" text-anchor="middle" font-size="9">RAM</text><rect x="255" y="76" width="85" height="12" fill="#0c4a6e" stroke="#fbbf24"/><rect x="165" y="120" width="175" height="30" fill="#0c4a6e" stroke="#ef4444" stroke-width="2"/><text x="252" y="139" fill="#ef4444" text-anchor="middle" font-weight="bold" font-size="11">DISQUE</text></svg>',
+CPU: '<svg viewBox="0 0 500 130" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="40" width="140" height="55" fill="#0c4a6e" stroke="#00d4ff" stroke-width="2" rx="6"/><text x="80" y="62" fill="#00d4ff" text-anchor="middle" font-weight="bold" font-size="12">1. FETCH</text><text x="80" y="80" fill="#94a3b8" text-anchor="middle" font-size="9">Lire</text><polygon points="155,67 170,60 170,74" fill="#22c55e"/><rect x="175" y="40" width="140" height="55" fill="#0c4a6e" stroke="#00d4ff" stroke-width="2" rx="6"/><text x="245" y="62" fill="#00d4ff" text-anchor="middle" font-weight="bold" font-size="12">2. DECODE</text><text x="245" y="80" fill="#94a3b8" text-anchor="middle" font-size="9">Decoder</text><polygon points="320,67 335,60 335,74" fill="#22c55e"/><rect x="340" y="40" width="140" height="55" fill="#0c4a6e" stroke="#00d4ff" stroke-width="2" rx="6"/><text x="410" y="62" fill="#00d4ff" text-anchor="middle" font-weight="bold" font-size="12">3. EXECUTE</text><text x="410" y="80" fill="#94a3b8" text-anchor="middle" font-size="9">Executer</text></svg>',
+RAM: '<svg viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="20" width="210" height="120" fill="#052e16" stroke="#22c55e" stroke-width="2" rx="10"/><text x="135" y="45" fill="#22c55e" text-anchor="middle" font-weight="bold" font-size="13">RAM rapide</text><text x="135" y="70" fill="#86efac" text-anchor="middle" font-size="10">8-64 Go</text><text x="135" y="100" fill="#fbbf24" text-anchor="middle" font-size="11">Volatile</text><rect x="260" y="20" width="210" height="120" fill="#7f1d1d" stroke="#ef4444" stroke-width="2" rx="10"/><text x="365" y="45" fill="#ef4444" text-anchor="middle" font-weight="bold" font-size="13">DISQUE lent</text><text x="365" y="70" fill="#fca5a5" text-anchor="middle" font-size="10">500 Go-4 To</text><text x="365" y="100" fill="#fbbf24" text-anchor="middle" font-size="11">Permanent</text></svg>',
+DISK: '<svg viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="20" width="210" height="120" fill="#1e293b" stroke="#ef4444" stroke-width="2" rx="10"/><text x="135" y="45" fill="#ef4444" text-anchor="middle" font-weight="bold" font-size="13">HDD</text><circle cx="135" cy="95" r="30" fill="none" stroke="#94a3b8" stroke-width="2"/><circle cx="135" cy="95" r="8" fill="#94a3b8"/><text x="135" y="150" fill="#94a3b8" text-anchor="middle" font-size="10">Plateaux</text><rect x="260" y="20" width="210" height="120" fill="#1e293b" stroke="#22c55e" stroke-width="2" rx="10"/><text x="365" y="45" fill="#22c55e" text-anchor="middle" font-weight="bold" font-size="13">SSD</text><rect x="285" y="70" width="30" height="40" fill="#0c4a6e" stroke="#22c55e"/><rect x="325" y="70" width="30" height="40" fill="#0c4a6e" stroke="#22c55e"/><rect x="365" y="70" width="30" height="40" fill="#0c4a6e" stroke="#22c55e"/><rect x="405" y="70" width="30" height="40" fill="#0c4a6e" stroke="#22c55e"/><text x="365" y="150" fill="#94a3b8" text-anchor="middle" font-size="10">Flash NAND</text></svg>',
+BIOS: '<svg viewBox="0 0 500 190" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="20" width="460" height="35" fill="#7f1d1d" stroke="#ef4444" stroke-width="2" rx="6"/><text x="250" y="42" fill="#fca5a5" text-anchor="middle" font-weight="bold" font-size="12">1. POWER ON - BIOS POST</text><polygon points="250,58 245,68 255,68" fill="#fbbf24"/><rect x="20" y="72" width="460" height="35" fill="#78350f" stroke="#fbbf24" stroke-width="2" rx="6"/><text x="250" y="94" fill="#fde68a" text-anchor="middle" font-weight="bold" font-size="12">2. Test materiel</text><polygon points="250,110 245,120 255,120" fill="#22c55e"/><rect x="20" y="124" width="460" height="35" fill="#052e16" stroke="#22c55e" stroke-width="2" rx="6"/><text x="250" y="146" fill="#86efac" text-anchor="middle" font-weight="bold" font-size="12">3. Bootloader - OS</text></svg>',
+OS: '<svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg"><rect x="60" y="20" width="380" height="40" fill="#052e16" stroke="#22c55e" stroke-width="2" rx="6"/><text x="250" y="46" fill="#86efac" text-anchor="middle" font-weight="bold" font-size="12">APPLICATIONS</text><rect x="60" y="70" width="380" height="40" fill="#0c4a6e" stroke="#00d4ff" stroke-width="2" rx="6"/><text x="250" y="96" fill="#7dd3fc" text-anchor="middle" font-weight="bold" font-size="12">SHELL</text><rect x="60" y="120" width="380" height="40" fill="#7f1d1d" stroke="#ef4444" stroke-width="2" rx="6"/><text x="250" y="146" fill="#fca5a5" text-anchor="middle" font-weight="bold" font-size="12">KERNEL</text><rect x="60" y="170" width="380" height="20" fill="#1e293b" stroke="#94a3b8" rx="6"/><text x="250" y="185" fill="#cbd5e1" text-anchor="middle" font-size="10">MATERIEL</text></svg>',
+FILES: '<svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" font-family="monospace" font-size="12"><text x="20" y="25" fill="#00d4ff" font-weight="bold">cyber/</text><text x="40" y="45" fill="#94a3b8">labs/</text><text x="40" y="65" fill="#94a3b8">tools/</text><text x="40" y="85" fill="#94a3b8">notes/</text><text x="40" y="105" fill="#94a3b8">ctfs/</text><text x="40" y="125" fill="#94a3b8">reports/</text><text x="40" y="145" fill="#94a3b8">README.md</text></svg>',
+KEYBOARD: '<svg viewBox="0 0 500 130" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="35" width="105" height="32" fill="#1e293b" stroke="#00d4ff" rx="4"/><text x="72" y="55" fill="#00d4ff" text-anchor="middle" font-size="10">Ctrl+C</text><rect x="135" y="35" width="105" height="32" fill="#1e293b" stroke="#00d4ff" rx="4"/><text x="187" y="55" fill="#00d4ff" text-anchor="middle" font-size="10">Ctrl+V</text><rect x="250" y="35" width="105" height="32" fill="#1e293b" stroke="#00d4ff" rx="4"/><text x="302" y="55" fill="#00d4ff" text-anchor="middle" font-size="10">Ctrl+Z</text><rect x="365" y="35" width="105" height="32" fill="#1e293b" stroke="#00d4ff" rx="4"/><text x="417" y="55" fill="#00d4ff" text-anchor="middle" font-size="10">Ctrl+S</text><rect x="20" y="80" width="105" height="32" fill="#1e293b" stroke="#fbbf24" rx="4"/><text x="72" y="100" fill="#fbbf24" text-anchor="middle" font-size="10">Alt+Tab</text><rect x="135" y="80" width="105" height="32" fill="#1e293b" stroke="#fbbf24" rx="4"/><text x="187" y="100" fill="#fbbf24" text-anchor="middle" font-size="10">Win+L</text><rect x="250" y="80" width="105" height="32" fill="#1e293b" stroke="#fbbf24" rx="4"/><text x="302" y="100" fill="#fbbf24" text-anchor="middle" font-size="10">Ctrl+F</text><rect x="365" y="80" width="105" height="32" fill="#1e293b" stroke="#fbbf24" rx="4"/><text x="417" y="100" fill="#fbbf24" text-anchor="middle" font-size="10">Ctrl+A</text></svg>',
+BACKUP: '<svg viewBox="0 0 500 130" xmlns="http://www.w3.org/2000/svg"><circle cx="90" cy="75" r="38" fill="#0c4a6e" stroke="#00d4ff" stroke-width="2"/><text x="90" y="72" fill="#00d4ff" text-anchor="middle" font-weight="bold" font-size="22">3</text><text x="90" y="90" fill="#7dd3fc" text-anchor="middle" font-size="10">copies</text><circle cx="250" cy="75" r="38" fill="#052e16" stroke="#22c55e" stroke-width="2"/><text x="250" y="72" fill="#22c55e" text-anchor="middle" font-weight="bold" font-size="22">2</text><text x="250" y="90" fill="#86efac" text-anchor="middle" font-size="10">supports</text><circle cx="410" cy="75" r="38" fill="#78350f" stroke="#fbbf24" stroke-width="2"/><text x="410" y="72" fill="#fbbf24" text-anchor="middle" font-weight="bold" font-size="22">1</text><text x="410" y="90" fill="#fde68a" text-anchor="middle" font-size="10">hors site</text></svg>',
+PERMS: '<svg viewBox="0 0 500 140" xmlns="http://www.w3.org/2000/svg"><text x="250" y="20" fill="#00d4ff" text-anchor="middle" font-weight="bold" font-size="12">-rwxr-xr-x (755)</text><text x="180" y="55" fill="#00d4ff" text-anchor="middle" font-weight="bold" font-size="14">rwx</text><text x="180" y="72" fill="#7dd3fc" text-anchor="middle" font-size="9">User (7)</text><text x="290" y="55" fill="#22c55e" text-anchor="middle" font-weight="bold" font-size="14">r-x</text><text x="290" y="72" fill="#86efac" text-anchor="middle" font-size="9">Group (5)</text><text x="400" y="55" fill="#fbbf24" text-anchor="middle" font-weight="bold" font-size="14">r-x</text><text x="400" y="72" fill="#fde68a" text-anchor="middle" font-size="9">Others (5)</text><text x="250" y="105" fill="#94a3b8" text-anchor="middle" font-size="10">r=4 w=2 x=1</text><text x="250" y="125" fill="#22c55e" text-anchor="middle" font-size="10">755 644 600</text></svg>',
+OSI: '<svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg"><rect x="80" y="24" width="340" height="22" fill="#7f1d1d" stroke="#ef4444" rx="3"/><text x="250" y="39" fill="#fca5a5" text-anchor="middle" font-size="10">7 Application</text><rect x="80" y="50" width="340" height="22" fill="#78350f" stroke="#fbbf24" rx="3"/><text x="250" y="65" fill="#fde68a" text-anchor="middle" font-size="10">6 Presentation</text><rect x="80" y="76" width="340" height="22" fill="#713f12" stroke="#fbbf24" rx="3"/><text x="250" y="91" fill="#fde68a" text-anchor="middle" font-size="10">5 Session</text><rect x="80" y="102" width="340" height="22" fill="#052e16" stroke="#22c55e" rx="3"/><text x="250" y="117" fill="#86efac" text-anchor="middle" font-size="10">4 Transport</text><rect x="80" y="128" width="340" height="22" fill="#0c4a6e" stroke="#00d4ff" rx="3"/><text x="250" y="143" fill="#7dd3fc" text-anchor="middle" font-size="10">3 Reseau</text><rect x="80" y="154" width="340" height="22" fill="#1e293b" stroke="#94a3b8" rx="3"/><text x="250" y="169" fill="#cbd5e1" text-anchor="middle" font-size="10">2 Liaison</text><rect x="80" y="180" width="340" height="16" fill="#0f172a" stroke="#94a3b8" rx="3"/><text x="250" y="192" fill="#cbd5e1" text-anchor="middle" font-size="9">1 Physique</text></svg>',
+IP: '<svg viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="40" width="100" height="45" fill="#0c4a6e" stroke="#00d4ff" stroke-width="2" rx="4"/><text x="80" y="68" fill="#00d4ff" text-anchor="middle" font-weight="bold" font-size="14">192</text><rect x="145" y="40" width="100" height="45" fill="#0c4a6e" stroke="#00d4ff" stroke-width="2" rx="4"/><text x="195" y="68" fill="#00d4ff" text-anchor="middle" font-weight="bold" font-size="14">168</text><rect x="260" y="40" width="100" height="45" fill="#052e16" stroke="#22c55e" stroke-width="2" rx="4"/><text x="310" y="68" fill="#22c55e" text-anchor="middle" font-weight="bold" font-size="14">1</text><rect x="375" y="40" width="100" height="45" fill="#78350f" stroke="#fbbf24" stroke-width="2" rx="4"/><text x="425" y="68" fill="#fbbf24" text-anchor="middle" font-weight="bold" font-size="14">10</text><text x="250" y="120" fill="#94a3b8" text-anchor="middle" font-size="11">4 octets - 32 bits</text><text x="250" y="145" fill="#22c55e" text-anchor="middle" font-size="11">192.168.x = PRIVEE</text></svg>',
+DNS: '<svg viewBox="0 0 500 130" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="35" width="80" height="35" fill="#0c4a6e" stroke="#00d4ff" stroke-width="2" rx="4"/><text x="50" y="57" fill="#7dd3fc" text-anchor="middle" font-size="10">Client</text><polygon points="95,52 105,45 105,60" fill="#22c55e"/><rect x="110" y="35" width="100" height="35" fill="#052e16" stroke="#22c55e" stroke-width="2" rx="4"/><text x="160" y="57" fill="#86efac" text-anchor="middle" font-size="10">Resolveur</text><polygon points="215,52 225,45 225,60" fill="#fbbf24"/><rect x="230" y="35" width="80" height="35" fill="#78350f" stroke="#fbbf24" stroke-width="2" rx="4"/><text x="270" y="57" fill="#fde68a" text-anchor="middle" font-size="10">Root</text><polygon points="315,52 325,45 325,60" fill="#fbbf24"/><rect x="330" y="35" width="80" height="35" fill="#78350f" stroke="#fbbf24" stroke-width="2" rx="4"/><text x="370" y="57" fill="#fde68a" text-anchor="middle" font-size="10">TLD</text><polygon points="415,52 425,45 425,60" fill="#fbbf24"/><rect x="430" y="35" width="60" height="35" fill="#78350f" stroke="#fbbf24" stroke-width="2" rx="4"/><text x="460" y="57" fill="#fde68a" text-anchor="middle" font-size="9">Auth</text><text x="250" y="95" fill="#94a3b8" text-anchor="middle" font-size="11">google.com - 142.250.75.238</text></svg>',
+TCP: '<svg viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg"><line x1="80" y1="35" x2="80" y2="160" stroke="#94a3b8" stroke-width="2"/><text x="80" y="175" fill="#94a3b8" text-anchor="middle" font-size="10">CLIENT</text><line x1="420" y1="35" x2="420" y2="160" stroke="#94a3b8" stroke-width="2"/><text x="420" y="175" fill="#94a3b8" text-anchor="middle" font-size="10">SERVEUR</text><line x1="80" y1="55" x2="415" y2="55" stroke="#22c55e" stroke-width="2"/><polygon points="415,50 425,55 415,60" fill="#22c55e"/><text x="250" y="48" fill="#86efac" text-anchor="middle" font-size="10">1. SYN</text><line x1="420" y1="95" x2="85" y2="95" stroke="#fbbf24" stroke-width="2"/><polygon points="85,90 75,95 85,100" fill="#fbbf24"/><text x="250" y="88" fill="#fde68a" text-anchor="middle" font-size="10">2. SYN-ACK</text><line x1="80" y1="135" x2="415" y2="135" stroke="#00d4ff" stroke-width="2"/><polygon points="415,130 425,135 415,140" fill="#00d4ff"/><text x="250" y="128" fill="#7dd3fc" text-anchor="middle" font-size="10">3. ACK</text></svg>'
+};
+
+var D = [
+{id:1,t:"Composants d'un ordinateur",d:50,
+intro:"Un ordinateur est une machine composee de plusieurs pieces materielles qui collaborent pour traiter l'information. Chaque composant joue un role precis dans la chaine de traitement.",
+analogy:"Comme une cuisine : le cuisinier (CPU) execute la recette, le plan de travail (RAM) est l'espace temporaire, le garde-manger (disque) est le stockage permanent, la carte mere est le plan de travail principal qui relie tout.",
+sections:[
+{titre:"Les composants internes",contenu:"<p>Un ordinateur contient plusieurs composants essentiels qui travaillent ensemble :</p><ul><li><b>CPU (processeur)</b> : le cerveau, execute les calculs et instructions. Un CPU moderne a 2, 4, 8 coeurs et tourne a 2-4 GHz.</li><li><b>RAM (memoire vive)</b> : memoire temporaire ultra-rapide qui stocke les donnees actives. Elle est volatile : effacee a l'extinction.</li><li><b>Disque dur (HDD ou SSD)</b> : stockage permanent des fichiers et du systeme. Les donnees restent meme hors tension.</li><li><b>Carte mere</b> : circuit imprime principal qui relie tous les composants via des bus de donnees.</li><li><b>Alimentation</b> : convertit le courant et fournit l'energie.</li><li><b>Ventirad</b> : refroidit le CPU.</li></ul>",svg:"PC"},
+{titre:"Les peripheriques externes",contenu:"<p>Les peripheriques sont les appareils connectes a l'ordinateur :</p><ul><li><b>Entree</b> : clavier, souris, scanner, webcam, microphone. Ils envoient des donnees.</li><li><b>Sortie</b> : ecran, imprimante, haut-parleurs. Ils restituent l'information.</li><li><b>Entree/Sortie</b> : cle USB, disque externe, carte reseau. Ils peuvent envoyer et recevoir.</li></ul><p>Connexions : USB, HDMI, RJ45 (reseau), jack audio, DisplayPort, USB-C.</p>"},
+{titre:"Le bus : autoroute interne",contenu:"<p>Le bus est le chemin par lequel circulent les donnees entre les composants. Trois types existent :</p><ul><li>Bus de donnees : transporte les informations.</li><li>Bus d'adresses : indique ou lire/ecrire.</li><li>Bus de controle : synchronise les echanges.</li></ul><p>Si la RAM sature, le systeme utilise le disque en secours (swap), ce qui divise les performances par environ 1000.</p>"}
+],
+why:"Chaque composant est une surface d'attaque. Un attaquant peut exploiter une faille du CPU (Meltdown, Spectre), compromettre le BIOS, voler un disque non chiffre, ou utiliser un port USB (BadUSB).",
+bank:"Dans une banque, les postes contiennent des donnees de comptes. Un disque vole non chiffre expose ces donnees : violation BCEAO, amende, perte de confiance. Un BIOS infecte peut exfiltrer sans detection.",
+glo:"<b>CPU</b> : processeur. <b>RAM</b> : memoire volatile. <b>SSD/HDD</b> : stockage. <b>Bus</b> : autoroute des donnees.",
+pr:["Ouvrez le boitier ou suivez un tutoriel de demontage.","Reperez le CPU sous son ventilateur (composant carre au centre).","Comptez les barrettes de RAM dans leurs slots.","Identifiez le disque : boitier metallique (HDD) ou barrette M.2 (SSD).","Listez les ports externes : USB, HDMI, RJ45, jack.","Dessinez un schema avec au moins 5 composants."],
+er:"Ne confondez pas RAM (barrettes amovibles) et disque (boitier/M.2). La RAM perd son contenu a l'extinction, pas le disque.",
+df:"Realisez un schema ou une photo annotee de votre PC avec 5 composants identifies.",
+proj:"Rapport d'audit materiel : schema + inventaire des composants.",
+q:[{q:"La RAM est une memoire :",a:["Permanente","Volatile","Externe","Optique"],c:1,e:"La RAM s'efface sans alimentation."},{q:"Le composant qui execute les instructions :",a:["Ecran","Processeur","Clavier","Disque"],c:1,e:"Le CPU execute les instructions."}]},
+
+{id:2,t:"Le processeur (CPU)",d:40,
+intro:"Le CPU (Central Processing Unit) est le cerveau de l'ordinateur. Il execute toutes les instructions des programmes en un cycle repete des milliards de fois par seconde.",
+analogy:"Un chef cuisinier lit une recette (Fetch), la comprend (Decode), puis la realise (Execute). Plusieurs commis (coeurs) travaillent en parallele pour aller plus vite.",
+sections:[
+{titre:"Le cycle Fetch-Decode-Execute",contenu:"<p>Chaque instruction suit un cycle en 3 phases :</p><ol><li><b>Fetch (lire)</b> : le CPU va chercher l'instruction suivante en memoire.</li><li><b>Decode (decoder)</b> : il comprend ce qu'il doit faire.</li><li><b>Execute (executer)</b> : il realise l'action et stocke le resultat.</li></ol><p>Ce cycle se repete des milliards de fois par seconde. Un CPU a 3 GHz effectue 3 milliards de cycles par seconde.</p>",svg:"CPU"},
+{titre:"Coeurs et frequence",contenu:"<p>Les processeurs modernes possedent plusieurs coeurs : dual (2), quad (4), octo (8). Chaque coeur peut executer des instructions en parallele. La frequence (en GHz) indique la vitesse de chaque coeur.</p><p>Attention : plus de GHz ne signifie pas toujours plus rapide. Un CPU octo-core a 2 GHz peut etre plus performant qu'un dual-core a 3,5 GHz selon l'architecture.</p>"},
+{titre:"Le cache : memoire ultra-rapide",contenu:"<p>Le cache est une memoire ultra-rapide integree au CPU (L1, L2, L3). Il stocke les instructions et donnees les plus utilisees, evitant d'aller en RAM (plus lente). L1 : 32-64 Ko, L2 : quelques Mo, L3 : jusqu'a 32 Mo.</p><p>Les deux principaux fabricants sont Intel (Core i3/i5/i7/i9) et AMD (Ryzen 3/5/7/9). Chaque CPU a un socket specifique sur la carte mere.</p>"}
+],
+why:"Les failles materielles (Meltdown 2018, Spectre 2018, Rowhammer) exploitent le CPU. Un cryptominer utilise votre CPU a 100% sans ecrire sur le disque, ce qui le rend furtif.",
+bank:"Un serveur bancaire a 100% CPU sans raison est un signal d'alerte : cryptominer ou deni de service. Un analyste SOC doit savoir lire l'activite CPU.",
+glo:"<b>Coeur</b> : unite de calcul. <b>Frequence</b> : GHz. <b>Cache</b> : memoire rapide. <b>Socket</b> : connecteur.",
+pr:["Windows : Ctrl+Shift+Echap > Performance > CPU.","Linux : tapez lscpu.","Notez modele, coeurs, frequence.","Ouvrez 20 onglets et observez la charge.","Identifiez le processus le plus gourmand."],
+er:"Ne croyez pas qu'un CPU avec plus de GHz est toujours plus rapide : architecture et coeurs comptent.",
+df:"Fiche technique du CPU : modele, coeurs, frequence.",
+proj:"Fiche technique CPU a publier sur GitHub.",
+q:[{q:"Les 3 phases du cycle CPU :",a:["Read/Write/Print","Fetch/Decode/Execute","Open/Close/Save","Load/Store/Drop"],c:1,e:"Fetch - Decode - Execute."},{q:"Un processeur octo-core possede :",a:["8 GHz","8 coeurs","8 Go RAM","8 To disque"],c:1,e:"Octo = 8 coeurs."}]},
+
+{id:3,t:"La memoire RAM",d:35,
+intro:"La RAM (Random Access Memory) est la memoire de travail de l'ordinateur. Elle stocke temporairement les donnees utilisees activement par le systeme et les applications.",
+analogy:"La RAM est le plan de travail de votre cuisine. Vous y posez les ingredients en cours d'utilisation. Si le plan est plein, vous rangez par terre (swap) : tout devient lent.",
+sections:[
+{titre:"Volatile et rapide",contenu:"<p>La RAM est <b>volatile</b> : elle est effacee des qu'on coupe l'alimentation. Elle est <b>tres rapide</b> : acces en nanosecondes, contre des millisecondes pour un disque.</p><p>Capacite courante : 8, 16, 32, 64 Go. Generations : DDR4, DDR5. Une barrette DDR5-4800 transfere 38,4 Go/s.</p>",svg:"RAM"},
+{titre:"Le swap : plan B du systeme",contenu:"<p>Quand la RAM sature, le systeme utilise le <b>swap</b> (memoire virtuelle sur le disque). Un disque est environ 1000 fois plus lent que la RAM. L'ordinateur devient extremement lent : c'est le swap thrashing.</p><p>Sur Linux, on cree une partition de swap (2-4 Go). Sur Windows, c'est le fichier pagefile.sys.</p>"},
+{titre:"Barrettes et dual channel",contenu:"<p>La RAM se presente en barrettes DIMM (PC bureau) ou SO-DIMM (laptops). Elles s'installent dans des slots sur la carte mere. Pour profiter du dual channel (double canal), il faut deux barrettes identiques dans les bons slots. Cela double la bande passante.</p>"}
+],
+why:"Les malwares furtifs (fileless malware) vivent uniquement en RAM sans ecrire sur le disque. Une analyse memoire permet de retrouver des cles de chiffrement, mots de passe en clair, connexions actives.",
+bank:"Un poste avec 8 Go de RAM qui sature provoque des erreurs de saisie. Un serveur dont la RAM est saturee par un malware peut tomber, bloquant les transactions.",
+glo:"<b>Volatile</b> : perdu sans courant. <b>Swap</b> : memoire sur disque. <b>DDR4/DDR5</b> : generations.",
+pr:["Ouvrez 15 onglets + une VM.","Gestionnaire > Memoire (Win) ou htop (Linux).","Notez RAM totale/utilisee.","Fermez la moitie et observez."],
+er:"Ne confondez pas 16 Go de RAM et 16 Go de disque : deux espaces distincts.",
+df:"Captures RAM avant/apres fermeture d'applications.",
+proj:"Rapport de consommation memoire.",
+q:[{q:"Quand la RAM sature :",a:["Le PC s'arrete","Utilise le swap disque","Redemarre","Efface tout"],c:1,e:"Le swap prend le relais (1000x plus lent)."},{q:"La RAM est volatile car :",a:["Chere","Perdue sans courant","Lente","Externe"],c:1,e:"Sans courant, elle s'efface."}]},
+
+{id:4,t:"HDD et SSD",d:35,
+intro:"Le stockage permanent se fait sur un disque dur (HDD) ou un disque a etat solide (SSD). Ces deux technologies ont des performances tres differentes.",
+analogy:"Le HDD est un tourne-disque : des plateaux magnetiques qui tournent. Le SSD est une cle USB geante : aucune piece mobile, tout est electronique.",
+sections:[
+{titre:"HDD : mecanique et economique",contenu:"<p>Technologie de 1956. Des plateaux magnetiques tournent a 5400/7200 tr/min et une tete lit/ecrit.</p><p><b>Avantages</b> : grande capacite (20 To), prix au To bas (~20 euros/To).</p><p><b>Inconvenients</b> : lent (100-200 Mo/s), fragile, bruyant.</p>",svg:"DISK"},
+{titre:"SSD : rapide et resistant",contenu:"<p>Memoire flash NAND, aucune piece mobile.</p><p><b>Avantages</b> : tres rapide (500 Mo/s SATA, 3-7 Go/s NVMe), silencieux, resistant aux chocs.</p><p><b>Inconvenients</b> : plus cher au Go (~80 euros/To), duree de vie limitee par les ecritures (5-10 ans).</p>"},
+{titre:"En pratique et securite",contenu:"<p>SSD pour OS et logiciels (gain de rapidite). HDD pour archives et gros fichiers. NVMe pour postes exigeants. Un NVMe atteint 7000 Mo/s (35x un HDD).</p><p><b>Securite</b> : BitLocker (Windows) et LUKS (Linux) chiffrent tout le disque. Un fichier supprime reste recuperable jusqu'a ecrasement : utilisez shred ou sdelete.</p>"}
+],
+why:"Un disque non chiffre est lisible par quiconque le vole. BitLocker/LUKS protegent. Un fichier supprime reste recuperable.",
+bank:"Les laptops bancaires contiennent des donnees clients. Un vol non chiffre = incident majeur. Les SSD compliquent l'analyse forensique (TRIM).",
+glo:"<b>HDD</b> : mecanique. <b>SSD</b> : flash. <b>NVMe</b> : ultra-rapide. <b>BitLocker/LUKS</b> : chiffrement.",
+pr:["diskmgmt.msc (Win) ou lsblk (Linux).","Notez capacite et espace libre.","Identifiez HDD/SSD.","CrystalDiskInfo pour la sante."],
+er:"Un fichier supprime n'est pas reellement efface. Utilisez shred/sdelete.",
+df:"Liste de vos disques : type, capacite, pourcentage libre.",
+proj:"Rapport d'inventaire de stockage.",
+q:[{q:"SSD rapide car :",a:["Tourne vite","Pas de pieces mobiles","Plus gros","Moins cher"],c:1,e:"100% electronique."},{q:"Pour archiver 4 To :",a:["SSD 512 Go","HDD 4 To","Cle USB","RAM"],c:1,e:"Meilleur prix/To."}]},
+
+{id:5,t:"BIOS et UEFI",d:40,
+intro:"Le BIOS ou son successeur UEFI est le tout premier logiciel execute au demarrage. Stocke sur une puce de la carte mere, il lance tout le processus.",
+analogy:"Le BIOS est le chef d'orchestre qui, avant le concert, verifie les instruments et decide qui commence a jouer.",
+sections:[
+{titre:"Les roles du BIOS/UEFI",contenu:"<p>Au demarrage, le BIOS :</p><ul><li><b>Initialise le materiel</b> via le POST (Power On Self Test).</li><li><b>Choisit le peripherique de demarrage</b> (Boot Order).</li><li><b>Fournit des reglages bas niveau</b> (date, heure, voltage).</li><li><b>Gere la securite</b> (mot de passe BIOS, Secure Boot).</li></ul>",svg:"BIOS"},
+{titre:"UEFI vs BIOS",contenu:"<p>UEFI remplace le BIOS depuis 2010.</p><p><b>Avantages</b> : interface graphique, support >2 To, demarrage rapide, et surtout <b>Secure Boot</b> qui verifie la signature cryptographique des logiciels de demarrage (empeche les bootkits).</p>"},
+{titre:"Secure Boot en detail",contenu:"<p>Secure Boot verifie que le bootloader (GRUB, Windows Boot) est signe par une cle de confiance. Un bootloader modifie est rejete. Ubuntu utilise des bootloaders signes Microsoft ; Arch/Gentoo demandent de desactiver Secure Boot ou signer manuellement.</p>"}
+],
+why:"Un rootkit firmware (LoJax 2018) infecte le BIOS/UEFI et survit a une reinstallation. Quasi indetectable. Secure Boot est une defense essentielle.",
+bank:"Les banques doivent activer Secure Boot pour empecher un attaquant de demarrer un OS pirate via cle USB sur un laptop vole.",
+glo:"<b>POST</b> : test materiel. <b>Boot Order</b> : ordre. <b>Secure Boot</b> : signatures.",
+pr:["Redemarrez > F2/Suppr/F10.","Notez la version.","Verifiez Boot Order.","Verifiez Secure Boot.","Sortez sans sauvegarder."],
+er:"Ne modifiez jamais un reglage BIOS sans avoir photographie l'etat d'origine.",
+df:"Photo BIOS avec version et Secure Boot.",
+proj:"Fiche BIOS : version, Secure Boot, ordre de boot.",
+q:[{q:"Le BIOS est :",a:["Logiciel user","Firmware","Antivirus","Pilote"],c:1,e:"Firmware sur puce."},{q:"Secure Boot :",a:["Chiffre","Bloque boot non signe","Accelere","Bloque Wi-Fi"],c:1,e:"Verifie les signatures."}]},
+
+{id:6,t:"Installer Windows",d:75,
+intro:"Savoir installer Windows proprement est fondamental en cybersecurite. C'est la premiere etape pour repartir sur une base saine apres une compromission.",
+analogy:"Reinstaller Windows, c'est comme nettoyer un magasin apres un cambriolage : on vide tout, on repare, on change les serrures.",
+sections:[
+{titre:"Pre-requis",contenu:"<ul><li>ISO officielle de microsoft.com/software-download.</li><li>Cle USB de 8 Go minimum.</li><li>Rufus (Windows) ou balenaEtcher pour creer la cle bootable.</li><li>Cle de licence Windows.</li></ul>"},
+{titre:"Etapes d'installation",contenu:"<ol><li>Telecharger l'ISO sur microsoft.com.</li><li>Creer la cle bootable avec Rufus.</li><li>Demarrer sur la cle (F12 ou F2).</li><li>Suivre l'assistant : langue, disque, compte.</li><li>Post-installation : Windows Update, pilotes, antivirus.</li><li>Snapshot si VM.</li></ol>"},
+{titre:"Post-installation : durcissement",contenu:"<ul><li>Windows Update jusqu'a la derniere version.</li><li>Pilotes depuis le fabricant.</li><li>Antivirus : Windows Defender suffit.</li><li>BitLocker si donnees sensibles.</li><li>Compte utilisateur standard (pas admin au quotidien).</li></ul>"}
+],
+why:"Reinstaller est indispensable en reponse a incident : seule facon d'etre sur que tous les malwares sont partis. Un ISO pirate est une source majeure de malware.",
+bank:"Apres compromission d'un poste bancaire, la reinstallation est la premiere etape de remediation.",
+glo:"<b>ISO</b> : image disque. <b>Rufus</b> : cle bootable. <b>Snapshot</b> : sauvegarde VM.",
+pr:["ISO microsoft.com.","Rufus 8 Go.","VM 4 Go RAM, 40 Go.","Installer.","Windows Update + snapshot."],
+er:"ISO pirate = malware.",
+df:"VM Windows a jour + snapshot.",
+proj:"Rapport d'installation documente.",
+q:[{q:"ISO Windows :",a:["Pirate","microsoft.com","Torrent","Forum"],c:1,e:"Officielle."},{q:"Rufus :",a:["Cle bootable","Antivirus","Pilote","Compresser"],c:0,e:"Bootable."}]},
+
+{id:7,t:"Installer Ubuntu",d:60,
+intro:"Ubuntu est la distribution Linux la plus utilisee. C'est un excellent point d'entree vers Linux, indispensable en cybersecurite.",
+analogy:"Installer Ubuntu, c'est avoir un second OS dans une piece separee (une VM) : vous pouvez tout casser sans risque.",
+sections:[
+{titre:"Choisir la version",contenu:"<p><b>LTS (Long Term Support)</b> : 5 ans de support. Version actuelle : 22.04 ou 24.04 LTS. A privilegier pour la stabilite. Les versions intermediaires (9 mois) sont a eviter.</p>"},
+{titre:"Installation en VM",contenu:"<ol><li>VirtualBox : Linux, Ubuntu 64-bit, 4 Go RAM, 25 Go.</li><li>Inserer l'ISO Ubuntu.</li><li>Demarrer, suivre l'installateur.</li><li>Choisir Effacer le disque.</li><li>Configurer langue, clavier, utilisateur.</li><li>sudo apt update et sudo apt upgrade.</li></ol>"},
+{titre:"Pourquoi Linux en cyber",contenu:"<p>Linux domine en cybersecurite : serveurs, outils (Nmap, Metasploit, Wireshark), distributions specialisees (Kali). Savoir l'installer et le securiser est un pre-requis pour tout analyste SOC.</p>"}
+],
+why:"Linux est le langage commun des pros de la cyber. Analyser un serveur compromis, utiliser Kali, ecrire un script Bash : vous serez sur Linux.",
+bank:"Les serveurs bancaires tournent souvent sous Linux. Un analyste SOC doit naviguer dans Linux.",
+glo:"<b>LTS</b> : Long Term Support. <b>VM</b> : machine virtuelle. <b>apt</b> : gestionnaire de paquets.",
+pr:["ISO Ubuntu LTS.","Cle bootable.","VM : 4 Go RAM, 25 Go.","Installer.","apt upgrade."],
+er:"Sur machine physique avec dual-boot, sauvegardez avant.",
+df:"VM Ubuntu + lsb_release -a.",
+proj:"Rapport d'installation Ubuntu.",
+q:[{q:"LTS signifie :",a:["Lent","Long Term Support","Light","Linux Total"],c:1,e:"5 ans de support."},{q:"Terminal Ubuntu :",a:["Ctrl+Alt+T","Ctrl+T","F1","Alt+F2"],c:0,e:"Ctrl+Alt+T."}]},
+
+{id:8,t:"Role du systeme d'exploitation",d:35,
+intro:"L'OS est le logiciel principal qui fait fonctionner l'ordinateur. Il gere le materiel, les applications, les fichiers, les utilisateurs et la securite.",
+analogy:"L'OS est le chef d'orchestre : il ne joue pas d'instrument, mais coordonne tous les musiciens.",
+sections:[
+{titre:"Les fonctions de l'OS",contenu:"<ul><li><b>Gestion du materiel</b> : lien entre apps et composants.</li><li><b>Gestion des processus</b> : ordonnancement.</li><li><b>Gestion memoire</b> : allocation de la RAM.</li><li><b>Gestion des fichiers</b> : organisation sur disque (NTFS, ext4).</li><li><b>Gestion utilisateurs</b> : controle d'acces.</li><li><b>Securite</b> : permissions, journalisation.</li></ul>",svg:"OS"},
+{titre:"Les familles d'OS",contenu:"<table><tr><th>OS</th><th>Filesystem</th><th>Usage</th></tr><tr><td>Windows</td><td>NTFS</td><td>Bureautique, entreprise</td></tr><tr><td>macOS</td><td>APFS</td><td>Creation, dev</td></tr><tr><td>Linux</td><td>ext4, xfs</td><td>Serveurs, securite</td></tr><tr><td>Android</td><td>ext4, f2fs</td><td>Mobile</td></tr><tr><td>iOS</td><td>APFS</td><td>iPhone, iPad</td></tr></table>"},
+{titre:"Architecture en couches",contenu:"<p>Un OS est organise en couches :</p><ul><li><b>Kernel (noyau)</b> : coeur, acces materiel.</li><li><b>Shell</b> : interface (bash, PowerShell).</li><li><b>Applications</b> : programmes utilisateur.</li></ul><p>Un attaquant qui obtient le kernel controle toute la machine.</p>"}
+],
+why:"Chaque OS a ses vulnerabilites et surfaces d'attaque. Windows (registre, services), Linux (permissions, sudoers), macOS (Gatekeeper). CIS Benchmarks liste les durcissements.",
+bank:"Les banques durcissent leurs systemes selon CIS, ANSSI. Un poste Windows non durci = services inutiles, partages ouverts, comptes par defaut.",
+glo:"<b>Kernel</b> : noyau. <b>Shell</b> : interface. <b>NTFS/ext4/APFS</b> : filesystems.",
+pr:["Identifier OS (winver/lsb_release).","uname -a pour le kernel.","Reperer racine.","Lister utilisateurs."],
+er:"macOS n'est pas invulnerable.",
+df:"Fiche OS + version + kernel.",
+proj:"Fiche systeme sur GitHub.",
+q:[{q:"Le kernel est :",a:["Logiciel user","Noyau","Navigateur","Antivirus"],c:1,e:"Noyau systeme."},{q:"Filesystem Windows :",a:["ext4","NTFS","APFS","FAT32"],c:1,e:"NTFS."}]},
+
+{id:9,t:"Organiser ses fichiers",d:35,
+intro:"Une bonne organisation de fichiers est essentielle, particulierement en cybersecurite ou l'on manipule beaucoup de logs, rapports, scripts.",
+analogy:"Une arborescence claire, c'est une armoire bien etiquetee : chaque document a sa place, on le retrouve en secondes.",
+sections:[
+{titre:"Bonnes pratiques",contenu:"<ul><li>Arborescence logique (Documents/Projets/Client/2025).</li><li>Nommage date (2025-03-15_rapport.pdf).</li><li>Eviter les caracteres speciaux (ils cassent les scripts).</li><li>README.md dans chaque dossier.</li><li>Pas d'espaces dans chemins de scripts.</li></ul>",svg:"FILES"},
+{titre:"Structure cyber",contenu:"<p>~/cyber/ avec sous-dossiers :</p><ul><li>labs/ : laboratoires</li><li>tools/ : scripts, outils</li><li>notes/ : notes markdown</li><li>ctfs/ : challenges</li><li>reports/ : rapports incident</li></ul><p>Publier cette structure sur GitHub montre votre rigueur.</p>"},
+{titre:"Nommage",contenu:"<p>Un bon nom est date (2025-03-15), descriptif (pas doc1.pdf), sans caracteres speciaux (tirets et underscores), sans accents ni espaces.</p>"}
+],
+why:"Un analyste SOC manipule des dizaines de fichiers/jour. Une organisation claire accelere les investigations et evite les erreurs de scripts.",
+bank:"Un rapport d'incident bien organise (date, type, client) est un livrable professionnel lisible par la direction.",
+glo:"<b>Arborescence</b> : hierarchie. <b>README</b> : doc. <b>Markdown</b> : format md.",
+pr:["Creer ~/cyber/ avec labs, tools, notes, ctfs, reports.","README par dossier.","Fichier date.","ls -R pour verifier."],
+er:"Caracteres speciaux cassent les scripts.",
+df:"Capture arborescence ~/cyber/.",
+proj:"Structure sur GitHub.",
+q:[{q:"Bon nom :",a:["doc1.pdf","2025-01-15_x.pdf","fichier special","a b.pdf"],c:1,e:"Date."},{q:"README :",a:["Decorer","Documenter","Bloquer","Compresser"],c:1,e:"Documentation."}]},
+
+{id:10,t:"Raccourcis clavier",d:30,
+intro:"Les raccourcis font gagner un temps considerable. Un pro manipule des dizaines de fenetres : chaque seconde compte.",
+analogy:"Comme les raccourcis d'un GPS : ils evitent de repasser par le menu a chaque action.",
+sections:[
+{titre:"Raccourcis universels",contenu:"<table><tr><th>Action</th><th>Win/Linux</th><th>Mac</th></tr><tr><td>Copier</td><td>Ctrl+C</td><td>Cmd+C</td></tr><tr><td>Coller</td><td>Ctrl+V</td><td>Cmd+V</td></tr><tr><td>Couper</td><td>Ctrl+X</td><td>Cmd+X</td></tr><tr><td>Annuler</td><td>Ctrl+Z</td><td>Cmd+Z</td></tr><tr><td>Rechercher</td><td>Ctrl+F</td><td>Cmd+F</td></tr><tr><td>Enregistrer</td><td>Ctrl+S</td><td>Cmd+S</td></tr></table>",svg:"KEYBOARD"},
+{titre:"Raccourcis systeme",contenu:"<table><tr><th>Action</th><th>Windows</th><th>Linux</th><th>Mac</th></tr><tr><td>Changer fenetre</td><td>Alt+Tab</td><td>Alt+Tab</td><td>Cmd+Tab</td></tr><tr><td>Verrouiller</td><td>Win+L</td><td>Ctrl+Alt+L</td><td>Ctrl+Cmd+Q</td></tr><tr><td>Gestionnaire</td><td>Ctrl+Shift+Echap</td><td>Ctrl+Alt+Suppr</td><td>Cmd+Opt+Echap</td></tr></table>"},
+{titre:"Pourquoi en cyber",contenu:"<p>En reponse a incident, chaque seconde compte. Un analyste SOC qui maitrise les raccourcis bascule instantanement entre terminal, SIEM et navigateur.</p>"}
+],
+why:"En reponse a incident, chaque seconde compte. Un analyste SOC rapide contient une attaque plus vite.",
+bank:"Un analyste bancaire surveille plusieurs tableaux de bord : les raccourcis lui permettent d'alterner et reagir vite.",
+glo:"<b>Ctrl</b> : Controle. <b>Cmd</b> : Command (Mac). <b>SIEM</b> : gestion des evenements.",
+pr:["Pratiquer 10x Ctrl+C V Z.","Alt+Tab.","Win+L.","Ctrl+Shift+Echap.","30 min sans souris."],
+er:"Ctrl n'est pas Cmd sur Mac.",
+df:"Tache sans souris.",
+proj:"Aide-memoire 10 raccourcis.",
+q:[{q:"Verrouiller Windows :",a:["Ctrl+L","Win+L","Alt+L","F1"],c:1,e:"Win+L."},{q:"Sur Mac copier :",a:["Ctrl+C","Cmd+C","Alt+C","Win+C"],c:1,e:"Cmd+C."}]},
+
+{id:11,t:"Installer un logiciel",d:35,
+intro:"Installer un logiciel proprement, sans malware, est une competence fondamentale. Les installateurs compromis sont une source majeure d'infection.",
+analogy:"Installer un logiciel, c'est acheter un medicament : verifier la pharmacie (source), la date (signature), la notice (installation personnalisee).",
+sections:[
+{titre:"Sources sures",contenu:"<ul><li>Site officiel de l'editeur (premiere option).</li><li>Microsoft Store / Snap Store / App Store.</li><li>Depots Linux (apt, dnf) : paquets signes.</li><li>winget (Windows) : gestionnaire Microsoft.</li></ul><p>Eviter les sites tiers, torrents, cracks.</p>"},
+{titre:"Verifier la signature",contenu:"<p>Windows : clic droit > Proprietes > Signatures numeriques. Si valide et du bon editeur, le fichier est authentique. Sur Linux, apt verifie automatiquement.</p>"},
+{titre:"Installation personnalisee",contenu:"<p>Beaucoup d'installateurs gratuits embarquent des adwares (barres d'outils). Choisir toujours Personnalisee et decocher les extras.</p>"}
+],
+why:"60% des infections viennent d'installateurs compromis. Un logiciel pirate peut contenir un cheval de Troie.",
+bank:"Les banques interdisent les logiciels non approuves. Un logiciel compromis exfiltre des donnees bancaires.",
+glo:"<b>Signature</b> : authenticite. <b>Adware</b> : pub. <b>winget</b> : gestionnaire Windows.",
+pr:["VLC sur videolan.org.","Verifier signatures.","Personnalisee.","Decocher extras."],
+er:"Suivant sans lire = adwares.",
+df:"VLC propre installe.",
+proj:"Rapport installation propre.",
+q:[{q:"Linux installer :",a:["apt install","winget","brew","exe"],c:0,e:"apt."},{q:"Signature sert a :",a:["Colorer","Verifier authenticite","Taille","Logo"],c:1,e:"Authenticite."}]},
+
+{id:12,t:"Desinstaller un logiciel",d:25,
+intro:"Desinstaller proprement est aussi important qu'installer. Un logiciel mal desinstalle laisse fichiers, services et entrees registre.",
+analogy:"Demenager : retirer la plaque ne suffit pas. Il faut vider les placards et rendre les cles.",
+sections:[
+{titre:"Windows",contenu:"<ol><li>Parametres > Applications > Applications et fonctionnalites.</li><li>Selectionner et desinstaller.</li><li>Revo Uninstaller ou BCUninstaller pour nettoyage complet.</li></ol>"},
+{titre:"Linux",contenu:"<p>sudo apt remove nom_logiciel. sudo apt autoremove. sudo apt purge (+ config).</p><p>Verifier avec which nom_logiciel : doit dire not found.</p>"},
+{titre:"Les residus",contenu:"<ul><li>Program Files (Windows) ou /usr/bin (Linux).</li><li>AppData (Windows) ou ~/.config (Linux).</li><li>Registre (Windows).</li><li>Services qui tournent encore.</li></ul>"}
+],
+why:"Logiciels obsoletes non patches = failles dormantes. Nettoyer regulierement = reduire la surface d'attaque.",
+bank:"Un poste bancaire avec logiciels inutilises non patches est une cible facile.",
+glo:"<b>Purge</b> : app+config. <b>Autoremove</b> : orphelins. <b>Residu</b> : fichier restant.",
+pr:["Desinstaller test.","Verifier Program Files/AppData.","apt remove + autoremove.","which donne not found."],
+er:"Supprimer l'icone ne desinstalle pas.",
+df:"0 residu dans Program Files et AppData.",
+proj:"Rapport de desinstallation.",
+q:[{q:"Purge :",a:["App seule","App+config","Rien","Installe"],c:1,e:"Config aussi."},{q:"Autoremove :",a:["Reinstalle","Orphelins","Cache","Redemarre"],c:1,e:"Orphelins."}]},
+
+{id:13,t:"Mettre a jour un systeme",d:35,
+intro:"Les mises a jour corrigent des vulnerabilites connues. Ne pas les appliquer revient a laisser la porte ouverte.",
+analogy:"Mettre a jour, c'est changer les serrures apres un cambriolage : le correctif existe, ne pas l'appliquer c'est refuser de se proteger.",
+sections:[
+{titre:"80% des intrusions exploitent des failles patchees",contenu:"<p>80% des intrusions reussies exploitent des vulnerabilites connues et patchees. WannaCry (2017) a infecte 200 000+ machines via MS17-010, patchee 2 mois avant l'attaque.</p>"},
+{titre:"Comment mettre a jour",contenu:"<p><b>Windows</b> : Parametres > Windows Update.</p><p><b>Linux</b> : sudo apt update ; sudo apt upgrade -y ; sudo apt full-upgrade -y ; sudo apt autoremove.</p><p><b>macOS</b> : Menu Pomme > Reglages > Mise a jour.</p>"},
+{titre:"Redemarrer",contenu:"<p>Sur Linux, apres un full-upgrade du kernel, redemarrer. Message System restart required a ne pas ignorer.</p>"}
+],
+why:"La non-application des patchs est la premiere cause de compromission. Chaque jour de nouvelles CVE sortent.",
+bank:"Une banque non patchee risque une amende reglementaire (BCEAO, PCI-DSS).",
+glo:"<b>Patch</b> : correctif. <b>CVE</b> : identifiant de faille. <b>Kernel</b> : noyau.",
+pr:["Windows Update.","apt update et upgrade.","Compter MAJ.","Redemarrer.","Planifier."],
+er:"Ne pas repousser indefiniment.",
+df:"Systeme a jour + capture.",
+proj:"Rapport MAJ avec captures.",
+q:[{q:"Patch sert a :",a:["Ralentir","Corriger faille","Supprimer","Vider RAM"],c:1,e:"Correctif."},{q:"WannaCry a exploite :",a:["0-day","Faille patchee non appliquee","Mot de passe faible","Phishing seul"],c:1,e:"Patchee 2 mois avant."}]},
+
+{id:14,t:"Sauvegarder ses donnees",d:45,
+intro:"La sauvegarde est votre filet de securite. Ransomware, panne, erreur, vol : sans sauvegarde, tout est perdu. Regle 3-2-1.",
+analogy:"Comme une copie de la cle du coffre-fort chez un notaire : si vous perdez l'original, vous avez un plan B.",
+sections:[
+{titre:"La regle 3-2-1",contenu:"<p><b>3 copies</b> sur <b>2 supports differents</b> dont <b>1 hors site</b>. Exemple : PC + disque externe + cloud (Backblaze, OneDrive).</p>",svg:"BACKUP"},
+{titre:"Types de sauvegarde",contenu:"<table><tr><th>Type</th><th>Description</th></tr><tr><td>Complete</td><td>Tout (lent)</td></tr><tr><td>Incrementale</td><td>Changements depuis la derniere</td></tr><tr><td>Differentielle</td><td>Changements depuis la derniere complete</td></tr></table>"},
+{titre:"Outils",contenu:"<p><b>Linux</b> : rsync, tar, Borg, Duplicity.</p><p>rsync -av ~/Documents/ /media/usb/backup/</p><p><b>Windows</b> : robocopy, Macrium Reflect. <b>Cloud</b> : Backblaze, OneDrive.</p>"}
+],
+why:"Le ransomware chiffre tout. Sans sauvegarde testee, tout est perdu. Les entreprises paient 200 000 euros en moyenne.",
+bank:"Une banque sans sauvegarde testee est paralysee en cas d'attaque. Les regulateurs imposent sauvegardes et tests reguliers.",
+glo:"<b>Regle 3-2-1</b> : standard. <b>Incrementale</b> : changements seuls.",
+pr:["Script rsync/robocopy.","Planifier.","Lancer manuel.","Verifier integrite.","3e copie cloud."],
+er:"Ne jamais sauvegarder sur le meme disque.",
+df:"Script + verification integrite.",
+proj:"Rapport strategie 3-2-1.",
+q:[{q:"3-2-1 :",a:["3 copies 2 supports 1 hors site","3 disques","3 jours","Rien"],c:0,e:"Standard industrie."},{q:"Incrementale :",a:["Tout","Changements","Supprime","Compresse"],c:1,e:"Changements seuls."}]},
+
+{id:15,t:"Restaurer une sauvegarde",d:35,
+intro:"Une sauvegarde non testee n'existe pas. La seule chose qui compte en cas de crash, c'est de pouvoir restaurer.",
+analogy:"Faire une repetition d'evacuation : si jamais teste, vous paniquerez au vrai incendie.",
+sections:[
+{titre:"Procedure",contenu:"<ol><li>Identifier la sauvegarde a restaurer.</li><li>Verifier son integrite (checksum).</li><li>Restaurer dans un dossier test d'abord.</li><li>Valider le contenu.</li><li>Remplacer les donnees defaillantes.</li></ol>"},
+{titre:"Le checksum",contenu:"<p>Empreinte numerique calculee sur un fichier. Si les checksums de la sauvegarde et de l'original sont identiques, la sauvegarde est intacte.</p><p>sha256sum fichier_original fichier_restaure</p>"},
+{titre:"Tester regulierement",contenu:"<p>Tester au moins une fois par trimestre. Beaucoup decouvrent au moment du crash que leurs sauvegardes sont corrompues.</p>"}
+],
+why:"Beaucoup pensent etre proteges jusqu'a ce qu'ils essaient de restaurer. Tester fait partie integrante de la strategie.",
+bank:"Les banques imposent des tests trimestriels. Une sauvegarde non testee est une illusion de securite.",
+glo:"<b>Checksum</b> : empreinte. <b>Restauration</b> : recuperation.",
+pr:["Supprimer 3 fichiers.","Restaurer.","Verifier intacts.","sha256sum.","Documenter."],
+er:"Ne jamais tester pour la premiere fois en situation de crise.",
+df:"3 fichiers restaures + checksum identique.",
+proj:"Rapport test de restauration.",
+q:[{q:"Sauvegarde non testee :",a:["Fiable","Potentiellement inexistante","Inutile","Dangereuse"],c:1,e:"On ne sait pas si elle fonctionne."},{q:"Checksum :",a:["Chiffre","Verifie integrite","Compresse","Copie"],c:1,e:"Detecte corruption."}]},
+
+{id:16,t:"Gestionnaire des taches",d:30,
+intro:"Le gestionnaire des taches est le premier outil de diagnostic Windows. Il permet de voir tous les processus en cours et detecter une activite suspecte.",
+analogy:"C'est le tableau de bord de votre voiture : vitesse (CPU), essence (RAM), voyants d'alerte (processus suspects).",
+sections:[
+{titre:"Onglets essentiels",contenu:"<ul><li><b>Processus</b> : apps et processus actifs, avec CPU/RAM/disque/reseau.</li><li><b>Performance</b> : graphiques temps reel.</li><li><b>Demarrage</b> : programmes au boot.</li><li><b>Details</b> : PID, chemins, ligne de commande.</li><li><b>Services</b> : services Windows.</li></ul>"},
+{titre:"Detecter un malware",contenu:"<ul><li>CPU ou RAM anormalement eleve (100%).</li><li>Nom legerement different (svch0st.exe vs svchost.exe).</li><li>Chemin inhabituel : Users/Public, TEMP.</li><li>Signature numerique manquante.</li></ul>"},
+{titre:"Exemples",contenu:"<p><b>Cryptominer</b> : 100% CPU permanent, nom aleatoire (xmrig), chemin AppData.</p><p><b>RAT</b> : connexion reseau sortante vers IP inconnue.</p>"}
+],
+why:"Detecter un processus malveillant = premier reflexe. Un cryptominer tourne a 100% CPU en arriere-plan et chauffe la machine.",
+bank:"Un poste qui rame sans raison peut heberger un cryptominer ou un malware qui exfiltre des donnees.",
+glo:"<b>PID</b> : identifiant processus. <b>Cryptominer</b> : malware mining. <b>RAT</b> : acces distant.",
+pr:["Ctrl+Shift+Echap.","Performance.","Trier par CPU.","5 gourmands + chemins.","Demarrage."],
+er:"Ne pas tuer explorer.exe ou svchost.exe.",
+df:"5 processus gourmands + chemins.",
+proj:"Rapport processus avec captures.",
+q:[{q:"Processus suspect :",a:["CPU 2%","CPU 100% chemin bizarre","Signe MS","Nom connu"],c:1,e:"Anomalie."},{q:"PID :",a:["MDP","Identifiant processus","Virus","Protocole"],c:1,e:"Identifiant unique."}]},
+
+{id:17,t:"Comprendre les processus",d:35,
+intro:"Un processus est un programme en cours d'execution. Tout programme qui tourne est un processus, identifie par un PID.",
+analogy:"Un processus, c'est un employe qui execute une tache. Vous pouvez lui demander gentiment d'arreter (SIGTERM) ou le licencier brutalement (SIGKILL).",
+sections:[
+{titre:"Caracteristiques",contenu:"<ul><li><b>PID</b> : identifiant unique.</li><li><b>PPID</b> : PID du parent.</li><li><b>Espace memoire</b> : isole.</li><li><b>Threads</b> : unites d'execution internes.</li></ul><p>Cycle : cree, pret, en execution, en attente, termine.</p>"},
+{titre:"Commandes Linux",contenu:"<p>ps aux : tous. ps -ef : arborescent. top/htop : temps reel. pstree : arbre. kill PID : SIGTERM. kill -9 PID : SIGKILL. pkill nom : par nom.</p>"},
+{titre:"Signaux",contenu:"<table><tr><th>Signal</th><th>Numero</th><th>Effet</th></tr><tr><td>SIGTERM</td><td>15</td><td>Arret propre</td></tr><tr><td>SIGKILL</td><td>9</td><td>Arret force</td></tr><tr><td>SIGHUP</td><td>1</td><td>Recharger config</td></tr><tr><td>SIGSTOP</td><td>19</td><td>Suspendre</td></tr></table>"}
+],
+why:"Un malware EST un processus. Un fork bomb cree des milliers de processus pour saturer un serveur.",
+bank:"Un serveur attaque peut voir ses ressources saturees par un fork bomb.",
+glo:"<b>PID</b> : identifiant. <b>PPID</b> : parent. <b>Thread</b> : unite.",
+pr:["sleep 300 et.","ps aux grep sleep.","kill PID.","kill -9 PID."],
+er:"Ne pas mettre kill -9 en premier reflexe.",
+df:"SIGTERM vs SIGKILL testes.",
+proj:"Rapport gestion processus.",
+q:[{q:"Thread :",a:["Processus","Unite d'execution","Fichier","Reseau"],c:1,e:"Unite d'execution."},{q:"kill -9 :",a:["Propre","Force","Suspend","Redemarre"],c:1,e:"SIGKILL force."}]},
+
+{id:18,t:"Comprendre les services",d:35,
+intro:"Un service (daemon Linux) est un programme qui tourne en arriere-plan, sans interface, pour rendre un service au systeme.",
+analogy:"Un service, c'est un employe de nuit : il travaille sans etre vu mais est essentiel.",
+sections:[
+{titre:"Exemples",contenu:"<ul><li><b>Serveur web</b> (Apache, Nginx).</li><li><b>SSH</b> : connexion distante.</li><li><b>DNS</b> : resolution.</li><li><b>Pare-feu</b>.</li><li><b>Bluetooth</b>.</li></ul>"},
+{titre:"Gerer Windows",contenu:"<p>services.msc liste tous les services : nom, statut, type de demarrage (automatique, manuel, desactive). On peut demarrer, arreter, desactiver.</p>"},
+{titre:"Gerer Linux",contenu:"<p>systemctl status nom_service. systemctl start. systemctl stop. systemctl enable (au boot). systemctl disable. systemctl list-units --type=service.</p>"}
+],
+why:"Les services sont la cible numero 1 (SSH, SMB, RDP). Chaque service ouvert = port ouvert = surface d'attaque.",
+bank:"Un serveur avec RDP expose sur Internet est la porte d'entree preferee des ransomwares.",
+glo:"<b>Daemon</b> : service Linux. <b>systemctl</b> : gestion systemd. <b>services.msc</b> : gestionnaire Windows.",
+pr:["services.msc / systemctl.","Identifier service inutile.","disable + stop.","Verifier status."],
+er:"Ne pas desactiver des services critiques.",
+df:"1 service desactive verifie.",
+proj:"Rapport audit services.",
+q:[{q:"Service Linux gere par :",a:["systemd","ls","cat","rm"],c:0,e:"systemctl."},{q:"Bonne pratique :",a:["Tout activer","Desactiver inutile","Ignorer","Eteindre"],c:1,e:"Reduire surface."}]},
+
+{id:19,t:"Installer des pilotes",d:40,
+intro:"Un pilote (driver) est un logiciel qui permet a l'OS de communiquer avec un composant materiel.",
+analogy:"Un pilote est un traducteur entre vous (l'OS) et un etranger (le materiel). Corrompu, il peut vous trahir.",
+sections:[
+{titre:"Pourquoi sensibles",contenu:"<p>Les pilotes tournent en kernel mode (privileges max). Une faille peut compromettre tout le systeme. Failles critiques trouvees dans les GPU (NVIDIA CVE-2021-1076, AMD CVE-2021-27090).</p>"},
+{titre:"Sources fiables",contenu:"<ul><li>Site officiel fabricant (NVIDIA, AMD, Intel, Dell, Lenovo).</li><li>Windows Update (certifies Microsoft).</li><li>Gestionnaires constructeur (Dell Update, Lenovo Vantage).</li><li>Depots Linux.</li></ul><p>Jamais de sites tiers, forums, torrents.</p>"},
+{titre:"Commandes utiles",contenu:"<p><b>Windows</b> : devmgmt.msc. Un point d'exclamation jaune signale un probleme.</p><p><b>Linux</b> : lspci -k pour voir les pilotes charges.</p>"}
+],
+why:"Pilotes non patches = faille majeure. Un attaquant peut elever ses privileges via un pilote.",
+bank:"Un serveur avec pilote vulnerable est expose a une escalade de privileges.",
+glo:"<b>Kernel mode</b> : privilegie. <b>Escalade</b> : utilisateur vers root.",
+pr:["Gestionnaire de peripheriques.","Reperer point jaune.","lspci -k (Linux).","Site fabricant."],
+er:"Jamais de pilote sur site tiers.",
+df:"Pilotes a jour verifies.",
+proj:"Rapport MAJ pilotes.",
+q:[{q:"Pilote tourne :",a:["Userland","Kernel mode","Disque","Boot"],c:1,e:"Kernel mode."},{q:"Source fiable :",a:["Pirate","Fabricant","Torrent","Forum"],c:1,e:"Fabricant."}]},
+
+{id:20,t:"Maintenance de base",d:50,
+intro:"La maintenance reguliere garde un systeme rapide, stable et securise. C'est une routine mensuelle.",
+analogy:"Comme l'entretien d'une voiture : vidange, pneus, freins. Sans entretien, panne au pire moment.",
+sections:[
+{titre:"Routine mensuelle",contenu:"<ul><li>Mises a jour OS et logiciels.</li><li>Scan antivirus complet.</li><li>Nettoyage fichiers temporaires.</li><li>Espace disque >15% libre.</li><li>Sauvegardes testees.</li><li>Audit comptes utilisateurs.</li><li>Redemarrage.</li></ul>"},
+{titre:"Outils Windows",contenu:"<p>cleanmgr. sfc /scannow. DISM /Online /Cleanup-Image /RestoreHealth.</p>"},
+{titre:"Outils Linux",contenu:"<p>sudo apt autoremove et autoclean. sudo journalctl --vacuum-time=7d. df -h. needrestart.</p>"}
+],
+why:"Un systeme mal entretenu accumule les failles, fichiers inutiles, services inactifs, et devient une cible facile.",
+bank:"Les banques maintiennent leurs systemes selon un calendrier strict. Un audit verifie MAJ, espace disque, sauvegardes, comptes.",
+glo:"<b>Temp</b> : temporaires. <b>Audit</b> : verification. <b>Kernel update</b> : noyau.",
+pr:["cleanmgr, sfc, DISM.","apt autoremove et df -h.","Verifier >15%.","Scan AV.","Redemarrer."],
+er:"Ne jamais redemarrer = kernel pas a jour.",
+df:"Checklist complete.",
+proj:"Rapport maintenance mensuelle.",
+q:[{q:"Espace libre min :",a:["<1%","~15%","50%","0%"],c:1,e:"15%."},{q:"sfc /scannow :",a:["Nettoie","Verifie fichiers","Installe","Supprime"],c:1,e:"System File Checker."}]},
+
+{id:21,t:"Installer VirtualBox",d:35,
+intro:"VirtualBox est un hyperviseur gratuit qui permet de creer des machines virtuelles isolees. C'est la base de tout laboratoire cyber.",
+analogy:"Des poupees russes : un OS dans un OS, completement isole du systeme principal.",
+sections:[
+{titre:"Pourquoi virtualiser",contenu:"<ul><li>Tester malwares sans risque.</li><li>Creer labos isoles (Kali + victimes).</li><li>Snapshots (retour arriere).</li><li>Plusieurs OS sur une machine.</li></ul>"},
+{titre:"Configuration",contenu:"<p>Activer VT-x/AMD-V dans le BIOS. Creer VM : type Linux Ubuntu 64-bit, 4 Go RAM, 25 Go disque dynamique. Installer Extension Pack pour USB et presse-papier.</p>"},
+{titre:"Snapshots",contenu:"<p>Une snapshot sauvegarde l'etat complet de la VM. Retour arriere en un clic si quelque chose tourne mal. Essentiel en lab.</p>"}
+],
+why:"Isoler les tests = ne pas risquer sa machine physique. Analyser un malware sans consequence.",
+bank:"Analyser un malware bancaire sans risque sur le poste de travail.",
+glo:"<b>Hyperviseur</b> : virtualisation. <b>Snapshot</b> : sauvegarde d'etat. <b>VT-x</b> : virtualisation materielle.",
+pr:["virtualbox.org.","Extension Pack.","VT-x dans BIOS.","VM Ubuntu 4 Go.","Snapshot."],
+er:"Sans VT-x = VM tres lente.",
+df:"VM Ubuntu + snapshot.",
+proj:"Rapport virtualisation.",
+q:[{q:"VirtualBox :",a:["Hyperviseur","Antivirus","Navigateur","Jeu"],c:0,e:"Hyperviseur type 2."},{q:"Snapshot :",a:["Supprime","Sauvegarde etat","Redemarre","Rien"],c:1,e:"Retour arriere."}]},
+
+{id:22,t:"Installer Kali Linux",d:55,
+intro:"Kali Linux est une distribution Debian specialisee en securite offensive, avec 600+ outils de pentest preinstalles.",
+analogy:"Une boite a outils de serrurier : tout pour tester, mais dangereuse si mal utilisee.",
+sections:[
+{titre:"Kali en pratique",contenu:"<p>Kali n'est PAS pour un usage principal. En VM uniquement, isole, pour labos et tests autorises. En pentest pro, on prefere Debian/Ubuntu avec outils installes manuellement.</p>"},
+{titre:"Outils inclus",contenu:"<p>Nmap (scan), Metasploit (exploitation), Wireshark (reseau), Burp (web), John (hash), Hydra (brute-force), Aircrack (Wi-Fi), Sqlmap (SQL).</p>"},
+{titre:"Installation",contenu:"<ol><li>Telecharger ISO sur kali.org.</li><li>VM Debian 64-bit, 4 Go RAM, 30 Go.</li><li>Installer.</li><li>sudo apt update et full-upgrade.</li><li>Verifier avec nmap, wireshark.</li></ol>"}
+],
+why:"Reference pour l'apprentissage pentest. Tous les outils en un seul OS.",
+bank:"Audits internes, laboratoires, formation des equipes securite.",
+glo:"<b>Debian</b> : distro Linux. <b>Pentest</b> : test d'intrusion.",
+pr:["kali.org.","VM 4 Go.","apt full-upgrade.","which nmap."],
+er:"Kali comme OS principal = cible numero 1.",
+df:"Kali + nmap + wireshark.",
+proj:"Rapport installation Kali.",
+q:[{q:"Kali base sur :",a:["Ubuntu","Debian","Arch","Fedora"],c:1,e:"Debian."},{q:"Reseau safe :",a:["Bridged","Host-only","Public","Cafe"],c:1,e:"Host-only."}]},
+
+{id:23,t:"Decouvrir le terminal",d:30,
+intro:"Le terminal (shell) est l'interface en ligne de commande. Puissance, rapidite, automatisation.",
+analogy:"Le volant d'une voiture : plus de controle que les boutons.",
+sections:[
+{titre:"Prompt",contenu:"<p>Prompt : user@host:~$ ou le symbole dollar est utilisateur normal, le diese est root. Le tilde signifie home.</p>"},
+{titre:"Commandes de base",contenu:"<ul><li>whoami : utilisateur courant.</li><li>pwd : dossier courant.</li><li>date : date/heure.</li><li>uname -a : infos systeme.</li><li>man cmd : manuel.</li><li>history : historique.</li><li>Tab : auto-completion.</li></ul>"},
+{titre:"Astuces",contenu:"<p>Ctrl+C : annuler commande. Ctrl+L : effacer ecran. Fleche haut : historique. Deux points exclamation : derniere commande.</p>"}
+],
+why:"Les outils cyber s'executent en CLI. La majorite des scripts de securite sont en Bash.",
+bank:"Scripts de reponse a incident automatises. Navigation rapide sur serveurs.",
+glo:"<b>Prompt</b> : invite. <b>Root</b> : super-utilisateur. <b>Bash</b> : shell Linux.",
+pr:["Ctrl+Alt+T.","whoami, pwd, uname -a.","man ls.","history.","Tab."],
+er:"Ne pas copier sans comprendre une commande.",
+df:"whoami + pwd + uname -a executes.",
+proj:"Aide-memoire commandes.",
+q:[{q:"Diese signifie :",a:["User","Root","Invite","Erreur"],c:1,e:"Root."},{q:"man sert a :",a:["Manuel","Lister","Supprimer","Creer"],c:0,e:"Manuel."}]},
+
+{id:24,t:"Utiliser pwd",d:15,
+intro:"pwd (Print Working Directory) affiche le chemin absolu du dossier courant.",
+analogy:"Les coordonnees GPS du terminal.",
+sections:[
+{titre:"Chemins et raccourcis",contenu:"<p>Raccourcis : tilde (home), point (courant), deux points (parent), slash (racine), tiret (precedent).</p>"},
+{titre:"Absolu vs relatif",contenu:"<p><b>Absolu</b> : depuis la racine (ex : /home/user/Documents). <b>Relatif</b> : depuis le courant (ex : Documents/).</p>"}
+],
+why:"Se perdre = erreurs. Les scripts referencent souvent des chemins.",
+bank:"Scripts d'audit referencent chemins absolus.",
+glo:"<b>Absolu</b> : depuis /. <b>Relatif</b> : depuis courant.",
+pr:["pwd.","cd /etc puis pwd.","cd ..","cd ~","cd -"],
+er:"Confondre absolu/relatif.",
+df:"Navigation 4 dossiers avec pwd.",
+proj:"Note navigation.",
+q:[{q:"pwd affiche :",a:["MDP","Dossier courant","Reseau","Rien"],c:1,e:"Print Working Directory."},{q:"Deux points :",a:["Racine","Courant","Parent","Home"],c:2,e:"Parent."}]},
+
+{id:25,t:"Utiliser ls",d:25,
+intro:"ls (list) liste le contenu d'un dossier.",
+analogy:"Le sommaire d'un livre.",
+sections:[
+{titre:"Options",contenu:"<table><tr><th>Option</th><th>Effet</th></tr><tr><td>-l</td><td>Format long</td></tr><tr><td>-a</td><td>Fichiers caches</td></tr><tr><td>-h</td><td>Taille lisible</td></tr><tr><td>-t</td><td>Tri par date</td></tr><tr><td>-R</td><td>Recursif</td></tr></table>"},
+{titre:"Combinaisons",contenu:"<p>ls -lah = long + caches + lisible. ls -lt = tri par date. ls -la /var/log = contenu de /var/log en long avec caches.</p>"}
+],
+why:"Commande la plus utilisee. Fichiers caches (.bash_history, .ssh) souvent critiques.",
+bank:"Lister /var/log pour analyse d'incidents.",
+glo:"<b>Option</b> : modificateur.",
+pr:["ls.","ls -l.","ls -lah /var/log.","ls -lt head."],
+er:"Sans -a, on rate .bash_history et .ssh.",
+df:"Lister /var/log en long.",
+proj:"Note listage.",
+q:[{q:"-a :",a:["Rien","Caches","Couleurs","Taille"],c:1,e:"Caches."},{q:"-lh :",a:["Long+lisible","Petit","Cache","Recursif"],c:0,e:"Long+human."}]},
+
+{id:26,t:"Utiliser cd",d:15,
+intro:"cd (change directory) change le dossier courant.",
+analogy:"Changer de piece dans une maison.",
+sections:[
+{titre:"Utilisations",contenu:"<p>cd /etc (absolu), cd Documents (relatif), cd .. (parent), cd ~ (home), cd - (precedent), cd sans argument (home).</p>"},
+{titre:"Espaces dans les chemins",contenu:"<p>Si le chemin a des espaces : cd Mon Dossier (avec guillemets) ou cd Mon Dossier (avec antislash).</p>"}
+],
+why:"Base de la navigation. Sans cd, impossible de travailler.",
+bank:"Navigation serveur pour audits.",
+glo:"<b>Relatif</b> : dependant du courant.",
+pr:["cd /etc.","cd -.","cd ~.","cd Documents."],
+er:"Espaces : cd Mon Dossier avec guillemets.",
+df:"4 commandes cd.",
+proj:"Note navigation.",
+q:[{q:"cd ~ :",a:["Racine","Home","Parent","Tmp"],c:1,e:"Home."},{q:"cd - :",a:["Rien","Precedent","Racine","Home"],c:1,e:"Precedent."}]},
+
+{id:27,t:"Utiliser mkdir",d:20,
+intro:"mkdir (make directory) cree un dossier.",
+analogy:"Creer un tiroir dans une armoire.",
+sections:[
+{titre:"Options",contenu:"<p>-p : cree les parents manquants. -m : permissions. -v : verbose.</p>"},
+{titre:"Creation multiple",contenu:"<p>mkdir -p projet/src projet/docs projet/tests cree l'arborescence complete en une commande.</p>"}
+],
+why:"Organiser les projets. Structurer les dossiers d'enquete.",
+bank:"Structurer un dossier d'enquete (logs, preuves, rapports).",
+glo:"<b>-p</b> : parents. <b>-m</b> : permissions.",
+pr:["mkdir test.","mkdir -p parent/enfant.","mkdir -p projet/src docs.","mkdir -m 700 prive."],
+er:"Sans -p echoue si parent absent.",
+df:"~/lab/ avec 3 sous-dossiers.",
+proj:"Structure projet.",
+q:[{q:"-p :",a:["Cacher","Parents","Suppr","Permission"],c:1,e:"Parents."},{q:"-m 700 :",a:["rwx------","Public","Cache","Rapide"],c:0,e:"Prive."}]},
+
+{id:28,t:"Utiliser cp",d:20,
+intro:"cp (copy) copie fichiers et dossiers.",
+analogy:"Photocopie d'un document.",
+sections:[
+{titre:"Options",contenu:"<p>-r : recursif (dossiers). -p : preserve permissions/dates. -i : confirmation. -v : verbose.</p>"},
+{titre:"Exemples",contenu:"<p>cp /etc/hosts ~/hosts.backup. cp -r /etc/systemd ~/systemd-backup. cp -i fichier1 fichier2 demande avant ecrasement.</p>"}
+],
+why:"Sauvegarder = copier. Les scripts de sauvegarde utilisent cp ou rsync.",
+bank:"Dupliquer configs pour tests avant modification.",
+glo:"<b>-r</b> : recursif. <b>-p</b> : attributs.",
+pr:["cp /etc/hosts ~/.","cp -r.","cp -i.","cp -v."],
+er:"Sans -i ecrase sans demander.",
+df:"Copier /etc/hosts avec -p.",
+proj:"Note copie.",
+q:[{q:"-r :",a:["Rien","Recursif","Vite","Recupere"],c:1,e:"Recursif."},{q:"-p :",a:["Attributs","Public","Rien","Pause"],c:0,e:"Attributs."}]},
+
+{id:29,t:"Utiliser mv",d:15,
+intro:"mv (move) deplace OU renomme selon la destination.",
+analogy:"Deplacer un meuble ou changer son etiquette.",
+sections:[
+{titre:"Options",contenu:"<p>-i : confirmation. -n : no-clobber (n'ecrase pas). -v : verbose.</p>"},
+{titre:"Cas",contenu:"<p>mv fichier.txt /tmp/ deplace. mv ancien.txt nouveau.txt renomme. mv *.pdf ~/PDF/ deplace tous les PDF.</p>"}
+],
+why:"Reorganiser. mv ecrase silencieusement sans -i.",
+bank:"Renommer logs pour archivage (date, client).",
+glo:"<b>-n</b> : n'ecrase pas.",
+pr:["mv f.txt /tmp/.","mv ancien nouveau.","mv -i.","mv *.pdf ~/PDF/."],
+er:"mv ecrase silencieusement.",
+df:"Renommer 3 + deplacer.",
+proj:"Note deplacement.",
+q:[{q:"mv peut :",a:["Deplacer","Renommer","Les 2","Copier"],c:2,e:"Les 2."},{q:"-i :",a:["Interactif","Recursif","Vide","Suppr"],c:0,e:"Confirm."}]},
+
+{id:30,t:"Utiliser rm",d:20,
+intro:"rm (remove) supprime definitivement. Pas de corbeille en CLI.",
+analogy:"Un broyeur a papier : pas de retour.",
+sections:[
+{titre:"Options et danger",contenu:"<p>-i : confirmation. -r : recursif. -f : force.</p><p>Attention : rm -rf / efface tout le systeme. rm -rf avec variable vide = catastrophe.</p>"},
+{titre:"Bonnes pratiques",contenu:"<ul><li>Toujours utiliser -i en interactif.</li><li>Verifier la cible avec ls avant.</li><li>Ne jamais faire rm -rf sur / ou ~.</li><li>Utiliser trash-cli pour une corbeille.</li></ul>"}
+],
+why:"rm sans retour = catastrophe. Une faute de frappe peut detruire des annees de donnees.",
+bank:"Nettoyer logs sensibles avec precaution (tracabilite).",
+glo:"<b>Corbeille CLI</b> : n'existe pas.",
+pr:["mkdir test.","rm -i f.txt.","rm -r test/.","rm -v *.tmp."],
+er:"rm -rf avec variable vide = /.",
+df:"Dossier test supprime.",
+proj:"Note suppression.",
+q:[{q:"-rf :",a:["Rapide","Force+recursif","Reversible","Rien"],c:1,e:"Force."},{q:"Corbeille :",a:["Oui","Non","Parfois","GUI"],c:1,e:"Non."}]},
+
+{id:31,t:"Utiliser cat",d:25,
+intro:"cat (concatenate) affiche le contenu d'un fichier.",
+analogy:"Lire un livre a voix haute.",
+sections:[
+{titre:"Options et variantes",contenu:"<p>cat -n : numerote. head -n X : X premieres lignes. tail -n X : X dernieres. tail -f : suivi temps reel. less : pagination.</p>"},
+{titre:"Combiner",contenu:"<p>cat f1 f2 > f3 concatene. cat > new.txt suivi du contenu puis EOF cree un fichier.</p>"}
+],
+why:"Lire /etc/passwd. Suivre logs en temps reel = base SOC.",
+bank:"Suivre les logs applicatifs en temps reel pour detecter incidents.",
+glo:"<b>tail -f</b> : follow.",
+pr:["cat /etc/passwd.","head -5.","tail -5.","tail -f /var/log/syslog."],
+er:"Gros binaire illisible.",
+df:"3 dernieres lignes /etc/passwd.",
+proj:"Note lecture.",
+q:[{q:"Dernieres lignes :",a:["cat","head","tail","less"],c:2,e:"Tail."},{q:"Suivre log :",a:["cat -f","tail -f","head -f","grep -f"],c:1,e:"Follow."}]},
+
+{id:32,t:"Utiliser grep",d:25,
+intro:"grep cherche du texte dans des fichiers.",
+analogy:"Un surligneur qui trouve toutes les occurrences.",
+sections:[
+{titre:"Options",contenu:"<p>-i : insensible casse. -r : recursif. -v : inverse. -n : numero ligne. -c : compte. -E : regex etendue.</p>"},
+{titre:"Combinaisons",contenu:"<p>grep -r password /var/log/. ps aux grep nginx. grep -E avec regex pour extraire IP.</p>"}
+],
+why:"Couteau suisse du pentester. Chercher mots de passe, IPs, erreurs dans logs.",
+bank:"Chercher IOC (indicateurs de compromission) dans logs bancaires.",
+glo:"<b>Regex</b> : motif.",
+pr:["grep root /etc/passwd.","grep -i ERROR.","grep -r TODO.","ps aux grep bash."],
+er:"Sans -i, sensible a la casse.",
+df:"grep root + error.",
+proj:"Note recherche.",
+q:[{q:"-i :",a:["Inverse","Insensible casse","Recursif","Numerote"],c:1,e:"Casse."},{q:"-r :",a:["Recursif","Rien","Recupere","Renomme"],c:0,e:"Recursif."}]},
+
+{id:33,t:"Utiliser find",d:30,
+intro:"find cherche des fichiers selon criteres multiples (nom, type, taille, date, permissions).",
+analogy:"Detecteur de metaux : cherche selon criteres precis.",
+sections:[
+{titre:"Criteres",contenu:"<p>-name, -type (f=fichier, d=dossier), -size (+10M), -mtime (-1 = moins de 24h), -perm (-4000 = SUID).</p>"},
+{titre:"SUID : vecteur d'escalade",contenu:"<p>find / -perm -4000 2>/dev/null liste les fichiers SUID : un fichier SUID s'execute avec les droits du proprietaire (souvent root). Mal configure, il permet l'escalade.</p>"},
+{titre:"Actions",contenu:"<p>find . -name *.tmp -delete supprime. find . -name *.log -exec rm {} supprime via exec.</p>"}
+],
+why:"find -perm -4000 revele les SUID : vecteur d'escalade classique en pentest.",
+bank:"Trouver fichiers modifies apres intrusion (analyse forensique).",
+glo:"<b>SUID</b> : Set User ID. <b>-perm -4000</b> : SUID.",
+pr:["find ~ -name *.txt.","find . -size +10M.","find / -perm -4000 2>/dev/null.","find . -mtime -1."],
+er:"Sans 2>/dev/null = spam d'erreurs.",
+df:"SUID systeme listes.",
+proj:"Note find.",
+q:[{q:"-perm -4000 :",a:["SUID","Textes","Vides","Reseau"],c:0,e:"SUID."},{q:"-name :",a:["Rien","Nom","Taille","Date"],c:1,e:"Nom."}]},
+
+{id:34,t:"Comprendre les permissions",d:30,
+intro:"Chaque fichier a 3 permissions pour 3 categories : user (proprietaire), group, others.",
+analogy:"Des cles differentes pour chaque porte d'une maison.",
+sections:[
+{titre:"Le systeme rwx",contenu:"<p>r=4 (lecture), w=2 (ecriture), x=1 (execution). u=user, g=group, o=others.</p><p>Exemples : 755=rwxr-xr-x, 644=rw-r--r--, 600=rw-------.</p>",svg:"PERMS"},
+{titre:"Lecture",contenu:"<p>-rwxr-xr-x 1 user group 1024 date fichier</p><p>Tiret = fichier, d = dossier, l = lien. rwx = user (7), r-x = group (5), r-x = others (5).</p>"},
+{titre:"Cas sensibles",contenu:"<ul><li>/etc/passwd (644) : lisible par tous.</li><li>/etc/shadow (640) : hash des MDP (root only).</li><li>~/.ssh/id_rsa (600) : cle privee.</li><li>Scripts executables (755).</li></ul>"}
+],
+why:"Mauvaises permissions = escalade de privileges. Un SUID mal configure = root. Un fichier world-writable = compromission.",
+bank:"SUID mal configure = root immediat sur serveur. Audit regulier = hygiene.",
+glo:"<b>u/g/o</b> : user/group/others. <b>chmod</b> : modifier.",
+pr:["ls -l /etc.","Decoder rw-r--r--.","ls -l /etc/shadow.","Convertir 750."],
+er:"chmod 777 = tout le monde peut tout.",
+df:"Convertir 755/644/600/700.",
+proj:"Table permissions.",
+q:[{q:"rwx :",a:["4","7","5","3"],c:1,e:"7."},{q:"644 :",a:["rwxrwxrwx","rw-r--r--","rwx------","---------"],c:1,e:"644."}]},
+
+{id:35,t:"Modifier les permissions (chmod)",d:25,
+intro:"chmod change les permissions. Mode symbolique (u+x) ou octal (755).",
+analogy:"Changer le nombre de cles d'une serrure.",
+sections:[
+{titre:"Modes",contenu:"<p>chmod u+x script.sh ajoute x pour user. chmod g-w fichier retire w pour group. chmod o=r fichier definit r pour others. chmod 755 script.sh definit rwxr-xr-x. chmod 600 ~/.ssh/id_rsa definit rw-------.</p>"},
+{titre:"Cas pratiques",contenu:"<table><tr><th>Element</th><th>Permissions</th></tr><tr><td>Cle SSH privee</td><td>600</td></tr><tr><td>Script executable</td><td>755</td></tr><tr><td>Fichier config</td><td>644</td></tr><tr><td>Dossier prive</td><td>700</td></tr></table>"}
+],
+why:"Cle SSH 644 = rejetee et volable. Un fichier config 777 = compromission. Bonnes permissions = securite.",
+bank:"Securiser les scripts critiques et cles SSH sur serveurs bancaires.",
+glo:"<b>+x</b> : ajoute execution. <b>chmod</b> : change permissions.",
+pr:["touch script.sh.","chmod +x.","chmod 755.","chmod 600 ~/.ssh/id_rsa."],
+er:"644 sur cle SSH = volee.",
+df:"Script 755 + cle 600.",
+proj:"Note permissions.",
+q:[{q:"755 :",a:["rwxr-xr-x","rw-r--r--","rwxrwxrwx","---------"],c:0,e:"755."},{q:"Cle SSH :",a:["644","600","777","400"],c:1,e:"600."}]},
+
+{id:36,t:"Gerer les utilisateurs",d:35,
+intro:"Chaque compte utilisateur a des permissions. /etc/passwd, /etc/shadow, /etc/group, /etc/sudoers gerent les comptes.",
+analogy:"Gestion du personnel : embauche, promotion, licenciement.",
+sections:[
+{titre:"Commandes",contenu:"<p>sudo adduser test cree. sudo userdel -r test supprime + home. sudo usermod -aG sudo test ajoute a sudo. id test infos. who connectes. last dernieres connexions.</p>"},
+{titre:"Fichiers cles",contenu:"<ul><li>/etc/passwd : comptes (lisible par tous).</li><li>/etc/shadow : hash MDP (root only).</li><li>/etc/group : groupes.</li><li>/etc/sudoers : qui peut sudo (editer avec visudo).</li></ul>"},
+{titre:"Bonnes pratiques",contenu:"<ul><li>Un compte par utilisateur (pas de partage).</li><li>Desactiver comptes non utilises.</li><li>Audit regulier (last, who).</li><li>Sudo avec utilisateur nominatif (pas sudo generique).</li></ul>"}
+],
+why:"Compte non utilise = backdoor potentielle. Ajouter un user a sudo sans raison = backdoor. Audit regulier = hygiene.",
+bank:"Audit regulier des comptes = conformite. Un compte oublie = porte d'entree.",
+glo:"<b>shadow</b> : hash MDP. <b>sudoers</b> : qui peut sudo.",
+pr:["adduser test.","usermod -aG sudo.","su - test.","userdel -r."],
+er:"Sudo sans raison = backdoor.",
+df:"User cree + supprime.",
+proj:"Rapport utilisateurs.",
+q:[{q:"Hash MDP :",a:["/etc/passwd","/etc/shadow","/etc/group","/etc/sudoers"],c:1,e:"shadow."},{q:"Creer user :",a:["adduser","newuser","user","add"],c:0,e:"adduser."}]},
+
+{id:37,t:"Installer avec apt",d:25,
+intro:"apt est le gestionnaire de paquets Debian/Ubuntu/Kali. Installe depuis des depots signes.",
+analogy:"Un magasin d'applications officiel.",
+sections:[
+{titre:"Commandes",contenu:"<p>sudo apt update MAJ liste des paquets. sudo apt upgrade -y MAJ paquets installes. sudo apt install nmap installe. sudo apt remove nmap desinstalle. sudo apt purge nmap + config. apt search scanner cherche. apt show nmap infos.</p>"},
+{titre:"Sources",contenu:"<p>Les paquets viennent de /etc/apt/sources.list et /etc/apt/sources.list.d/. Depots signes cryptographiquement : integre et authentique.</p>"}
+],
+why:"Installation rapide et securisee. Depots signes = pas de malware (contrairement aux telechargements tiers).",
+bank:"Deployer des outils de securite sur serveurs de maniere controlee et reproductible.",
+glo:"<b>Paquet</b> : logiciel. <b>Depot</b> : source signee.",
+pr:["apt update.","apt install nmap curl htop.","which nmap.","apt purge htop."],
+er:"apt install sans update = versions anciennes.",
+df:"nmap + curl + htop installes, htop purge.",
+proj:"Note apt.",
+q:[{q:"apt update fait :",a:["MAJ paquets","MAJ liste","Installe","Supprime"],c:1,e:"Liste."},{q:"Purge :",a:["Identique","+ config","- config","Rien"],c:1,e:"Config."}]},
+
+{id:38,t:"Mettre Linux a jour",d:20,
+intro:"La routine de mise a jour Linux : update, upgrade, full-upgrade, autoremove, autoclean.",
+analogy:"Mettre a jour son GPS avec les nouvelles routes.",
+sections:[
+{titre:"Routine complete",contenu:"<p>sudo apt update. sudo apt upgrade -y. sudo apt full-upgrade -y. sudo apt autoremove -y. sudo apt autoclean.</p>"},
+{titre:"Redemarrage",contenu:"<p>Apres un kernel update, redemarrer. Le message System restart required signale qu'un redemarrage est necessaire. Ignorer ce message = kernel pas reellement mis a jour.</p>"}
+],
+why:"Linux non patche = vulnerable. Les serveurs Linux sont la cible numero 1 des botnets (SSH brute-force).",
+bank:"Serveurs a jour = conformite (ISO 27001, PCI-DSS).",
+glo:"<b>full-upgrade</b> : dependances complexes. <b>autoremove</b> : orphelins.",
+pr:["apt update et upgrade.","full-upgrade.","autoremove.","Reboot."],
+er:"Ignorer restart required.",
+df:"Systeme a jour.",
+proj:"Rapport MAJ.",
+q:[{q:"full-upgrade :",a:["Simple","Complexe","Installe","Rien"],c:1,e:"Complexe."},{q:"autoremove :",a:["Orphelins","Vide","Redemarre","Rien"],c:0,e:"Orphelins."}]},
+
+{id:39,t:"Comprendre les processus Linux",d:30,
+intro:"Gerer les processus sous Linux : ps, top, htop, kill, pkill.",
+analogy:"Comme Windows, mais en ligne de commande.",
+sections:[
+{titre:"Commandes",contenu:"<p>ps aux : tous les processus. ps -ef : arborescent. top/htop : temps reel. pstree : arbre. kill PID : SIGTERM. kill -9 PID : SIGKILL. pkill nom : par nom.</p>"},
+{titre:"Signaux",contenu:"<ul><li><b>SIGTERM (15)</b> : demande d'arret propre.</li><li><b>SIGKILL (9)</b> : arret force, non interceptable.</li><li><b>SIGHUP (1)</b> : recharger config.</li><li><b>SIGSTOP (19)</b> : suspendre.</li></ul>"}
+],
+why:"Reperer malware = forensic. Analyser serveurs compromis.",
+bank:"Analyser un serveur compromis : processus anormaux, connexions sortantes.",
+glo:"<b>SIGKILL</b> : force. <b>htop</b> : top ameliore.",
+pr:["ps aux.","htop.","sleep 300 et.","kill PID.","kill -9."],
+er:"kill -9 en premier = corruption.",
+df:"SIGTERM vs SIGKILL testes.",
+proj:"Rapport processus.",
+q:[{q:"SIGTERM :",a:["Force","Propre","Recharge","Suspend"],c:1,e:"Propre."},{q:"ps aux :",a:["Rien","Tous","Reseau","Fichiers"],c:1,e:"Tous."}]},
+
+{id:40,t:"Realiser un mini-projet Linux",d:90,
+intro:"Combiner toutes les notions : script bash, cron, permissions, logs.",
+analogy:"Automatiser une tache repetitive.",
+sections:[
+{titre:"Le projet",contenu:"<p>Script backup.sh qui copie un dossier, le compresse, nettoie les anciennes sauvegardes et log tout.</p><p>#!/bin/bash ; DATE=date ; DEST=backups ; mkdir -p DEST ; tar -czf DEST/doc.tar.gz ~/Documents ; find backups -mtime +30 -exec rm -rf ; echo log dans backup.log</p>"},
+{titre:"Planification cron",contenu:"<p>crontab -e puis ajouter : 0 3 * * * /home/user/scripts/backup.sh (tous les jours a 3h).</p>"},
+{titre:"Bonnes pratiques",contenu:"<ul><li>Chemins via variables (pas en dur).</li><li>Logs horodates.</li><li>Verifier l'espace disque avant.</li><li>Tester sur dossier de test.</li></ul>"}
+],
+why:"Projet concret = preuve de competence. Portfolio = CV. Automatisation = gain de temps.",
+bank:"Sauvegarde automatisee = conformite. Reproductible et auditable.",
+glo:"<b>cron</b> : planificateur. <b>tar</b> : archivage. <b>shebang</b> : #!/bin/bash.",
+pr:["~/scripts/backup.sh.","Copie+nettoie+log.","chmod +x.","crontab -e.","Verifier."],
+er:"Chemins en dur = non portable.",
+df:"Script + cron + logs.",
+proj:"backup.sh sur GitHub.",
+q:[{q:"Shebang :",a:["#!/bin/bash","#bash","//bash","@bash"],c:0,e:"#!/bin/bash."},{q:"cron :",a:["Planifie","Nettoie","Compresse","Reseau"],c:0,e:"Planifie."}]},
+
+{id:41,t:"Comprendre Internet",d:30,
+intro:"Internet est un reseau mondial de reseaux interconnectes via TCP/IP. Le Web est un service (HTTP) qui tourne sur Internet.",
+analogy:"Internet = routes. Web = magasins sur les routes.",
+sections:[
+{titre:"Modele OSI",contenu:"<p>7 couches, de la physique a l'application :</p><table><tr><th>Couche</th><th>Role</th></tr><tr><td>7 Application</td><td>HTTP, DNS, SSH</td></tr><tr><td>6 Presentation</td><td>Chiffrement, encodage</td></tr><tr><td>5 Session</td><td>Gestion connexions</td></tr><tr><td>4 Transport</td><td>TCP, UDP, ports</td></tr><tr><td>3 Reseau</td><td>IP, routeurs</td></tr><tr><td>2 Liaison</td><td>MAC, switch</td></tr><tr><td>1 Physique</td><td>Cables, signaux</td></tr></table>",svg:"OSI"},
+{titre:"Internet vs Web",contenu:"<p><b>Internet</b> = infrastructure (cables, routeurs, protocoles TCP/IP). <b>Web</b> = service HTTP qui utilise Internet (un service parmi d'autres : mail, SSH, FTP...).</p>"}
+],
+why:"Chaque attaque cible une couche OSI. Comprendre l'architecture = comprendre ou chercher.",
+bank:"Cartographier le reseau = comprendre les risques a chaque couche.",
+glo:"<b>OSI</b> : 7 couches. <b>TCP/IP</b> : protocoles Internet.",
+pr:["ping google.com.","traceroute.","Compter hops.","Noter HTTPS."],
+er:"Confondre Internet et Web.",
+df:"Hops jusqu'a google.com.",
+proj:"Schema OSI.",
+q:[{q:"Web :",a:["Internet","Service d'Internet","Cable","OS"],c:1,e:"Service HTTP."},{q:"OSI :",a:["3","5","7","10"],c:2,e:"7 couches."}]},
+
+{id:42,t:"Comprendre une adresse IP",d:30,
+intro:"Une adresse IP identifie une machine sur un reseau. IPv4 (32 bits) et IPv6 (128 bits). Privee vs publique.",
+analogy:"Adresse postale d'une machine : unique sur un reseau.",
+sections:[
+{titre:"IPv4 privee vs publique",contenu:"<p><b>Privees</b> (non routables sur Internet) : 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16. <b>Loopback</b> : 127.0.0.1 (localhost). <b>Publique</b> : visible sur Internet, fournie par le FAI.</p>",svg:"IP"},
+{titre:"IPv6",contenu:"<p>128 bits (8 groupes hexadecimal). Pas de NAT natif. Types : ::1 (localhost), fe80:: (link-local), 2001:: (global).</p>"}
+],
+why:"Scanner, tracer = manipuler les IP. Comprendre prive vs public = comprendre NAT.",
+bank:"Identifier les machines sur le reseau bancaire (LAN prive + DMZ + serveurs).",
+glo:"<b>IPv4</b> : 4 octets. <b>IPv6</b> : 128 bits. <b>Privee</b> : non routable.",
+pr:["ipconfig ou ip a.","whatismyip.com.","Comparer.","ping 127.0.0.1."],
+er:"IP privee non securisee (juste non routable).",
+df:"IP privee + publique + loopback.",
+proj:"Fiche reseau.",
+q:[{q:"192.168 :",a:["Publique","Privee","Loopback","IPv6"],c:1,e:"Privee."},{q:"IPv6 :",a:["32","64","128","256"],c:2,e:"128 bits."}]},
+
+{id:43,t:"Comprendre IPv4",d:30,
+intro:"IPv4 = 4 octets separes par des points. Chaque octet 0-255. Total 32 bits.",
+analogy:"Quatre numeros de maison pour identifier une adresse.",
+sections:[
+{titre:"Notation binaire",contenu:"<p>192 = 11000000, 168 = 10101000. Total 32 bits = environ 4,3 milliards d'adresses. Epuise depuis 2011, solutions : NAT et IPv6.</p>"},
+{titre:"IP speciales",contenu:"<ul><li>0.0.0.0 : toutes interfaces.</li><li>255.255.255.255 : broadcast.</li><li>169.254.x.x : APIPA (pas de DHCP).</li></ul>"}
+],
+why:"99% des reseaux. Le comprendre = base du pentest reseau.",
+bank:"Base pour scanner, segmenter, configurer.",
+glo:"<b>APIPA</b> : 169.254.x.x sans DHCP.",
+pr:["Convertir 192.168.1.10.","Binaire en decimal."],
+er:"Octet superieur a 255 invalide.",
+df:"IPv4 en binaire.",
+proj:"Fiche IPv4.",
+q:[{q:"IPv4 :",a:["4 octets","6","8","16"],c:0,e:"4 octets."},{q:"Max :",a:["128","255","256","999"],c:1,e:"255."}]},
+
+{id:44,t:"Comprendre IPv6",d:30,
+intro:"IPv6 = 128 bits = 8 groupes hexadecimaux. Le double deux-points compresse les zeros.",
+analogy:"Adresse postale longue pour ne jamais manquer.",
+sections:[
+{titre:"Notation",contenu:"<p>Exemple : 2001:0db8:85a3:0000:0000:8a2e:0370:7334. Compresse : 2001:db8:85a3::8a2e:370:7334. Le :: ne peut apparaitre qu'une seule fois.</p>"},
+{titre:"Types",contenu:"<ul><li>::1 : localhost.</li><li>fe80::/10 : link-local.</li><li>2001::/32 : global unicast.</li><li>ff00::/8 : multicast.</li></ul>"}
+],
+why:"IPv6 se deploie. Pas de NAT = chaque machine joignable = surface d'attaque augmentee.",
+bank:"IPv6 se deploie en entreprise. A connaitre pour audits.",
+glo:"<b>hexadecimal</b> : base 16. <b>::</b> : compression.",
+pr:["ip -6 a.","Identifier type.","ping6 ::1."],
+er:":: une seule fois.",
+df:"IPv6 + type.",
+proj:"Fiche IPv6.",
+q:[{q:"IPv6 :",a:["32","64","128","256"],c:2,e:"128."},{q:"::1 :",a:["Broadcast","Localhost","Gateway","DNS"],c:1,e:"Localhost."}]},
+
+{id:45,t:"Comprendre le masque de sous-reseau",d:35,
+intro:"Le masque separe la partie reseau de la partie hote. Notation CIDR : /24, /25, etc.",
+analogy:"Decouper un gateau en parts egales.",
+sections:[
+{titre:"Calcul du nombre d'hotes",contenu:"<p>Formule : 2 puissance (32-CIDR) moins 2 (reseau + broadcast exclus).</p><table><tr><th>CIDR</th><th>Masque</th><th>Hotes</th></tr><tr><td>/24</td><td>255.255.255.0</td><td>254</td></tr><tr><td>/25</td><td>255.255.255.128</td><td>126</td></tr><tr><td>/26</td><td>255.255.255.192</td><td>62</td></tr><tr><td>/30</td><td>255.255.255.252</td><td>2</td></tr></table>"}
+],
+why:"Segmenter = isoler les zones critiques. Subnetting = base de tout reseau securise.",
+bank:"DMZ, LAN, serveurs : chaque zone = un subnet isole.",
+glo:"<b>CIDR</b> : notation /. <b>Subnet</b> : sous-reseau.",
+pr:["Noter IP+masque.","/26.","/28.","subnet.ninja."],
+er:"Oublier -2 (reseau+broadcast).",
+df:"/26 et /28 calcules.",
+proj:"Table CIDR.",
+q:[{q:"/24 :",a:["255.0.0.0","255.255.0.0","255.255.255.0","255.255.255.255"],c:2,e:"/24."},{q:"/26 :",a:["30","62","126","254"],c:1,e:"62."}]},
+
+{id:46,t:"Comprendre le DNS",d:30,
+intro:"Le DNS traduit les noms de domaine en adresses IP.",
+analogy:"L'annuaire telephonique d'Internet.",
+sections:[
+{titre:"Hierarchie",contenu:"<p>Client, Resolveur (FAI, 8.8.8.8), Root (13 serveurs), TLD (.com, .fr), Authoritative (du domaine), reponse.</p>",svg:"DNS"},
+{titre:"Enregistrements",contenu:"<ul><li><b>A</b> : domaine vers IPv4.</li><li><b>AAAA</b> : domaine vers IPv6.</li><li><b>MX</b> : serveurs mail.</li><li><b>CNAME</b> : alias.</li><li><b>TXT</b> : SPF, DKIM, verifications.</li></ul>"}
+],
+why:"DNS = cible (spoofing, tunneling). DNS non chiffre = espionnage (utiliser DoH/DoT).",
+bank:"DNS mal configure = phishing. Un enregistrement SPF/DKIM absent = mails usurpes.",
+glo:"<b>A</b> : IPv4. <b>MX</b> : mail. <b>DoH</b> : DNS over HTTPS.",
+pr:["nslookup.","dig.","dig MX.","dig TXT."],
+er:"DNS non chiffre = espionnage.",
+df:"Resoudre A+MX+TXT.",
+proj:"Fiche DNS.",
+q:[{q:"DNS :",a:["IP MAC","Nom IP","Port IP","Rien"],c:1,e:"Nom vers IP."},{q:"A :",a:["IPv6","IPv4","Mail","Alias"],c:1,e:"IPv4."}]},
+
+{id:47,t:"Comprendre le DHCP",d:25,
+intro:"DHCP attribue automatiquement IP, masque, gateway, DNS.",
+analogy:"Un serveur qui distribue les adresses.",
+sections:[
+{titre:"Cycle DORA",contenu:"<ol><li><b>D</b>iscover : client cherche serveur.</li><li><b>O</b>ffer : serveur propose.</li><li><b>R</b>equest : client demande.</li><li><b>A</b>ck : serveur confirme.</li></ol>"},
+{titre:"Rogue DHCP",contenu:"<p>Un attaquant lance un DHCP pirate : fausses configs (gateway = attaquant), MITM. Defense : DHCP snooping sur les switches.</p>"}
+],
+why:"Rogue DHCP = MITM classique. Intercepter tout le trafic.",
+bank:"MITM reseau bancaire = interception de transactions.",
+glo:"<b>DORA</b> : cycle DHCP.",
+pr:["ipconfig /all.","dhclient -v.","release/renew."],
+er:"Rogue DHCP pirate.",
+df:"Release + renew.",
+proj:"Fiche DHCP.",
+q:[{q:"DORA :",a:["DORA","ABCD","PING","ARP"],c:0,e:"DORA."},{q:"Fournit :",a:["IP","Complete","Rien","MDP"],c:1,e:"Complete."}]},
+
+{id:48,t:"Comprendre les ports",d:25,
+intro:"Un port identifie un service sur une machine (0-65535).",
+analogy:"Des portes numerotees dans un immeuble.",
+sections:[
+{titre:"Ports celebres",contenu:"<table><tr><th>Port</th><th>Service</th></tr><tr><td>22</td><td>SSH</td></tr><tr><td>23</td><td>Telnet</td></tr><tr><td>53</td><td>DNS</td></tr><tr><td>80</td><td>HTTP</td></tr><tr><td>443</td><td>HTTPS</td></tr><tr><td>445</td><td>SMB</td></tr><tr><td>3306</td><td>MySQL</td></tr><tr><td>3389</td><td>RDP</td></tr></table>"},
+{titre:"Categories",contenu:"<ul><li>0-1023 : well-known (systeme).</li><li>1024-49151 : registered.</li><li>49152-65535 : ephemeral.</li></ul>"}
+],
+why:"RDP (3389) expose sur Internet = cible numero 1 ransomware. Chaque port ouvert = porte d'entree.",
+bank:"RDP ouvert = ransomware. SSH expose = brute-force. Scan regulier = hygiene.",
+glo:"<b>Well-known</b> : 0-1023.",
+pr:["ss -tuln.","netstat -an.","nmap 127.0.0.1."],
+er:"RDP expose sur Internet.",
+df:"Ports + services.",
+proj:"Table ports.",
+q:[{q:"SSH :",a:["21","22","23","80"],c:1,e:"22."},{q:"HTTPS :",a:["80","443","445","8080"],c:1,e:"443."}]},
+
+{id:49,t:"Comprendre TCP",d:30,
+intro:"TCP = fiable, oriente connexion. Handshake SYN, SYN-ACK, ACK.",
+analogy:"Recommande avec accuse de reception.",
+sections:[
+{titre:"Handshake 3-way",contenu:"<ol><li>Client envoie SYN.</li><li>Serveur repond SYN-ACK.</li><li>Client envoie ACK.</li></ol><p>Connexion etablie. Utilise par HTTP, SSH, FTP.</p>",svg:"TCP"},
+{titre:"Caracteristiques",contenu:"<ul><li>Fiable (accuses reception).</li><li>Ordonne (numeros de sequence).</li><li>Controle de flux.</li><li>Retransmission si perte.</li></ul>"}
+],
+why:"90% du trafic. Analyser TCP = detection d'intrusion. Scan SYN = half-open.",
+bank:"Detection d'intrusion. Analyser captures en cas d'incident.",
+glo:"<b>SYN</b> : demande. <b>ACK</b> : accuse.",
+pr:["Wireshark.","tcp.flags.syn.","Handshake.","Follow Stream."],
+er:"TCP n'est pas UDP.",
+df:"Handshake capture.",
+proj:"pcap.",
+q:[{q:"TCP :",a:["Non fiable","Fiable","Sans connexion","Chiffre"],c:1,e:"Fiable."},{q:"Handshake :",a:["SYN ACK FIN","SYN SYN-ACK ACK","PING PONG","HELLO"],c:1,e:"3-way handshake."}]},
+
+{id:50,t:"Comprendre UDP",d:25,
+intro:"UDP = non connecte, rapide, sans garantie. DNS, DHCP, VoIP.",
+analogy:"Carte postale : rapide, sans accuse de reception.",
+sections:[
+{titre:"Caracteristiques",contenu:"<ul><li>Pas de handshake.</li><li>Pas d'accuse reception.</li><li>Pas de retransmission.</li><li>Tres rapide.</li></ul><p>Utilise par DNS (53), DHCP (67/68), VoIP, streaming, jeux, QUIC (HTTP/3).</p>"},
+{titre:"Vulnerabilites",contenu:"<p>UDP est spoofable (usurpation d'IP source) car pas de handshake. Exploite pour le DDoS par amplification (DNS, NTP, SSDP).</p>"}
+],
+why:"Spoofable = DDoS par amplification. Un paquet UDP peut sembler venir de n'importe qui.",
+bank:"DDoS par amplification = saturation des services bancaires en ligne.",
+glo:"<b>Sans garantie</b> de livraison.",
+pr:["dig google.com.","curl https.","Wireshark udp."],
+er:"UDP spoofable.",
+df:"DNS UDP capture.",
+proj:"pcap UDP.",
+q:[{q:"UDP :",a:["Fiable","Non connecte","Chiffre","TCP"],c:1,e:"Non connecte."},{q:"DNS :",a:["TCP","UDP 53","ICMP","Rien"],c:1,e:"UDP 53."}]},
+
+{id:51,t:"Utiliser ping",d:20,
+intro:"ping envoie des paquets ICMP Echo pour tester la connectivite et mesurer la latence.",
+analogy:"Sonar : envoie un signal, mesure le retour.",
+sections:[
+{titre:"Options",contenu:"<p>-c 4 (Linux) ou -n 4 (Windows) : 4 paquets. -t (Win) : continu. -i 0.2 : intervalle.</p><p>Le RTT (Round-Trip Time) indique la latence en ms.</p>"},
+{titre:"Interpretation",contenu:"<ul><li><b>Reply</b> : joignable.</li><li><b>Timed out</b> : pas de reponse.</li><li><b>Destination unreachable</b> : routage impossible.</li></ul><p>Un ping qui echoue ne signifie pas machine down : un firewall peut bloquer ICMP.</p>"}
+],
+why:"Premier reflexe de diagnostic. ICMP bloque n'est pas machine down.",
+bank:"Diagnostic latence pour applications critiques (transactions, mobile banking).",
+glo:"<b>RTT</b> : round-trip time. <b>ICMP</b> : protocole de controle.",
+pr:["ping google.com.","ping -c 4 8.8.8.8.","ping box."],
+er:"Echoue n'est pas down.",
+df:"3 cibles + RTT.",
+proj:"Rapport ping.",
+q:[{q:"ping utilise :",a:["TCP","UDP","ICMP","HTTP"],c:2,e:"ICMP."},{q:"Echoue :",a:["Down","Firewall","Crash","Pas IP"],c:1,e:"Firewall peut bloquer."}]},
+
+{id:52,t:"Utiliser traceroute",d:25,
+intro:"traceroute montre chaque routeur traverse jusqu'a la destination.",
+analogy:"Fil d'Ariane de tes paquets.",
+sections:[
+{titre:"Interpretation",contenu:"<p>Chaque ligne = un routeur (hop). * * * = pas de reponse (souvent firewall ICMP desactive sur le routeur).</p>"},
+{titre:"Outils",contenu:"<p><b>Linux</b> : traceroute ou mtr (traceroute + ping continu). <b>Windows</b> : tracert.</p>"}
+],
+why:"Diagnostiquer route/latence. Detecter un detournement de trafic.",
+bank:"Diagnostic de connectivite entre agences bancaires.",
+glo:"<b>hop</b> : saut (routeur).",
+pr:["traceroute.","Compter hops.","Identifier FAI.","mtr."],
+er:"Asterisques = souvent firewall.",
+df:"Hops jusqu'a google.com.",
+proj:"Rapport route.",
+q:[{q:"traceroute :",a:["Destination","Chaque routeur","Ports","DNS"],c:1,e:"Hops."},{q:"Asterisques :",a:["Erreur","Firewall","OK","Virus"],c:1,e:"Souvent firewall."}]},
+
+{id:53,t:"Utiliser ipconfig",d:20,
+intro:"ipconfig = diagnostic reseau Windows.",
+analogy:"Carte d'identite reseau.",
+sections:[
+{titre:"Options",contenu:"<p>ipconfig : IP basique. ipconfig /all : tout (MAC, DHCP, DNS). /release : libere IP. /renew : demande nouvelle IP. /flushdns : vide cache DNS.</p>"},
+{titre:"Interpretation",contenu:"<p>/all montre : IPv4, IPv6, MAC, DHCP, DNS, bail. Essentiel pour diagnostic.</p>"}
+],
+why:"/all revele MAC, DNS, DHCP. Diagnostic poste.",
+bank:"Diagnostic rapide d'un poste bancaire en incident.",
+glo:"<b>MAC</b> : adresse physique.",
+pr:["ipconfig.","/all.","/flushdns."],
+er:"Sans /all, on rate des infos.",
+df:"/all complet.",
+proj:"Rapport ipconfig.",
+q:[{q:"Tout :",a:["ipconfig","/all","/renew","ifconfig"],c:1,e:"/all."},{q:"DNS :",a:["/dns","/flushdns","/clear","dns"],c:1,e:"Flush."}]},
+
+{id:54,t:"Utiliser ip et ss (Linux)",d:25,
+intro:"ip et ss remplacent ifconfig et netstat (deprecies).",
+analogy:"Outils modernes pour configuration reseau.",
+sections:[
+{titre:"Commandes ip",contenu:"<p>ip a : adresses. ip r : routes. ip a add 192.168.1.10/24 dev eth0. ip link set eth0 up.</p>"},
+{titre:"Commandes ss",contenu:"<p>ss -tuln : ports TCP/UDP en ecoute. ss -tunap : tous + processus.</p>"}
+],
+why:"Outils modernes Linux. Indispensables pour configuration et diagnostic.",
+bank:"Config serveurs, diagnostic de ports ouverts.",
+glo:"<b>ss</b> : socket statistics.",
+pr:["ip a.","ip r.","ss -tuln."],
+er:"ifconfig deprecie.",
+df:"ip + ss.",
+proj:"Rapport reseau.",
+q:[{q:"Moderne :",a:["ifconfig","ip","netstat","route"],c:1,e:"ip."},{q:"Ports :",a:["ip","ss -tuln","ls","ps"],c:1,e:"ss."}]},
+
+{id:55,t:"Comprendre un routeur",d:30,
+intro:"Le routeur connecte des reseaux et achemine les paquets. Fonctions : routage, NAT, DHCP, firewall.",
+analogy:"Un peage qui oriente les voitures entre routes.",
+sections:[
+{titre:"Fonctions",contenu:"<ul><li><b>Routage</b> : table de routes.</li><li><b>NAT</b> : traduction privee vers publique.</li><li><b>DHCP</b> : distribution IP.</li><li><b>Firewall</b> : filtrage.</li><li><b>VPN</b> : parfois.</li></ul>"},
+{titre:"Securite",contenu:"<p>Admin par defaut (admin/admin) = faille critique. Firmware non patche = CVE exploitees. WPS active = faille. Wi-Fi separe (interne/invite).</p>"}
+],
+why:"Routeur non patche = faille critique (TP-Link, D-Link). Changer admin par defaut.",
+bank:"Routeur central du reseau. Un defaut = compromission totale.",
+glo:"<b>NAT</b> : Network Address Translation.",
+pr:["Trouver gateway.","http://192.168.1.1.","NAT/DHCP.","Ne rien modifier."],
+er:"Admin par defaut = faille.",
+df:"3 fonctions box.",
+proj:"Fiche routeur.",
+q:[{q:"Routeur :",a:["Connecte reseaux","Switch","Firewall","Cable"],c:0,e:"Reseaux."},{q:"NAT :",a:["Traduction","Antivirus","Port","DNS"],c:0,e:"Traduction."}]},
+
+{id:56,t:"Comprendre un switch",d:25,
+intro:"Le switch relie les machines d'un LAN en couche 2 (MAC).",
+analogy:"Aiguillage qui dirige chaque train vers la bonne voie.",
+sections:[
+{titre:"Fonctions",contenu:"<ul><li>Apprentissage MAC (table CAM).</li><li>Commutation par port.</li><li>VLAN : segmentation logique.</li><li>Port mirroring (SPAN).</li></ul>"},
+{titre:"Attaques L2",contenu:"<ul><li><b>MAC flooding</b> : sature la table CAM, switch devient hub.</li><li><b>ARP spoofing</b> : MITM.</li><li><b>VLAN hopping</b> : traverser les VLAN.</li></ul>"}
+],
+why:"Attaques L2 = MITM, interception. Un switch non manage = aucune visibilite.",
+bank:"Port security = defense. VLAN = isoler les zones.",
+glo:"<b>CAM</b> : table MAC. <b>VLAN</b> : reseau virtuel.",
+pr:["Identifier switch.","Port security.","VLAN."],
+er:"Non manage = aucune visibilite.",
+df:"Switch L2 vs L3.",
+proj:"Schema LAN.",
+q:[{q:"Switch :",a:["L1","L2","L3","L4"],c:1,e:"L2."},{q:"MAC flooding :",a:["Sature CAM","Accelere","Repare","Rien"],c:0,e:"Sature."}]},
+
+{id:57,t:"Comprendre le Wi-Fi",d:30,
+intro:"Wi-Fi = reseau sans fil 802.11. WEP casse, WPA obsolete, WPA2 standard, WPA3 sur.",
+analogy:"Ondes invisibles qui transportent les donnees.",
+sections:[
+{titre:"Securite Wi-Fi",contenu:"<table><tr><th>Protocole</th><th>Securite</th></tr><tr><td>WEP</td><td>Casse en minutes</td></tr><tr><td>WPA</td><td>Obsolete</td></tr><tr><td>WPA2</td><td>Standard (AES)</td></tr><tr><td>WPA3</td><td>Le plus sur</td></tr></table><p>WPS = faille majeure (PIN brute-forceable en heures). A desactiver.</p>"},
+{titre:"Attaques",contenu:"<ul><li><b>Evil Twin</b> : faux point d'acces.</li><li><b>Deauth</b> : deconnexion forcee.</li><li><b>Handshake capture</b> : WPA2 crackable offline.</li></ul>"}
+],
+why:"Cible majeure. WPS = brute-forceable. WPA2 handshake crackable.",
+bank:"Wi-Fi invite separe du Wi-Fi interne. WPA3 active.",
+glo:"<b>WPS</b> : PIN 8 chiffres brute-forceable.",
+pr:["netsh wlan show networks.","WPA2/3.","WPS OFF.","WPA3."],
+er:"WPS active.",
+df:"Chiffrement + WPS OFF.",
+proj:"Audit Wi-Fi.",
+q:[{q:"Sur :",a:["WEP","WPA","WPA2","WPA3"],c:3,e:"WPA3."},{q:"WPS :",a:["Sur","Faille","Chiffre","Recomm"],c:1,e:"Faille."}]},
+
+{id:58,t:"Configurer un petit reseau",d:60,
+intro:"Configurer un petit LAN avec 2 VMs host-only.",
+analogy:"Construire un mini-reseau isole.",
+sections:[
+{titre:"Etapes",contenu:"<ol><li>2 VMs VirtualBox en Host-only.</li><li>Kali : 192.168.56.10/24.</li><li>Ubuntu : 192.168.56.20/24.</li><li>Ping entre elles.</li></ol>"},
+{titre:"Configuration Linux",contenu:"<p>sudo ip a add 192.168.56.10/24 dev eth0. sudo ip link set eth0 up. ip a pour verifier.</p>"}
+],
+why:"Lab = base de l'apprentissage. Un reseau isole = pas de risque.",
+bank:"Simuler un reseau bancaire en lab.",
+glo:"<b>Host-only</b> : reseau isole (pas d'Internet).",
+pr:["2 VMs host-only.","Kali .10.","Ubuntu .20.","ping.","ip a."],
+er:"Conflit d'IP = reseau casse.",
+df:"2 VMs se pingent.",
+proj:"Schema lab.",
+q:[{q:"Host-only :",a:["Internet","Isole","Public","Aucun"],c:1,e:"Isole."},{q:"Ajouter :",a:["ip a add","ifconfig add","new ip","set"],c:0,e:"ip a add."}]},
+
+{id:59,t:"Tester la connectivite",d:35,
+intro:"Methode : bas vers haut (L1 cable, L2 MAC, L3 IP, L4 port, L7 app).",
+analogy:"Mecanicien qui verifie du plus simple au plus complexe.",
+sections:[
+{titre:"Etapes",contenu:"<ol><li>Couche 1 : cable branche ? Wi-Fi actif ?</li><li>Couche 2 : MAC/switch ?</li><li>Couche 3 : ping gateway ?</li><li>Couche 4 : nc -zv ip port.</li><li>Couche 7 : curl http.</li></ol>"},
+{titre:"Outils",contenu:"<ul><li><b>ping</b> : joignabilite.</li><li><b>traceroute</b> : chemin.</li><li><b>nslookup</b> : DNS.</li><li><b>nc -zv</b> : tester port.</li><li><b>curl</b> : tester HTTP.</li></ul>"}
+],
+why:"Methode plutot que devinette. Diagnostiquer vite = competence cruciale.",
+bank:"Diagnostiquer un poste en incident (SOC).",
+glo:"<b>Couche</b> : niveau OSI.",
+pr:["Simuler panne.","ping gateway.","ping 8.8.8.8.","nc -zv 443."],
+er:"Sauter des etapes.",
+df:"Panne + diagnostic.",
+proj:"Rapport diagnostic.",
+q:[{q:"1er test :",a:["curl","ping gateway","nmap","wireshark"],c:1,e:"L3 locale."},{q:"Port :",a:["ping","nc -zv","dig","traceroute"],c:1,e:"Netcat."}]},
+
+{id:60,t:"Realiser un mini-laboratoire reseau",d:120,
+intro:"Kali + Ubuntu + scan. JAMAIS reseau non autorise.",
+analogy:"Match d'entrainement avant competition.",
+sections:[
+{titre:"Le lab",contenu:"<ol><li>2 VMs host-only.</li><li>Victime : python3 -m http.server 80.</li><li>nmap -sV 192.168.56.20.</li><li>curl http://192.168.56.20.</li></ol>"},
+{titre:"Ethique",contenu:"<p>Scanner un reseau non autorise = illegal (Art. 323-1 du Code penal en France, code penal ivoirien). Ne scanner QUE vos labs.</p>"}
+],
+why:"Premier lab complet = competence concrete.",
+bank:"Lab SOC avant production.",
+glo:"<b>Ethique</b> : autorisation ecrite.",
+pr:["2 VMs host-only.","python http.server.","nmap -sV.","curl."],
+er:"Bridged expose au reseau reel.",
+df:"Capture nmap.",
+proj:"Rapport lab.",
+q:[{q:"Reseau safe :",a:["Bridged","Host-only","Public","Cafe"],c:1,e:"Host-only."},{q:"Scanner avec :",a:["nmap","ping","ls","cat"],c:0,e:"nmap."}]},
+
+{id:61,t:"Installer Python",d:25,
+intro:"Python 3 est le langage numero 1 en cybersecurite. venv permet d'isoler les dependances par projet.",
+analogy:"Boite a outils de programmation, avec un tiroir (venv) pour chaque projet.",
+sections:[
+{titre:"Installation",contenu:"<p><b>Windows</b> : python.org (cocher Add to PATH). <b>Linux</b> : apt install python3 python3-pip. <b>macOS</b> : brew install python3.</p>"},
+{titre:"venv : environnement virtuel",contenu:"<p>python3 -m venv monprojet. source monprojet/bin/activate (Linux/Mac) ou monprojet/Scripts/activate (Windows). pip install requests (isole).</p><p>Chaque projet a ses propres dependances, sans conflit.</p>"}
+],
+why:"Scripts cyber (scapy, requests, impacket) sont en Python. venv = pas de pollution systeme.",
+bank:"Automatisation des taches SOC : parsing de logs, scans, alerting.",
+glo:"<b>venv</b> : environnement virtuel. <b>pip</b> : gestionnaire paquets.",
+pr:["python3 --version.","venv.","activate.","pip --version."],
+er:"Oublier Add to PATH (Windows).",
+df:"Python3 + venv active.",
+proj:"Fiche installation.",
+q:[{q:"Version :",a:["python","python3","py","ver"],c:1,e:"python3."},{q:"venv :",a:["Isole","Compresser","Reseau","Imprimer"],c:0,e:"Isole."}]},
+
+{id:62,t:"Ecrire Hello World",d:15,
+intro:"Premier programme Python : print().",
+analogy:"Premier mot dans une nouvelle langue.",
+sections:[
+{titre:"Syntaxe",contenu:"<p>print(Hello World). Le diese est un commentaire. Indentation obligatoire : 4 espaces (pas de tabs melanges).</p>"},
+{titre:"Astuces",contenu:"<p>Le REPL Python (python3) permet de tester du code en direct. exit() pour quitter.</p>"}
+],
+why:"Premier pas. Comprendre la structure d'un script.",
+bank:"Tester l'environnement de dev.",
+glo:"<b>print</b> : affichage. <b>REPL</b> : Read-Eval-Print Loop.",
+pr:["hello.py.","print Hello.","python3 hello.py."],
+er:"Espaces vs tabulations.",
+df:"hello.py 2 lignes.",
+proj:"Script hello.",
+q:[{q:"print sert a :",a:["Lire","Afficher","Suppr","Rien"],c:1,e:"Afficher."},{q:"Diese :",a:["Commentaire","Multipl","Variable","Erreur"],c:0,e:"Commentaire."}]},
+
+{id:63,t:"Les variables",d:20,
+intro:"Une variable stocke une valeur en memoire. Types : str, int, float, bool.",
+analogy:"Etiquettes sur des boites : un nom, un contenu.",
+sections:[
+{titre:"Declaration",contenu:"<p>nom = Alice. age = 25. taille = 1.68. actif = True. Case-sensitive : Nom n'est pas nom.</p>"},
+{titre:"f-strings",contenu:"<p>print(f Je suis nom, age ans) permet d'inserer des variables dans du texte.</p>"}
+],
+why:"Variables = stockage des donnees dans tout script.",
+bank:"Stockage IPs, chemins, resultats d'analyse.",
+glo:"<b>f-string</b> : formatage.",
+pr:["4 variables.","type().","f-string."],
+er:"= affectation vs == comparaison.",
+df:"4 variables + f-string.",
+proj:"Script variables.",
+q:[{q:"type 3.14 :",a:["int","float","str","bool"],c:1,e:"Float."},{q:"= :",a:["Comparer","Affecter","Afficher","Rien"],c:1,e:"Affectation."}]},
+
+{id:64,t:"Les types de donnees",d:25,
+intro:"Python a plusieurs types natifs : int, float, str, bool, list, tuple, dict, set.",
+analogy:"Differents contenants pour differents contenus.",
+sections:[
+{titre:"Types principaux",contenu:"<table><tr><th>Type</th><th>Exemple</th></tr><tr><td>int</td><td>42</td></tr><tr><td>float</td><td>3.14</td></tr><tr><td>str</td><td>hello</td></tr><tr><td>bool</td><td>True</td></tr><tr><td>list</td><td>1, 2, 3</td></tr><tr><td>dict</td><td>cle valeur</td></tr><tr><td>set</td><td>1, 2, 3</td></tr></table>"},
+{titre:"Conversions",contenu:"<p>int(42) donne 42. str(42) donne 42 texte. list(abc) donne a b c.</p>"}
+],
+why:"Eviter les bugs. Les malentendus de types sont des portes d'exploitation.",
+bank:"Manipuler donnees structurees (JSON, config).",
+glo:"<b>conversion</b> : int(), str().",
+pr:["6 types.","type().","int 42."],
+er:"1+1 avec texte = TypeError.",
+df:"6 types testes.",
+proj:"Script types.",
+q:[{q:"1,2 :",a:["str","list","dict","set"],c:1,e:"List."},{q:"{1,2,3} :",a:["list","dict","set","tuple"],c:2,e:"Set."}]},
+
+{id:65,t:"Les conditions",d:25,
+intro:"if/elif/else : les decisions du programme.",
+analogy:"Aiguillage : si X alors Y sinon Z.",
+sections:[
+{titre:"Operateurs",contenu:"<p>Comparaison : ==, !=, plus petit, plus grand. Logique : and, or, not.</p>"},
+{titre:"Syntaxe",contenu:"<p>if age >= 18 : print Majeur. elif age >= 13 : print Ado. else : print Enfant.</p>"}
+],
+why:"Decisions = base de tout script.",
+bank:"Si admin alors autoriser, sinon refuser.",
+glo:"<b>Ternaire</b> : 1 ligne.",
+pr:["if.","elif.","else."],
+er:"Oublier deux points en fin de ligne.",
+df:"Classe age.",
+proj:"Script conditions.",
+q:[{q:"elif :",a:["Sinon si","Sinon","Fin","Rien"],c:0,e:"Else if."},{q:"ET :",a:["&&","and","+","&"],c:1,e:"and."}]},
+
+{id:66,t:"Les boucles",d:25,
+intro:"for range(n), while condition. break sort, continue saute.",
+analogy:"Repeter une tache jusqu'a condition.",
+sections:[
+{titre:"Boucles",contenu:"<p>for i in range(5). while i < 3 : print i puis i += 1.</p>"},
+{titre:"Controle",contenu:"<ul><li><b>break</b> : sort immediatement.</li><li><b>continue</b> : passe a l'iteration suivante.</li></ul>"}
+],
+why:"Boucler = traiter listes IPs, logs, fichiers.",
+bank:"Parcourir alertes, journaux.",
+glo:"<b>break</b> : sort.",
+pr:["for.","while.","break."],
+er:"Boucle infinie sans condition.",
+df:"for + while.",
+proj:"Script boucles.",
+q:[{q:"range 5 :",a:["1-5","0-4","5","Rien"],c:1,e:"0-4."},{q:"break :",a:["Continue","Sort","Rien","Erreur"],c:1,e:"Sort."}]},
+
+{id:67,t:"Les fonctions",d:30,
+intro:"Une fonction = bloc de code reutilisable.",
+analogy:"Recette reutilisable.",
+sections:[
+{titre:"Definition",contenu:"<p>def saluer nom : return Bonjour nom.</p><p>def scan ip port=80 : return Scan ip port.</p>"},
+{titre:"Arguments par defaut",contenu:"<p>scan 1.1.1.1 utilise port 80. scan 1.1.1.1 443 utilise port 443.</p>"}
+],
+why:"Code modulaire, reutilisable, testable.",
+bank:"Fonctions scan(), alert(), log().",
+glo:"<b>return</b> : renvoie.",
+pr:["def saluer.","scan ip port=80."],
+er:"Effet de bord sur liste = mutation.",
+df:"2 fonctions.",
+proj:"Script fonctions.",
+q:[{q:"def :",a:["Definir","Suppr","Rien","Variable"],c:0,e:"Definir."},{q:"return :",a:["Affiche","Renvoie","Rien","Erreur"],c:1,e:"Renvoie."}]},
+
+{id:68,t:"Les listes",d:25,
+intro:"1,2,3. append, remove, [i], len, sort.",
+analogy:"Boite ordonnee.",
+sections:[
+{titre:"Operations",contenu:"<p>ips.append. ips.remove. ips[0]. len(ips). ips.sort().</p>"},
+{titre:"Comprehension",contenu:"<p>x for x in ips if x.startswith 10 : filtre rapide.</p>"}
+],
+why:"IPs, chemins, resultats scan.",
+bank:"Liste d'alertes, resultats de scan.",
+glo:"<b>index</b> : position.",
+pr:["ips=[].","append.","remove.","comprehension."],
+er:"IndexError si hors plage.",
+df:"Liste + filtre.",
+proj:"Script listes.",
+q:[{q:"Ajouter :",a:["add","append","push","insert"],c:1,e:"append."},{q:"-1 :",a:["Premier","Dernier","Erreur","Tout"],c:1,e:"Dernier."}]},
+
+{id:69,t:"Les dictionnaires",d:25,
+intro:"cle valeur. get() pour acces sur. json.dumps.",
+analogy:"Annuaire cle vers valeur.",
+sections:[
+{titre:"Operations",contenu:"<p>user = nom Alice. user[email] = a@test.com. user.get absent = None. items() pour paires.</p>"},
+{titre:"JSON",contenu:"<p>import json. json.dumps user transforme en string. json.loads str transforme en dict.</p>"}
+],
+why:"Configurations, reponses API (JSON).",
+bank:"Config, reponses API bancaires.",
+glo:"<b>JSON</b> : format d'echange.",
+pr:["user={}.","get.","json.dumps."],
+er:"KeyError si absent.",
+df:"Dict + JSON.",
+proj:"Script dicts.",
+q:[{q:"absent :",a:["None","KeyError","Rien","Erreur"],c:1,e:"KeyError."},{q:"get() :",a:["Erreur","None","Rien","Bug"],c:1,e:"None."}]},
+
+{id:70,t:"Les fichiers",d:25,
+intro:"with open fichier mode. r/w/a/b. with ferme automatiquement.",
+analogy:"Lire/ecrire dans un cahier.",
+sections:[
+{titre:"Modes",contenu:"<table><tr><th>Mode</th><th>Usage</th></tr><tr><td>r</td><td>lecture</td></tr><tr><td>w</td><td>ecriture (ecrase)</td></tr><tr><td>a</td><td>ajout</td></tr><tr><td>b</td><td>binaire</td></tr></table>"},
+{titre:"Exemple",contenu:"<p>with open test.txt w as f : f.write Hello. Puis with open test.txt r as f : for line in f : print line.strip.</p>"}
+],
+why:"Logs, rapports. Ne jamais oublier with (fuite de fichier).",
+bank:"Rapports d'incident, parsing de logs.",
+glo:"<b>with</b> : ferme auto.",
+pr:["write.","read.","append."],
+er:"Sans with, fichier non ferme.",
+df:"Fichier + relecture.",
+proj:"Script fichiers.",
+q:[{q:"with :",a:["Ferme auto","Rien","Bug","Rapide"],c:0,e:"Auto."},{q:"w :",a:["Lecture","Ecrase","Ajout","Binaire"],c:1,e:"Ecrase."}]},
+
+{id:71,t:"Les exceptions",d:25,
+intro:"try/except/finally pour gerer les erreurs.",
+analogy:"Filet de securite du trapeziste.",
+sections:[
+{titre:"Syntaxe",contenu:"<p>try : int abc. except ValueError : print pas un nombre. finally : print toujours execute.</p>"},
+{titre:"Types courants",contenu:"<ul><li>ValueError, TypeError.</li><li>FileNotFoundError.</li><li>KeyError, IndexError.</li><li>Exception (generique, a eviter).</li></ul>"}
+],
+why:"Script robuste = ne plante pas sur une erreur.",
+bank:"Script qui ne plante pas = incident gere.",
+glo:"<b>exception</b> : erreur capturable.",
+pr:["try/except.","finally.","raise."],
+er:"except nu = trop large.",
+df:"3 types geres.",
+proj:"Script robuste.",
+q:[{q:"finally :",a:["Jamais","Toujours","Si erreur","Rien"],c:1,e:"Toujours."},{q:"Bare :",a:["Bon","Deconseille","Obligatoire","Rapide"],c:1,e:"Deconseille."}]},
+
+{id:72,t:"Les modules",d:20,
+intro:"import, from X import Y, __name__ egal main.",
+analogy:"Chapitres d'un livre.",
+sections:[
+{titre:"Import",contenu:"<p>import os. from datetime import datetime. import json as js.</p>"},
+{titre:"Module et main",contenu:"<p>mon_module.py contient def hello. main.py : from mon_module import hello. if __name__ == main : hello().</p>"}
+],
+why:"Modularite = code reutilisable.",
+bank:"Modules scan, alert.",
+glo:"<b>__main__</b> : execution directe.",
+pr:["import os.","from datetime.","if __name__."],
+er:"random.py masque random.",
+df:"Module + main.",
+proj:"Projet modulaire.",
+q:[{q:"Import :",a:["import star","from x import","load","Rien"],c:1,e:"from x."},{q:"__name__ :",a:["Toujours","Si direct","Faux","Bug"],c:1,e:"__main__."}]},
+
+{id:73,t:"Installer une bibliotheque (pip)",d:20,
+intro:"pip install paquet. Toujours dans un venv.",
+analogy:"Magasin de paquets Python.",
+sections:[
+{titre:"Commandes",contenu:"<p>pip install requests. pip list. pip freeze > requirements.txt. pip uninstall requests.</p>"},
+{titre:"requirements.txt",contenu:"<p>Liste des dependances avec versions. pip install -r requirements.txt pour reproduire l'environnement.</p>"}
+],
+why:"Milliers de libs cyber (requests, scapy, impacket).",
+bank:"Outils d'analyse.",
+glo:"<b>PyPI</b> : depot officiel.",
+pr:["venv.","pip install requests.","freeze."],
+er:"pip root = pollution.",
+df:"requests + req.",
+proj:"requirements.txt.",
+q:[{q:"pip :",a:["Suppr","Installe","Liste","Rien"],c:1,e:"Installe."},{q:"requirements :",a:["Dependances","Script","Config","Rien"],c:0,e:"Dependances."}]},
+
+{id:74,t:"Lire un fichier",d:25,
+intro:"Iterer fichier. re.findall pour extraire IPs.",
+analogy:"Chercher dans un gros livre.",
+sections:[
+{titre:"Analyse de log",contenu:"<p>with open access.log as f : for line in f : if 404 in line : print line.</p>"},
+{titre:"Regex",contenu:"<p>import re. ips = re.findall avec pattern pour IP, line.</p>"}
+],
+why:"Analyse de logs = competence SOC.",
+bank:"Logs bancaires = analyse d'incident.",
+glo:"<b>regex</b> : motif.",
+pr:["access.log.","Filtrer 404.","re.findall."],
+er:"read() sur gros fichier = memoire.",
+df:"Log + IPs uniques.",
+proj:"Script analyse log.",
+q:[{q:"Efficace :",a:["read","for line","readline","scan"],c:1,e:"Iterer."},{q:"IPs :",a:["re","split","find","index"],c:0,e:"Regex."}]},
+
+{id:75,t:"Ecrire un fichier",d:25,
+intro:"w/a. csv.writer avec newline vide. json.dump.",
+analogy:"Produire un rapport.",
+sections:[
+{titre:"CSV",contenu:"<p>import csv. with open out.csv w newline vide as f : w = csv.writer f. w.writerow ip port.</p>"},
+{titre:"JSON",contenu:"<p>import json. with open out.json w as f : json.dump data f indent=2.</p>"}
+],
+why:"Generer des rapports = livrable professionnel.",
+bank:"Rapport d'incident en CSV/JSON.",
+glo:"<b>CSV</b> : tabulaire.",
+pr:["csv.","writerow.","json.dump."],
+er:"csv sans newline vide = lignes vides.",
+df:"CSV 3 resultats.",
+proj:"Script rapport.",
+q:[{q:"Ecrase :",a:["r","w","a","x"],c:1,e:"w."},{q:"csv newline :",a:["Optionnel","vide","0","Rien"],c:1,e:"newline vide."}]},
+
+{id:76,t:"Utiliser requests",d:30,
+intro:"Bibliotheque HTTP pour Python.",
+analogy:"Envoyer une lettre et recevoir reponse.",
+sections:[
+{titre:"GET POST",contenu:"<p>requests.get url timeout=5. print r.status_code r.headers r.text. requests.post url data user test timeout=5.</p>"},
+{titre:"Timeout obligatoire",contenu:"<p>Toujours mettre timeout=5 pour eviter un blocage infini si le serveur ne repond pas.</p>"}
+],
+why:"Scanner web, brute-force, API testing.",
+bank:"Tester sites bancaires (lab), API.",
+glo:"<b>HTTP</b> : protocole web.",
+pr:["pip install.","get timeout.","post."],
+er:"Sans timeout = blocage infini.",
+df:"GET + POST testes.",
+proj:"Script HTTP.",
+q:[{q:"GET :",a:["Recupere","Envoie","Suppr","Rien"],c:0,e:"Recupere."},{q:"timeout :",a:["Accelere","Bloque","Rien","Erreur"],c:1,e:"Evite blocage."}]},
+
+{id:77,t:"Automatiser une tache",d:40,
+intro:"Script + cron. time.sleep. Logs.",
+analogy:"Un robot qui fait une tache repetitive.",
+sections:[
+{titre:"Monitoring",contenu:"<p>import time. from datetime import datetime. while True : with open monitor.log a as f : f.write datetime.now check. time.sleep 60.</p>"},
+{titre:"Planification",contenu:"<p>cron : crontab -e puis ajouter etoile slash 5 etoile etoile etoile etoile /usr/bin/python3 monitor.py (toutes les 5 min).</p>"}
+],
+why:"Gain de temps. Monitoring 24/7 automatique.",
+bank:"Monitoring continu des services bancaires.",
+glo:"<b>cron</b> : planificateur.",
+pr:["monitor.py.","cron.","Verifier log."],
+er:"Boucle sans sleep = CPU 100%.",
+df:"Script + cron.",
+proj:"Script monitoring.",
+q:[{q:"cron :",a:["Planifie","Reseau","Antivirus","Rien"],c:0,e:"Planifie."},{q:"sleep :",a:["Pause","Dort","Rien","Rapide"],c:0,e:"Pause."}]},
+
+{id:78,t:"Creer un script utile",d:45,
+intro:"secrets (crypto-sur) plutot que random. Generateur MDP, hash avec hashlib.",
+analogy:"Outil personnel, a publier sur GitHub.",
+sections:[
+{titre:"Generateur securise",contenu:"<p>import secrets, string. def gen_pwd n=16 : a = ascii_letters + digits + symboles. return join secrets.choice a for range n.</p>"},
+{titre:"Hash securise",contenu:"<p>import hashlib. hashlib.sha256 b test hexdigest.</p>"}
+],
+why:"Portfolio + securite. secrets = crypto-sur.",
+bank:"Generation de MDP forts pour utilisateurs.",
+glo:"<b>secrets</b> : crypto-sur. <b>random</b> : predictible.",
+pr:["secrets.","gen_pwd 16.","hashlib."],
+er:"random n'est PAS sur pour la securite.",
+df:"Generateur 16+ chars.",
+proj:"Generateur sur GitHub.",
+q:[{q:"MDP :",a:["random","secrets","os","sys"],c:1,e:"secrets."},{q:"random :",a:["Rapide","Pas sur","Python","Utile"],c:1,e:"Pas sur."}]},
+
+{id:79,t:"Organiser un projet Python",d:35,
+intro:"src/, tests/, README, requirements.txt, .gitignore.",
+analogy:"Atelier range : chaque outil a sa place.",
+sections:[
+{titre:"Structure",contenu:"<p>mon_projet/ avec README.md, requirements.txt, .gitignore, src/main.py, tests/.</p>"},
+{titre:".gitignore",contenu:"<p>__pycache__/, *.pyc, venv/, .env, *.log.</p>"}
+],
+why:"Code propre, maintenable. Portfolio pro.",
+bank:"Projet professionnel, reproductible.",
+glo:"<b>.gitignore</b> : fichiers ignores.",
+pr:["Structure.","README.","gitignore."],
+er:"venv/.env dans Git = catastrophe.",
+df:"Structure + commit.",
+proj:"Repo structure.",
+q:[{q:"Ignorer :",a:["README","venv","src","main.py"],c:1,e:"venv."},{q:"README :",a:["Doc","Compile","Teste","Rien"],c:0,e:"Doc."}]},
+
+{id:80,t:"Realiser un mini-projet Python",d:120,
+intro:"Scanner reseau : socket, threads, CSV. ETHIQUE : vos reseaux uniquement.",
+analogy:"Construire son propre outil.",
+sections:[
+{titre:"Squelette",contenu:"<p>import socket. from concurrent.futures import ThreadPoolExecutor. def scan ip port : s = socket.socket. s.settimeout 0.5. try : s.connect ip port return True. except : return False. finally : s.close.</p>"},
+{titre:"Ethique",contenu:"<p>Scanner uniquement VOS reseaux (lab, machines perso). Scanner un reseau public = illegal.</p>"}
+],
+why:"Projet concret = competence demontrable.",
+bank:"Audit de lab, formation.",
+glo:"<b>socket</b> : connexion reseau.",
+pr:["netscan.py.","socket.","CSV.","GitHub."],
+er:"Reseau etranger = illegal.",
+df:"Scanner + CSV + push.",
+proj:"netscan GitHub.",
+q:[{q:"Etranger :",a:["OK","Illegal","Rapide","Bien"],c:1,e:"Illegal."},{q:"socket :",a:["Reseau","Fichiers","Rien","Graphique"],c:0,e:"Reseau."}]},
+
+{id:81,t:"Installer Git",d:25,
+intro:"Git = versioning distribue. Historique de toutes les modifications.",
+analogy:"Historique horodate de toutes les modifications.",
+sections:[
+{titre:"Configuration",contenu:"<p>git config --global user.name Votre Nom. git config --global user.email vous@email.com. git config --global init.defaultBranch main.</p>"},
+{titre:"Verification",contenu:"<p>git --version. git config --list.</p>"}
+],
+why:"Collaboration, tracabilite.",
+bank:"Tracabilite des scripts d'audit.",
+glo:"<b>Git</b> vs <b>GitHub</b> : Git = outil, GitHub = plateforme.",
+pr:["Installer.","config.","user.email."],
+er:"Email avec faute.",
+df:"Git installe + config OK.",
+proj:"Config Git.",
+q:[{q:"Configurer :",a:["git set","git config","git name","git init"],c:1,e:"git config."},{q:"Version :",a:["git --version","git v","git ver","version"],c:0,e:"--version."}]},
+
+{id:82,t:"Creer un depot Git",d:25,
+intro:"git init, clone, status, log, branch.",
+analogy:"Un classeur numerote pour chaque projet.",
+sections:[
+{titre:"Commandes",contenu:"<p>mkdir monrepo && cd. git init. git status. git log --oneline. git clone https://github.com/user/repo.git.</p>"},
+{titre:"Branches",contenu:"<p>git branch : liste. git branch nouvelle : cree. git checkout nouvelle : basculer.</p>"}
+],
+why:"Un repo par projet. Clone = recuperer un outil.",
+bank:"Un repo par projet securite.",
+glo:"<b>repo</b> : depot.",
+pr:["init.","clone.","status.","log."],
+er:"init dans mauvais dossier.",
+df:"Repo + clone + log.",
+proj:"Repo projet.",
+q:[{q:"Initier :",a:["git start","git init","git new","git create"],c:1,e:"init."},{q:"Cloner :",a:["git get","git clone","git copy","git pull"],c:1,e:"clone."}]},
+
+{id:83,t:"Faire un premier commit",d:30,
+intro:"add, commit -m, push. Message present imperatif.",
+analogy:"Sauvegarder un etat dans l'historique.",
+sections:[
+{titre:"Cycle",contenu:"<p>git add fichier.txt. git commit -m Ajoute fichier.txt. git push origin main. git log.</p>"},
+{titre:"Messages",contenu:"<p>Present imperatif : Ajoute, Corrige, Refactorise. Concis et explicite.</p>"}
+],
+why:"Historique = retour arriere possible.",
+bank:"Tracabilite.",
+glo:"<b>commit</b> : sauvegarde.",
+pr:["add.","commit -m.","push.","log."],
+er:"add point peut committer secrets.",
+df:"2 commits dans log.",
+proj:"Repo commits.",
+q:[{q:"Stager :",a:["git add","git stage","git push","git commit"],c:0,e:"add."},{q:"Commit :",a:["git commit -m","git save","git push","git add"],c:0,e:"commit."}]},
+
+{id:84,t:"Utiliser GitHub",d:35,
+intro:"github.com. remote add. push -u. PAT.",
+analogy:"Vitrine publique de ton travail.",
+sections:[
+{titre:"Workflow",contenu:"<p>git remote add origin https://github.com/user/repo.git. git push -u origin main.</p>"},
+{titre:"Authentification",contenu:"<p>Utiliser un Personal Access Token (PAT) plutot qu'un mot de passe. Cree dans Settings, Developer settings, Tokens.</p>"}
+],
+why:"Portfolio GitHub = CV vivant.",
+bank:"Recruteurs regardent GitHub.",
+glo:"<b>PAT</b> : Personal Access Token.",
+pr:["Compte.","remote add.","push -u."],
+er:"Tokens dans public = compromission.",
+df:"Repo public + README.",
+proj:"Portfolio GitHub.",
+q:[{q:"Pousser :",a:["git push","git send","git up","git upload"],c:0,e:"push."},{q:"Remote :",a:["git remote add","git link","git connect","git url"],c:0,e:"remote add."}]},
+
+{id:85,t:"Installer VS Code",d:25,
+intro:"Editeur numero 1 avec extensions : Python, GitLens, Docker, Remote SSH.",
+analogy:"Couteau suisse du developpeur.",
+sections:[
+{titre:"Extensions",contenu:"<ul><li>Python (Microsoft).</li><li>GitLens (Git avance).</li><li>Remote - SSH.</li><li>Docker.</li><li>Rainbow CSV.</li></ul>"},
+{titre:"Raccourcis",contenu:"<ul><li>Ctrl+Shift+P : palette.</li><li>Ctrl+backtick : terminal.</li><li>Ctrl+P : ouvrir fichier.</li></ul>"}
+],
+why:"Editeur complet. Python + Git integres.",
+bank:"Scripts, config.",
+glo:"<b>Extension</b> : plugin.",
+pr:["Installer.","Python+GitLens."],
+er:"50 extensions = lenteur.",
+df:"Extensions + terminal.",
+proj:"Workspace.",
+q:[{q:"Palette :",a:["Ctrl+P","Ctrl+Shift+P","Ctrl+K","F1"],c:1,e:"Palette."},{q:"Terminal :",a:["Ctrl+backtick","Ctrl+T","F5","Alt+T"],c:0,e:"Ctrl+backtick."}]},
+
+{id:86,t:"Installer Wireshark",d:30,
+intro:"Sniffer reseau. Filtres http, dns, ip.addr. Npcap sur Windows.",
+analogy:"Microscope du reseau.",
+sections:[
+{titre:"Filtres",contenu:"<ul><li><b>http</b> : trafic web non chiffre.</li><li><b>dns</b> : requetes DNS.</li><li><b>ip.addr == 192.168.1.1</b> : trafic d'une IP.</li><li><b>tcp.port == 80</b> : port.</li></ul>"},
+{titre:"Npcap",contenu:"<p>Sur Windows, installer Npcap pour la capture de paquets. Sans Npcap, Wireshark ne voit aucune interface.</p>"}
+],
+why:"Voir trafic = comprendre attaque.",
+bank:"Analyser incidents reseau.",
+glo:"<b>sniffer</b> : capture paquets.",
+pr:["Installer + Npcap.","Interface.","Filtre http."],
+er:"Reseau non autorise = illegal.",
+df:"Capture HTTP.",
+proj:"pcap.",
+q:[{q:"Wireshark :",a:["Sniffer","Antivirus","Editeur","Social"],c:0,e:"Sniffer."},{q:"Filtre :",a:["http","filter","show","hp"],c:0,e:"http."}]},
+
+{id:87,t:"Capturer les premiers paquets",d:35,
+intro:"Capture + Follow TCP Stream. Format pcap.",
+analogy:"Enregistrement video du reseau.",
+sections:[
+{titre:"Etapes",contenu:"<ol><li>Capture sur interface.</li><li>Naviguer sur http://neverssl.com (HTTP pur).</li><li>Arreter la capture.</li><li>Clic droit sur un paquet, Follow, TCP Stream.</li><li>Sauvegarder en pcap.</li></ol>"},
+{titre:"Analyse",contenu:"<p>Follow Stream reconstitue la conversation complete (requete HTTP + reponse).</p>"}
+],
+why:"Lire capture = competence forensic.",
+bank:"Preuve en cas d'incident.",
+glo:"<b>pcap</b> : format capture.",
+pr:["Capture.","Follow Stream.","Sauvegarder."],
+er:"Wi-Fi managed = propre trafic.",
+df:"pcap + flux.",
+proj:"Analyse capture.",
+q:[{q:"Follow :",a:["Clic droit","Double-clic","F5","Entree"],c:0,e:"Clic droit."},{q:"Format :",a:["pcap","csv","txt","jpg"],c:0,e:"pcap."}]},
+
+{id:88,t:"Installer Nmap",d:25,
+intro:"Scanner de ports. -sV, -O, -p-, -sn, -sS.",
+analogy:"Radar a ports.",
+sections:[
+{titre:"Scans essentiels",contenu:"<table><tr><th>Option</th><th>Effet</th></tr><tr><td>nmap IP</td><td>Top 1000 ports</td></tr><tr><td>-sV</td><td>Versions services</td></tr><tr><td>-O</td><td>OS detection</td></tr><tr><td>-p-</td><td>Tous ports</td></tr><tr><td>-sn</td><td>Ping sweep</td></tr><tr><td>-sS</td><td>SYN scan</td></tr></table>"},
+{titre:"Installation",contenu:"<p>Linux : apt install nmap. Windows : nmap.org + Npcap.</p>"}
+],
+why:"Outil numero 1 pentest. Decouverte des services exposes.",
+bank:"Scanner reseau interne = audit.",
+glo:"<b>port</b> : service.",
+pr:["Installer.","127.0.0.1.","-sV.","-p-."],
+er:"Public = illegal.",
+df:"Localhost -sV.",
+proj:"Rapport nmap.",
+q:[{q:"-sV :",a:["Versions","Silencieux","Vite","Rien"],c:0,e:"Versions."},{q:"-O :",a:["OS","Ouvrir","Optimiser","Rien"],c:0,e:"OS."}]},
+
+{id:89,t:"Scanner son ordinateur",d:30,
+intro:"Auditer sa machine : open, closed, filtered.",
+analogy:"Auto-diagnostic : connaitre sa surface d'attaque.",
+sections:[
+{titre:"Interpretation",contenu:"<ul><li><b>open</b> : service actif (a verifier).</li><li><b>closed</b> : port ferme (normal).</li><li><b>filtered</b> : firewall (normal).</li></ul>"},
+{titre:"Bonnes pratiques",contenu:"<ul><li>Fermer les services inutiles.</li><li>Mettre a jour les services exposes.</li><li>Changer les ports par defaut de SSH/RDP.</li><li>Restreindre par IP source.</li></ul>"}
+],
+why:"Connaitre sa surface d'attaque = base hygiene.",
+bank:"Audit poste employe, serveur.",
+glo:"<b>filtered</b> : firewall.",
+pr:["nmap 127.0.0.1.","Identifier services.","-sV."],
+er:"Filtered = normal.",
+df:"Ports + services.",
+proj:"Rapport audit.",
+q:[{q:"open :",a:["Actif","Ferme","Firewall","Erreur"],c:0,e:"Actif."},{q:"filtered :",a:["Firewall","Ouvert","Rien","Erreur"],c:0,e:"Firewall."}]},
+
+{id:90,t:"Scanner son reseau local",d:35,
+intro:"-sn, arp-scan. JAMAIS reseau public.",
+analogy:"Inventaire des machines autour.",
+sections:[
+{titre:"Commandes",contenu:"<p>nmap -sn 192.168.1.0/24. arp-scan --localnet. netdiscover -r 192.168.1.0/24.</p>"},
+{titre:"Resultats",contenu:"<p>Identifier : box (.1), PC, telephone, imprimante. Comparer avec la page admin de la box.</p>"}
+],
+why:"Detecter intrus, appareils non autorises.",
+bank:"Appareils non autorises sur le reseau = incident.",
+glo:"<b>sweep</b> : balayage.",
+pr:["Plage IP.","nmap -sn.","Comparer box."],
+er:"Public illegal.",
+df:"Scan + 3 appareils.",
+proj:"Inventaire reseau.",
+q:[{q:"-sn :",a:["Sweep","Scan rapide","Silencieux","Version"],c:0,e:"Sweep."},{q:"Public :",a:["Legal","Illegal","Rien","Bien"],c:1,e:"Illegal."}]},
+
+{id:91,t:"Installer TryHackMe",d:25,
+intro:"Plateforme de labs guides. Pre Security, Linux Fundamentals. AttackBox.",
+analogy:"Salle d'entrainement cyber.",
+sections:[
+{titre:"Pour debuter",contenu:"<ul><li>Compte tryhackme.com.</li><li>Parcours Pre Security (gratuit).</li><li>AttackBox (VM navigateur, pas d'installation).</li><li>Notes en markdown.</li></ul>"},
+{titre:"Rooms recommandees",contenu:"<ul><li>Pre Security Path.</li><li>Linux Fundamentals 1-2-3.</li><li>Network Fundamentals.</li><li>Web Fundamentals.</li></ul>"}
+],
+why:"Apprentissage guide, gratuit, sans installation.",
+bank:"Formation continue.",
+glo:"<b>AttackBox</b> : VM navigateur.",
+pr:["Compte.","Pre Security.","AttackBox."],
+er:"Sauter les fondamentaux.",
+df:"Compte + 1 task completee.",
+proj:"Notes THM.",
+q:[{q:"THM :",a:["Labs","Social","Jeu","Forum"],c:0,e:"Labs."},{q:"AttackBox :",a:["VM navigateur","Antivirus","Cable","Rien"],c:0,e:"VM."}]},
+
+{id:92,t:"Reussir son premier laboratoire",d:60,
+intro:"Completer une room entiere. Notes markdown. Certificat.",
+analogy:"Premiere medaille : motivation + preuve.",
+sections:[
+{titre:"Methode",contenu:"<ol><li>Lire chaque tache.</li><li>Notes markdown.</li><li>Repondre aux questions (flags).</li><li>Completer toutes les tasks.</li><li>Telecharger le certificat.</li></ol>"},
+{titre:"Exemple",contenu:"<p>Room Linux Fundamentals 1 : 5 tasks, certificat a la fin. A publier sur LinkedIn.</p>"}
+],
+why:"Premiere victoire = motivation. Preuve concrete.",
+bank:"Competence demontrable.",
+glo:"<b>flag</b> : reponse.",
+pr:["Linux Fund 1.","5 tasks.","Certificat."],
+er:"Sans comprendre = apprentissage vide.",
+df:"Room + certificat.",
+proj:"Write-up.",
+q:[{q:"Notes :",a:["Optionnel","Essentiel","Interdit","Rien"],c:1,e:"Essentiel."},{q:"Room finie :",a:["Certificat","Rien","Badge","Score"],c:0,e:"Certificat."}]},
+
+{id:93,t:"Creer une documentation",d:40,
+intro:"Markdown + GitHub = portfolio. Structure modules/, labs/.",
+analogy:"Carnet de bord professionnel.",
+sections:[
+{titre:"Structure",contenu:"<p>cyber-notes/ avec modules/module1.md, labs/tryhackme/, README.md.</p>"},
+{titre:"Utilite",contenu:"<p>Ancrage memoriel, portfolio public, visibilite aupres des recruteurs.</p>"}
+],
+why:"Documenter = ancrage + CV.",
+bank:"Recruteurs lisent GitHub.",
+glo:"<b>Markdown</b> : format texte.",
+pr:["Repo cyber-notes.","5 notes.","Push."],
+er:"Documenter trop tard.",
+df:"Repo + 5 notes.",
+proj:"Portfolio docs.",
+q:[{q:"Format :",a:["Markdown","Word","Papier","Image"],c:0,e:"Markdown."},{q:"Portfolio :",a:["GitHub","Facebook","Instagram","TikTok"],c:0,e:"GitHub."}]},
+
+{id:94,t:"Chercher dans la documentation",d:30,
+intro:"man, docs officielles, site: query. Doc AVANT Stack Overflow.",
+analogy:"Bibliotheque bien rangee.",
+sections:[
+{titre:"Techniques",contenu:"<ul><li><b>man ls</b> : manuel Linux.</li><li><b>man ls grep sort</b> : recherche dans le man.</li><li><b>site:docs.python.org requests</b> : recherche Google limitee.</li></ul>"},
+{titre:"Sources fiables",contenu:"<ul><li>docs.python.org, man7.org, wireshark.org/docs.</li><li>nmap.org/book, git-scm.com/doc.</li></ul>"}
+],
+why:"Autonomie = survie. Doc officielle = source de verite.",
+bank:"Autonomie en incident.",
+glo:"<b>site:</b> : filtre Google.",
+pr:["man find.","site:docs.python."],
+er:"Code sans comprendre.",
+df:"3 options trouvees.",
+proj:"Memo docs.",
+q:[{q:"Manuel :",a:["man","help","info","doc"],c:0,e:"man."},{q:"Site :",a:["site:x query","@site","find","search"],c:0,e:"site:."}]},
+
+{id:95,t:"Resoudre un probleme sans tutoriel",d:60,
+intro:"Comprendre, reproduire, hypotheses, tester 1, documenter.",
+analogy:"Methode scientifique.",
+sections:[
+{titre:"Methode",contenu:"<ol><li>Reformuler le probleme par ecrit.</li><li>3-5 causes possibles.</li><li>Tester une hypothese a la fois.</li><li>Documenter chaque essai.</li><li>Chercher apres 60 min de blocage.</li></ol>"},
+{titre:"Pourquoi",contenu:"<p>En cyber, chaque situation est nouvelle. L'autonomie est la competence la plus valorisee.</p>"}
+],
+why:"Autonomie = survie en incident.",
+bank:"Incidents uniques necessitent methode.",
+glo:"<b>hypothese</b> : cause possible.",
+pr:["Reformuler.","3 causes.","Tester 1."],
+er:"Changer tout en meme temps.",
+df:"Probleme resolu + demarche.",
+proj:"Note resolution.",
+q:[{q:"1er :",a:["Changer","Comprendre","Google","Abandonner"],c:1,e:"Comprendre."},{q:"Tester :",a:["Tout","1 a la fois","Jamais","Hasard"],c:1,e:"1 a la fois."}]},
+
+{id:96,t:"Reproduire un laboratoire",d:120,
+intro:"VulnHub ou THM. Refaire sans solution. Rapport = livrable.",
+analogy:"Examen blanc.",
+sections:[
+{titre:"Etapes",contenu:"<ol><li>VM VulnHub facile (Basic Pentesting).</li><li>Nmap scan.</li><li>Enumerer services (SSH, HTTP, SMB).</li><li>Tenter exploits (autorise).</li><li>Rapport redige.</li></ol>"},
+{titre:"Format rapport",contenu:"<ul><li>Methodologie.</li><li>Decouvertes (ports, services).</li><li>Exploits utilises.</li><li>Recommandations.</li></ul>"}
+],
+why:"Preuve de competence concrete.",
+bank:"Simulation pentest.",
+glo:"<b>pentest</b> : test intrusion.",
+pr:["VulnHub.","nmap.","Rapport."],
+er:"Solution avant 60 min de blocage.",
+df:"Lab + rapport.",
+proj:"Rapport pentest.",
+q:[{q:"Chercher :",a:["Immediat","60 min","Jamais","Hasard"],c:1,e:"60 min."},{q:"VulnHub :",a:["VMs","Social","AV","Framework"],c:0,e:"VMs."}]},
+
+{id:97,t:"Presenter en video",d:60,
+intro:"OBS + DaVinci. 5-15 min. Intro + demo + bilan.",
+analogy:"Presenter son travail a un public.",
+sections:[
+{titre:"Structure",contenu:"<ol><li>Intro (30s) : sujet.</li><li>Demo (5-15 min).</li><li>Bilan (1 min).</li></ol>"},
+{titre:"Outils",contenu:"<ul><li><b>OBS Studio</b> : enregistrement (gratuit).</li><li><b>DaVinci Resolve</b> : montage (gratuit).</li><li><b>YouTube</b> / PeerTube : hebergement.</li></ul>"}
+],
+why:"Enseigner = ancrage. Video = visibilite.",
+bank:"Montrer competence publiquement.",
+glo:"<b>OBS</b> : enregistrement.",
+pr:["OBS.","Lab.","Enregistrer.","Publier."],
+er:"Video trop longue.",
+df:"Video publiee.",
+proj:"YouTube.",
+q:[{q:"Enreg. :",a:["OBS","Photoshop","Word","Premiere"],c:0,e:"OBS."},{q:"Duree :",a:["1 min","5-15","1 h","3 h"],c:1,e:"5-15."}]},
+
+{id:98,t:"Reviser tous les defis",d:120,
+intro:"Repetition espacee : J+1, J+7, J+30.",
+analogy:"Sportif qui s'entraine regulierement.",
+sections:[
+{titre:"Planning",contenu:"<ul><li>J+1 : relire les notes.</li><li>J+7 : refaire 1 quiz.</li><li>J+30 : refaire un defi pratique.</li><li>J+90 : enseigner (video, blog).</li></ul>"},
+{titre:"Pourquoi",contenu:"<p>Sans revision, 90% est oublie en 1 mois. La repetition espacee est la methode la plus efficace selon la science cognitive.</p>"}
+],
+why:"Sans revision = oubli. Repetition espacee = memoire long terme.",
+bank:"Maintien de competence.",
+glo:"<b>spaced repetition</b> : repetition espacee.",
+pr:["Quiz.","3 defis.","5 fiches."],
+er:"Tout en une fois = surcharge.",
+df:"5 fiches + points faibles.",
+proj:"Fiches de revision.",
+q:[{q:"Rep. :",a:["1","J+1 7 30","Jamais","Rien"],c:1,e:"Espacee."},{q:"Active :",a:["Relire","Quiz refaire","Ecouter","Rien"],c:1,e:"Active."}]},
+
+{id:99,t:"Realiser un projet integrateur",d:180,
+intro:"Linux + reseau + Python. Monitoring baseline + alertes. Mini-SOC.",
+analogy:"Projet de fin d'etudes.",
+sections:[
+{titre:"Architecture",contenu:"<p>netmon/ avec netmon.py, config.yaml, baseline.json, logs/, README.md.</p>"},
+{titre:"Fonctionnement",contenu:"<p>netmon.py : nmap subprocess, comparaison baseline, alerte si nouveau port ouvert, log CSV + notification.</p>"}
+],
+why:"Maitrise transversale. Projet complet = preuve.",
+bank:"Mini-SOC bancaire.",
+glo:"<b>baseline</b> : reference.",
+pr:["netmon/.","nmap subprocess.","Baseline.","Alerte.","GitHub."],
+er:"1 fichier 1000 lignes = non maintenable.",
+df:"Projet GitHub + demo.",
+proj:"netmon GitHub.",
+q:[{q:"Baseline :",a:["Etat initial","Ligne","Config","Rien"],c:0,e:"Reference."},{q:"Long :",a:["Modulariser","1 fichier","Rien","Bug"],c:0,e:"Modules."}]},
+
+{id:100,t:"Passer un bilan de competences",d:60,
+intro:"Auto-evaluation 1-5. 3 forces + 3 faiblesses. Plan Niveau 2.",
+analogy:"Bilan de mi-parcours.",
+sections:[
+{titre:"Auto-evaluation",contenu:"<p>Notez chaque competence de 1 a 5 : composants materiels, installation OS, commandes Linux, permissions, notions reseau, scan nmap, Python bases, Git, Wireshark.</p>"},
+{titre:"Plan Niveau 2",contenu:"<ul><li>Cryptographie (TLS, PKI).</li><li>Web pentest (OWASP Top 10).</li><li>Forensics (analyse disque/memoire).</li><li>Cloud security.</li></ul>"}
+],
+why:"Progression. Metacognition guide l'apprentissage.",
+bank:"Plan carriere bancaire.",
+glo:"<b>metacognition</b> : penser son apprentissage.",
+pr:["Noter.","Forces faiblesses.","Plan."],
+er:"Se surestimer.",
+df:"Auto-eval + plan.",
+proj:"Roadmap perso.",
+q:[{q:"Auto-eval :",a:["Perte","Utile","Rien","Optionnel"],c:1,e:"Utile."},{q:"Niveau 2 :",a:["Crypto web","Rien","Bases","Dormir"],c:0,e:"Crypto web."}]}
+];
+
+/* ============================================================
+   EXAMENS DE FIN DE MODULE (1 examen par 20 defis)
+   Chaque examen : 10 questions, seuil de validation 70%
+   ============================================================ */
+var EXAMS = [
+{
+  id:"E1", module:"Module 1 - Informatique", from:1, to:20,
+  titre:"Examen Module 1 : Fondamentaux Informatique",
+  duree:30,
+  questions:[
+    {q:"Quel composant est le cerveau de l'ordinateur ?",a:["La RAM","Le CPU","Le disque dur","La carte mere"],c:1,e:"Le CPU execute les instructions."},
+    {q:"La RAM est volatile, cela signifie :",a:["Elle est lente","Elle s'efface sans alimentation","Elle est permanente","Elle est externe"],c:1,e:"Sans courant, la RAM perd son contenu."},
+    {q:"Quelle est la difference principale entre HDD et SSD ?",a:["La couleur","HDD a des pieces mobiles, SSD non","SSD est plus grand","HDD est plus rapide"],c:1,e:"Le SSD est 100% electronique."},
+    {q:"Le BIOS/UEFI sert a :",a:["Jouer aux jeux","Initialiser le materiel au demarrage","Naviguer sur Internet","Compiler du code"],c:1,e:"C'est le firmware de demarrage."},
+    {q:"Quelle est la bonne source pour installer Windows ?",a:["Un forum","microsoft.com","Un torrent","Un site de crack"],c:1,e:"Seul le site officiel est sur."},
+    {q:"Quelle regle de sauvegarde est un standard ?",a:["1-1-1","3-2-1","2-1","5-5-5"],c:1,e:"3 copies, 2 supports, 1 hors site."},
+    {q:"Le gestionnaire des taches permet de :",a:["Nettoyer le clavier","Voir les processus actifs","Installer Windows","Configurer le BIOS"],c:1,e:"Il liste les processus en cours."},
+    {q:"SIGTERM et SIGKILL :",a:["Identiques","SIGTERM propre, SIGKILL force","SIGKILL propre","Aucune difference"],c:1,e:"SIGKILL (-9) est un arret force."},
+    {q:"Un service (daemon) :",a:["Est forcement visible","Tourne en arriere-plan","Est un antivirus","Est un jeu"],c:1,e:"Il rend un service sans interface."},
+    {q:"Une mise a jour systeme sert a :",a:["Ralentir","Corriger les vulnerabilites","Supprimer les donnees","Vider la RAM"],c:1,e:"Les patchs corrigent les failles."}
+  ]
+},
+{
+  id:"E2", module:"Module 2 - Linux", from:21, to:40,
+  titre:"Examen Module 2 : Administration Linux",
+  duree:30,
+  questions:[
+    {q:"VirtualBox est un :",a:["Antivirus","Hyperviseur","Navigateur","Jeu"],c:1,e:"Hyperviseur type 2 (gratuit)."},
+    {q:"Kali Linux est base sur :",a:["Ubuntu","Debian","Arch","Fedora"],c:1,e:"Kali derive de Debian."},
+    {q:"pwd affiche :",a:["Le mot de passe","Le dossier courant","Le reseau","Le kernel"],c:1,e:"Print Working Directory."},
+    {q:"Pour lister avec details et fichiers caches :",a:["ls","ls -l","ls -la","ls -h"],c:2,e:"-l long, -a caches."},
+    {q:"rm -rf / :",a:["Supprime un fichier","Efface tout le systeme","Reinstalle","Rien"],c:1,e:"Commande catastrophique."},
+    {q:"grep -i signifie :",a:["Inverse","Insensible a la casse","Recursif","Numerote"],c:1,e:"Ignore majuscules/minuscules."},
+    {q:"Permission 755 =",a:["rwxr-xr-x","rw-r--r--","rwxrwxrwx","---------"],c:0,e:"7 user, 5 group, 5 others."},
+    {q:"La cle SSH privee doit avoir :",a:["644","600","777","400"],c:1,e:"600 = rw pour proprietaire seul."},
+    {q:"Pour installer un paquet Ubuntu :",a:["apt install","winget","brew","exe"],c:0,e:"apt est le gestionnaire Debian."},
+    {q:"systemctl sert a :",a:["Gerer les services","Lister les fichiers","Scanner le reseau","Compresser"],c:0,e:"Gestion des services systemd."}
+  ]
+},
+{
+  id:"E3", module:"Module 3 - Reseaux", from:41, to:60,
+  titre:"Examen Module 3 : Reseaux TCP/IP",
+  duree:30,
+  questions:[
+    {q:"Le modele OSI a :",a:["3 couches","5 couches","7 couches","10 couches"],c:2,e:"7 couches de la physique a l'application."},
+    {q:"192.168.1.10 est une IP :",a:["Publique","Privee","Loopback","IPv6"],c:1,e:"Plage 192.168.x.x = privee."},
+    {q:"Le masque /24 laisse combien d'hotes ?",a:["30","62","126","254"],c:3,e:"2^(32-24) - 2 = 254."},
+    {q:"Le DNS traduit :",a:["MAC vers IP","Nom vers IP","Port vers IP","Rien"],c:1,e:"Resolution de noms de domaine."},
+    {q:"Le cycle DHCP s'appelle :",a:["ABCD","DORA","PING","ARP"],c:1,e:"Discover-Offer-Request-Ack."},
+    {q:"Le port SSH est :",a:["21","22","23","80"],c:1,e:"Port 22 par defaut."},
+    {q:"TCP est :",a:["Non fiable","Fiable oriente connexion","Sans connexion","Chiffre"],c:1,e:"TCP = fiable avec handshake."},
+    {q:"UDP est utilise par :",a:["HTTP","SSH","DNS","FTP"],c:2,e:"DNS utilise UDP port 53."},
+    {q:"traceroute affiche :",a:["La destination","Chaque routeur traverse","Les ports","Les DNS"],c:1,e:"Chaque hop jusqu'a la cible."},
+    {q:"Pour voir les ports en ecoute Linux :",a:["ls","ss -tuln","cat","pwd"],c:1,e:"ss = socket statistics."}
+  ]
+},
+{
+  id:"E4", module:"Module 4 - Python", from:61, to:80,
+  titre:"Examen Module 4 : Scripting Python",
+  duree:30,
+  questions:[
+    {q:"Python 3 s'installe via :",a:["python.org","Un forum","Un torrent","Un CD pirate"],c:0,e:"Site officiel uniquement."},
+    {q:"print sert a :",a:["Lire","Afficher","Supprimer","Compiler"],c:1,e:"Affiche a l'ecran."},
+    {q:"type(3.14) renvoie :",a:["int","float","str","bool"],c:1,e:"3.14 est un float."},
+    {q:"if/elif/else sert a :",a:["Boucler","Prendre des decisions","Importer","Ecrire un fichier"],c:1,e:"Structures conditionnelles."},
+    {q:"range(5) genere :",a:["1 a 5","0 a 4","5","Rien"],c:1,e:"0,1,2,3,4."},
+    {q:"def sert a :",a:["Definir une fonction","Supprimer","Importer","Afficher"],c:0,e:"Definition de fonction."},
+    {q:"Une liste s'ecrit :",a:["(1,2)","[1,2]","{1:2}","<1,2>"],c:1,e:"Les listes utilisent les crochets."},
+    {q:"with open(f) :",a:["Ouvre sans fermer","Ouvre et ferme automatiquement","Supprime","Compresse"],c:1,e:"with gere la fermeture."},
+    {q:"try/except sert a :",a:["Boucler","Gerer les erreurs","Importer","Afficher"],c:1,e:"Capture les exceptions."},
+    {q:"pip install installe :",a:["Un antivirus","Un paquet Python","Un OS","Un pilote"],c:1,e:"Gestionnaire de paquets Python."}
+  ]
+},
+{
+  id:"E5", module:"Module 5 - Outils Cyber", from:81, to:100,
+  titre:"Examen Module 5 : Outils & Pratiques Cyber",
+  duree:30,
+  questions:[
+    {q:"Git sert a :",a:["Compresser","Versionner le code","Scanner","Antivirus"],c:1,e:"Systeme de versioning distribue."},
+    {q:"Pour creer un depot Git :",a:["git start","git init","git new","git create"],c:1,e:"git init initialise le depot."},
+    {q:"Un commit enregistre :",a:["Une image","Un etat du code","Un virus","Un port"],c:1,e:"Sauvegarde dans l'historique Git."},
+    {q:"GitHub est :",a:["Un antivirus","Une plateforme d'hebergement Git","Un OS","Un langage"],c:1,e:"Plateforme de collaboration."},
+    {q:"Wireshark est un :",a:["Editeur","Sniffer reseau","Antivirus","Compilateur"],c:1,e:"Analyseur de paquets."},
+    {q:"Nmap -sV :",a:["Detecte les versions","Ping seulement","Silencieux","Vide"],c:0,e:"Detection des versions de services."},
+    {q:"TryHackMe est :",a:["Un jeu","Une plateforme de labs","Un antivirus","Un reseau social"],c:1,e:"Apprentissage par labs guides."},
+    {q:"Un portfolio se publie sur :",a:["GitHub","Facebook","Instagram","TikTok"],c:0,e:"GitHub montre votre travail."},
+    {q:"Scanner un reseau non autorise est :",a:["Legal","Illegal","Recommande","Neutre"],c:1,e:"Illegal sans autorisation ecrite."},
+    {q:"man sert a :",a:["Manuel des commandes","Lister","Supprimer","Compiler"],c:0,e:"Manuel Linux."}
+  ]
+}
+];
+
+/* Seuil de validation : 70% de bonnes reponses */
+var EXAM_PASS_RATIO = 0.7;
+
+var CERT_PLAN = [
+{seuil:20, modules:"Defis 1-20", titre:"Bases informatiques", cert:"ISC2 Certified in Cybersecurity (CC)", url:"https://www.isc2.org/landing/1mcc", type:"free", desc:"Examen et formation gratuits. Aucun prerequis. LA certification d'entree la plus reconnue."},
+{seuil:40, modules:"Defis 21-40", titre:"Administration Linux", cert:"Fortinet NSE 1-3 (FCF) + Linux Foundation LFD121", url:"https://www.fortinet.com/training-certification", type:"free", desc:"Fortinet FCF (3 modules gratuits) + LFD121 (developpement securise gratuit)."},
+{seuil:60, modules:"Defis 41-60", titre:"Reseaux TCP/IP", cert:"Cisco Junior Cybersecurity Analyst (CCST)", url:"https://www.netacad.com/courses/cybersecurity/introduction-cybersecurity", type:"free", desc:"Badge NetAcad gratuit, aucun prerequis."},
+{seuil:80, modules:"Defis 61-80", titre:"Scripting Python", cert:"Google Cybersecurity Certificate", url:"https://www.coursera.org/professional-certificates/google-cybersecurity", type:"partial", desc:"Gratuit via aide financiere Coursera (90%)."},
+{seuil:100, modules:"Defis 81-100", titre:"Niveau 1 complet", cert:"IBM QRadar SIEM Foundation", url:"https://www.ibm.com/training/learning-path/ibm-qradar-siem-foundation-694", type:"free", desc:"Badge IBM gratuit. Fondamentaux SIEM."}
+];
+
+var MILESTONES = [
+{seuil:20, titre:"Audit et inventaire d'un poste", date:"Apres defi 20", desc:"Inventaire materiel, systeme, mises a jour, permissions, services."},
+{seuil:40, titre:"Script Bash de sauvegarde", date:"Apres defi 40", desc:"tar.gz, rotation 30j, cron, GitHub."},
+{seuil:60, titre:"Laboratoire reseau virtualise", date:"Apres defi 60", desc:"Host-only, 2 VMs Linux, IPs statiques, nmap."},
+{seuil:80, titre:"Outil Python de scan", date:"Apres defi 80", desc:"Sockets + ThreadPoolExecutor + CSV. Lab uniquement."},
+{seuil:100, titre:"Mini-SOC avec Wazuh", date:"Apres defi 100", desc:"SIEM sur Ubuntu, detection brute-force SSH. PCI-DSS."}
+];
+
+var JOBS = [
+{nom:"Djamo - Junior SOC Analyst", url:"https://ci.eclozion-opportunities.com/opportunite/junior-soc-analyst/", type:"CI FinTech - Junior", desc:"SOC, logs PCI DSS, incidents."},
+{nom:"Bridge Bank CI - Stagiaires Securite Numerique", url:"https://ci.eclozion-opportunities.com/opportunite/bridge-bank-recrute-2-stagiaires-en-securite-numerique/", type:"CI Banque - Stage", desc:"Politique securite, pentest, PCI-DSS."},
+{nom:"AFG Holding - Stagiaire Cybersecurite", url:"https://yop.l-frii.com/offre-de-stage-a-atlantic-financial-group-holding-afg-holding-29-novembre-2025/", type:"CI Banque - Stage", desc:"DevSecOps, ISO 27001, Kali."},
+{nom:"Societe Generale CI - Stages", url:"https://yop.l-frii.com/des-dizaines-dopportunites-de-stage-chez-societe-generale-28-mai-2026/", type:"CI Banque - Stage", desc:"9 metiers dont cybersecurite."},
+{nom:"SIB - Controleur Risques IT-SSI Junior", url:"https://emploi.educarriere.ci/offre-156356-controleur-risques-it-ssi-junior-1.html", type:"CI Banque - Junior", desc:"ISO 27000, NIST."},
+{nom:"BOA - Analyste Securite SI", url:"https://yop.l-frii.com/opportunite-a-saisir-au-groupe-bank-of-africa-boa-02-octobre-2025/", type:"CI Banque - Junior", desc:"Coordination securite."},
+{nom:"LinkedIn Jobs", url:"https://www.linkedin.com/jobs/", type:"International", desc:"SOC Junior Abidjan."},
+{nom:"Emploi.ci", url:"https://www.emploi.ci/", type:"CI Generaliste", desc:"Portail ivoirien."}
+];
+
+var JP = 3;
+var state = JSON.parse(localStorage.getItem('cyber_ci') || '{"done":{},"exams":{}}');
+if (!state.exams) state.exams = {};
+Object.keys(state.done).forEach(function(id){ if (state.done[id] === true) state.done[id] = new Date().toISOString(); });
+function save(){ localStorage.setItem('cyber_ci', JSON.stringify(state)); }
+var app = document.getElementById('app');
+
+function todayKey(){ return new Date().toISOString().split('T')[0]; }
+function countToday(){ var t = todayKey(); return Object.values(state.done).filter(function(v){ return typeof v === 'string' && v.startsWith(t); }).length; }
+function countTotal(){ return Object.keys(state.done).length; }
+
+function isExamUnlocked(ex){
+  // Tous les defis du module doivent etre valides
+  for (var i = ex.from; i <= ex.to; i++){
+    if (!state.done[i]) return false;
+  }
+  return true;
+}
+function isExamPassed(ex){
+  return !!(state.exams && state.exams[ex.id] && state.exams[ex.id].passed);
+}
+function passedExamsCount(){
+  if (!state.exams) return 0;
+  return Object.keys(state.exams).filter(function(k){ return state.exams[k].passed; }).length;
+}
+
+function updateProg(){
+  var done = countTotal(), today = countToday();
+  document.getElementById('hs').innerHTML = "Aujourdhui : <b>" + today + "</b> · Defis : <b>" + done + "/" + D.length + "</b> · Examens : <b>" + passedExamsCount() + "/" + EXAMS.length + "</b>";
+}
+
+function render(){
+  updateProg();
+  var today = countToday(), total = countTotal();
+  var html = '<div class="card"><h2>Parcours 100 Defis - Cours detailles</h2><p style="color:#94a3b8;font-size:0.9em">Etudiant L2 UVCI - Objectif Banque CI</p>';
+  html += '<div class="stats-grid"><div class="stat"><span class="big">' + today + '</span><span class="lbl">Aujourdhui</span></div><div class="stat"><span class="big">' + total + '</span><span class="lbl">Defis / ' + D.length + '</span></div><div class="stat"><span class="big">' + passedExamsCount() + '</span><span class="lbl">Examens / ' + EXAMS.length + '</span></div><div class="stat"><span class="big">' + Math.round(total/D.length*100) + '%</span><span class="lbl">Progression</span></div></div>';
+  html += '<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="gold" onclick="showCerts()">Certifications</button><button class="gold" onclick="showStats()">Statistiques</button><button class="gold" onclick="showJobs()">Emplois CI</button><button class="sec" onclick="reset()">Reinitialiser</button></div></div>';
+  
+  var mods = [
+    {n:"Module 1 - Informatique", from:1, to:20, cs:20, exam:"E1"},
+    {n:"Module 2 - Linux", from:21, to:40, cs:40, exam:"E2"},
+    {n:"Module 3 - Reseaux", from:41, to:60, cs:60, exam:"E3"},
+    {n:"Module 4 - Python", from:61, to:80, cs:80, exam:"E4"},
+    {n:"Module 5 - Outils", from:81, to:100, cs:100, exam:"E5"}
+  ];
+  
+  mods.forEach(function(m){
+    var defis = D.filter(function(d){ return d.id >= m.from && d.id <= m.to; });
+    var done = defis.filter(function(d){ return state.done[d.id]; }).length;
+    var cp = CERT_PLAN.filter(function(c){ return c.seuil === m.cs; })[0];
+    var exam = EXAMS.filter(function(e){ return e.id === m.exam; })[0];
+    var examUnlocked = exam && isExamUnlocked(exam);
+    var examPassed = exam && isExamPassed(exam);
+    var status = done === defis.length ? 'done' : '';
+    html += '<div class="card"><h2>' + m.n + '</h2><p style="color:#94a3b8;font-size:0.8em">' + done + '/' + defis.length + ' defis valides</p>';
+    if (cp) {
+      var badge = cp.type === 'free' ? 'free' : 'partial';
+      html += '<div class="cert ' + status + '"><h4>' + (status?'Debloquee':'A debloquer') + ' - ' + cp.modules + '</h4><div style="font-weight:700;margin:4px 0">' + cp.cert + ' <span class="badge ' + badge + '">' + (cp.type==='free'?'GRATUIT':'PARTIEL') + '</span></div><div style="font-size:0.85em;color:#94a3b8;margin-top:6px">' + cp.desc + '</div><div style="margin-top:6px"><a href="' + cp.url + '" target="_blank">Passer</a></div></div>';
+    }
+    html += '<div class="grid">';
+    defis.forEach(function(d){
+      var cls = state.done[d.id] ? 'done' : '';
+      html += '<div class="btn ' + cls + '" onclick="show(' + d.id + ')"><span class="n">Defi ' + d.id + '</span><span class="ti">' + d.t + '</span></div>';
+    });
+    html += '</div>';
+    
+    // Carte examen
+    if (exam) {
+      var cls2 = examPassed ? 'passed' : (examUnlocked ? '' : 'locked');
+      var badgeCls = examPassed ? 'passed' : (examUnlocked ? 'ready' : 'locked');
+      var badgeTxt = examPassed ? 'REUSSI' : (examUnlocked ? 'PRET' : 'VERROUILLE');
+      html += '<div class="exam-card ' + cls2 + '"><span class="exam-badge ' + badgeCls + '">' + badgeTxt + '</span><h4>' + exam.titre + '</h4>';
+      html += '<div class="qcount">' + exam.questions.length + ' questions · Seuil : ' + Math.round(EXAM_PASS_RATIO*100) + '% · ' + exam.duree + ' min</div>';
+      if (examPassed) {
+        var sc = state.exams[exam.id].score;
+        html += '<div style="color:#86efac;font-size:0.85em;margin-top:6px">Score : ' + sc + '/' + exam.questions.length + ' (' + Math.round(sc/exam.questions.length*100) + '%)</div>';
+        html += '<div class="nav"><button class="exam" onclick="startExam(\'' + exam.id + '\')">Repasser l\'examen</button></div>';
+      } else if (examUnlocked) {
+        html += '<div style="color:#e9d5ff;font-size:0.85em;margin-top:6px">Module complete ! Passez l\'examen pour valider.</div>';
+        html += '<div class="nav"><button class="exam" onclick="startExam(\'' + exam.id + '\')">Passer l\'examen</button></div>';
+      } else {
+        var reste = exam.to - done;
+        html += '<div style="color:#94a3b8;font-size:0.85em;margin-top:6px">Validez les ' + reste + ' defis restants pour debloquer.</div>';
+      }
+      html += '</div>';
+    }
+    
+    html += '</div>';
+  });
+  
+  app.innerHTML = html;
+  window.scrollTo(0,0);
+}
+
+function show(id){
+  var d = D.filter(function(x){ return x.id === id; })[0];
+  if (!d) return;
+  var dateValid = state.done[d.id];
+  var dateStr = dateValid ? new Date(dateValid).toLocaleString('fr-FR') : '';
+  
+  var html = '<div class="card"><div class="meta"><small>Defi ' + d.id + '/100</small><small>' + d.d + ' min</small>' + (dateStr ? '<small style="color:#22c55e">Valide le ' + dateStr + '</small>' : '') + '</div>';
+  html += '<h2>Defi ' + d.id + ' : ' + d.t + '</h2>';
+  html += '<div class="intro"><h3 style="color:#7dd3fc;margin-top:0">Introduction</h3><p>' + d.intro + '</p></div>';
+  html += '<div class="analogy"><b>Analogie :</b> ' + d.analogy + '</div>';
+  
+  d.sections.forEach(function(s, i){
+    html += '<div class="section"><h3>' + (i+1) + '. ' + s.titre + '</h3>' + s.contenu;
+    if (s.svg && SVG[s.svg]) {
+      html += '<div class="svg-box">' + SVG[s.svg] + '</div>';
+    }
+    html += '</div>';
+  });
+  
+  html += '<div class="why"><b>Pourquoi en cyber :</b> ' + d.why + '</div>';
+  html += '<div class="bank"><b>Pourquoi pour une banque :</b> ' + d.bank + '</div>';
+  html += '<div class="glo"><b>Glossaire :</b> ' + d.glo + '</div>';
+  html += '<div class="pr"><h3 style="color:#22c55e;margin-top:0">PRATIQUE</h3><ol>';
+  d.pr.forEach(function(p){ html += '<li>' + p + '</li>'; });
+  html += '</ol></div>';
+  html += '<div class="er"><b>Erreur a eviter :</b> ' + d.er + '</div>';
+  html += '<div class="df"><b>Exercice final :</b> ' + d.df + '</div>';
+  html += '<div class="car"><b>Livrable portfolio :</b> ' + d.proj + '</div>';
+  html += '<h3>Quiz</h3><div class="quiz" id="quiz">';
+  
+  d.q.forEach(function(q, i){
+    html += '<div class="q"><b>Q' + (i+1) + '. ' + q.q + '</b>';
+    q.a.forEach(function(opt, j){
+      html += '<label><input type="radio" name="q' + i + '" value="' + j + '"> ' + opt + '</label>';
+    });
+    html += '<div class="exp" id="exp' + i + '"></div></div>';
+  });
+  
+  html += '</div><div class="nav"><button class="sec" onclick="render()">Accueil</button><button onclick="validate(' + id + ')">Valider</button></div><div id="res"></div></div>';
+  
+  app.innerHTML = html;
+  window.scrollTo(0,0);
+}
+
+function validate(id){
+  var d = D.filter(function(x){ return x.id === id; })[0];
+  var correct = 0;
+  d.q.forEach(function(q, i){
+    var sel = document.querySelector('input[name="q' + i + '"]:checked');
+    var labels = document.querySelectorAll('input[name="q' + i + '"]');
+    labels.forEach(function(inp, j){
+      var lbl = inp.parentElement;
+      if (j === q.c) lbl.classList.add('ok');
+      if (sel && +sel.value === j && j !== q.c) lbl.classList.add('ko');
+    });
+    var exp = document.getElementById('exp' + i);
+    exp.style.display = 'block';
+    exp.innerHTML = q.e;
+    if (sel && +sel.value === q.c) correct++;
+  });
+  
+  var ok = correct === d.q.length;
+  var dejaValide = !!state.done[id];
+  document.getElementById('res').innerHTML = '<div class="res ' + (ok?'g':'r') + '">' + (ok ? 'Defi ' + d.id + ' valide !' : 'Score : ' + correct + '/' + d.q.length + ' - Reessayez') + '</div>';
+  
+  if (ok && !dejaValide) {
+    state.done[id] = new Date().toISOString();
+    save();
+    updateProg();
+    // Suggere examen si module complet
+    var exam = EXAMS.filter(function(e){ return e.from <= id && e.to >= id; })[0];
+    if (exam && isExamUnlocked(exam) && !isExamPassed(exam)) {
+      document.getElementById('res').innerHTML += '<div class="res g" style="margin-top:8px">Module complete ! <a href="#" onclick="startExam(\'' + exam.id + '\');return false;">Passer l\'examen final</a></div>';
+    }
+  }
+}
+
+/* ============================================================
+   MOTEUR D'EXAMEN
+   ============================================================ */
+var currentExam = null;
+
+function startExam(id){
+  var ex = EXAMS.filter(function(e){ return e.id === id; })[0];
+  if (!ex) return;
+  if (!isExamUnlocked(ex)) { alert("Validez d'abord tous les defis du module."); return; }
+  currentExam = ex;
+  
+  var html = '<div class="card"><div class="meta"><small>Examen ' + ex.id + '</small><small>' + ex.questions.length + ' questions</small><small>Seuil ' + Math.round(EXAM_PASS_RATIO*100) + '%</small></div>';
+  html += '<h2>' + ex.titre + '</h2>';
+  html += '<div class="intro"><p><b>Instructions :</b> Repondez a toutes les questions. Il faut au moins ' + Math.ceil(ex.questions.length * EXAM_PASS_RATIO) + '/' + ex.questions.length + ' bonnes reponses pour valider. Les corrections s\'affichent apres validation.</p></div>';
+  html += '<div class="quiz" id="examQuiz">';
+  
+  ex.questions.forEach(function(q, i){
+    html += '<div class="q" data-qi="' + i + '"><b>Q' + (i+1) + '. ' + q.q + '</b>';
+    q.a.forEach(function(opt, j){
+      html += '<label><input type="radio" name="exam_q' + i + '" value="' + j + '"> ' + opt + '</label>';
+    });
+    html += '<div class="exp" id="exam_exp' + i + '"></div></div>';
+  });
+  
+  html += '</div><div class="nav"><button class="sec" onclick="render()">Annuler</button><button class="exam" onclick="submitExam()">Valider l\'examen</button></div><div id="exam_res"></div></div>';
+  
+  app.innerHTML = html;
+  window.scrollTo(0,0);
+}
+
+function submitExam(){
+  if (!currentExam) return;
+  var ex = currentExam;
+  var correct = 0;
+  var details = [];
+  
+  ex.questions.forEach(function(q, i){
+    var sel = document.querySelector('input[name="exam_q' + i + '"]:checked');
+    var labels = document.querySelectorAll('input[name="exam_q' + i + '"]');
+    labels.forEach(function(inp, j){
+      var lbl = inp.parentElement;
+      if (j === q.c) lbl.classList.add('ok');
+      if (sel && +sel.value === j && j !== q.c) lbl.classList.add('ko');
+    });
+    var exp = document.getElementById('exam_exp' + i);
+    exp.style.display = 'block';
+    exp.innerHTML = q.e;
+    var ok = sel && +sel.value === q.c;
+    if (ok) correct++;
+    details.push({q: q.q, ok: ok, correct: q.a[q.c], chosen: sel ? q.a[+sel.value] : '(aucune)'});
+  });
+  
+  var ratio = correct / ex.questions.length;
+  var passed = ratio >= EXAM_PASS_RATIO;
+  var existing = state.exams[ex.id];
+  // On enregistre seulement si c'est un nouveau record
+  if (!existing || !existing.passed || correct > existing.score) {
+    state.exams[ex.id] = {
+      score: correct,
+      total: ex.questions.length,
+      passed: passed,
+      date: new Date().toISOString()
+    };
+    save();
+  }
+  
+  var msg = '';
+  if (passed) {
+    msg = '<div class="res g">Examen REUSSI ! ' + correct + '/' + ex.questions.length + ' (' + Math.round(ratio*100) + '%)</div>';
+    if (!existing || !existing.passed) {
+      msg += '<div class="res g" style="margin-top:8px">Felicitations, module valide ! Certificat de module debloque.</div>';
+    }
+  } else {
+    msg = '<div class="res r">Examen echoue : ' + correct + '/' + ex.questions.length + ' (' + Math.round(ratio*100) + '%) - Il faut ' + Math.ceil(ex.questions.length*EXAM_PASS_RATIO) + '/' + ex.questions.length + '</div>';
+  }
+  
+  // Detail
+  msg += '<div class="card" style="margin-top:12px"><h3>Detail des reponses</h3><table><tr><th>#</th><th>Question</th><th>Votre reponse</th><th>Bonne reponse</th><th>Statut</th></tr>';
+  details.forEach(function(d, i){
+    msg += '<tr><td>' + (i+1) + '</td><td>' + d.q + '</td><td>' + d.chosen + '</td><td>' + d.correct + '</td><td style="color:' + (d.ok?'#22c55e':'#ef4444') + '">' + (d.ok?'OK':'KO') + '</td></tr>';
+  });
+  msg += '</table></div>';
+  
+  msg += '<div class="nav"><button class="sec" onclick="render()">Accueil</button><button class="exam" onclick="startExam(\'' + ex.id + '\')">Repasser</button></div>';
+  
+  document.getElementById('exam_res').innerHTML = msg;
+  updateProg();
+  window.scrollTo(0, document.body.scrollHeight - 400);
+}
+
+/* ============================================================
+   PAGES ANNEXES
+   ============================================================ */
+function showCerts(){
+  var total = countTotal();
+  var html = '<div class="card"><button class="sec" onclick="render()">Accueil</button><h2>Plan de certification</h2>';
+  CERT_PLAN.forEach(function(p){
+    var status = total >= p.seuil ? 'done' : '';
+    var badge = p.type === 'free' ? 'free' : 'partial';
+    var exam = EXAMS.filter(function(e){ return e.to === p.seuil; })[0];
+    var examPassed = exam && isExamPassed(exam);
+    html += '<div class="cert ' + status + '"><h4>' + p.titre + ' - ' + p.modules + '</h4><div style="font-size:0.85em;color:#fbbf24;font-weight:700;margin:4px 0">' + p.seuil + ' defis minimum</div><div style="font-weight:700;margin:4px 0">' + p.cert + ' <span class="badge ' + badge + '">' + (p.type==='free'?'GRATUIT':'PARTIEL') + '</span></div><div style="font-size:0.85em;color:#94a3b8;margin-top:6px">' + p.desc + '</div><div style="margin-top:8px"><a href="' + p.url + '" target="_blank">Site officiel</a></div>' + (status==='done'?'<div style="color:#86efac;font-weight:700;margin-top:8px">Certification debloquee' + (examPassed ? ' ✓ Examen reussi' : ' (examen module a passer)') + '</div>':'<div style="color:#94a3b8;margin-top:8px">Encore ' + (p.seuil-total) + ' defis</div>') + '</div>';
+  });
+  html += '</div>';
+  app.innerHTML = html;
+}
+
+function showStats(){
+  var total = countTotal(), today = countToday();
+  var now = new Date();
+  var dayOfWeek = now.getDay() || 7;
+  var monday = new Date(now); monday.setDate(now.getDate() - dayOfWeek + 1); monday.setHours(0,0,0,0);
+  var week = Object.values(state.done).filter(function(v){ return typeof v === 'string' && new Date(v) >= monday; }).length;
+  var monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+  var month = Object.values(state.done).filter(function(v){ return typeof v === 'string' && new Date(v) >= monthStart; }).length;
+  var milestonesDone = MILESTONES.filter(function(m){ return state.done[m.seuil]; });
+  
+  var html = '<div class="card"><button class="sec" onclick="render()">Accueil</button><h2>Statistiques</h2>';
+  html += '<div class="stats-grid"><div class="stat"><span class="big">' + today + '</span><span class="lbl">Aujourdhui</span></div><div class="stat"><span class="big">' + week + '</span><span class="lbl">Semaine</span></div><div class="stat"><span class="big">' + month + '</span><span class="lbl">Mois</span></div><div class="stat"><span class="big">' + total + '</span><span class="lbl">Total</span></div></div>';
+  
+  html += '<h3>Examens de module</h3>';
+  html += '<table><tr><th>Examen</th><th>Score</th><th>Statut</th><th>Date</th></tr>';
+  EXAMS.forEach(function(ex){
+    var r = state.exams && state.exams[ex.id];
+    var statut = r ? (r.passed ? 'REUSSI' : 'ECHOUE') : 'Non passe';
+    var color = r ? (r.passed ? '#22c55e' : '#ef4444') : '#94a3b8';
+    html += '<tr><td>' + ex.titre + '</td><td>' + (r ? r.score + '/' + r.total : '-') + '</td><td style="color:' + color + ';font-weight:700">' + statut + '</td><td>' + (r ? new Date(r.date).toLocaleString('fr-FR') : '-') + '</td></tr>';
+  });
+  html += '</table>';
+  
+  html += '<h3>Projets majeurs atteints</h3>';
+  if (milestonesDone.length === 0) {
+    html += '<p style="color:#94a3b8">Aucun projet majeur encore atteint.</p>';
+  } else {
+    html += '<ul>';
+    milestonesDone.forEach(function(m){ html += '<li><b>' + m.titre + '</b> - ' + m.date + '<br><span style="color:#94a3b8;font-size:0.85em">' + m.desc + '</span></li>'; });
+    html += '</ul>';
+  }
+  html += '<h3>Historique defis (20 dernieres)</h3><table><tr><th>Defi</th><th>Titre</th><th>Date</th></tr>';
+  var entries = Object.entries(state.done).sort(function(a,b){ return new Date(b[1]) - new Date(a[1]); });
+  entries.slice(0, 20).forEach(function(e){
+    var d = D.filter(function(x){ return x.id === +e[0]; })[0];
+    html += '<tr><td>' + e[0] + '</td><td>' + (d?d.t:'?') + '</td><td>' + new Date(e[1]).toLocaleString('fr-FR') + '</td></tr>';
+  });
+  html += '</table></div>';
+  app.innerHTML = html;
+}
+
+function showJobs(){
+  var html = '<div class="card"><button class="sec" onclick="render()">Accueil</button><h2>Emplois en Cote dIvoire</h2>';
+  JOBS.forEach(function(j){
+    html += '<div class="job"><h4>' + j.nom + '</h4><div style="font-size:0.75em;color:#94a3b8">' + j.type + '</div><div style="margin:6px 0;font-size:0.88em">' + j.desc + '</div><a href="' + j.url + '" target="_blank">' + j.url + '</a></div>';
+  });
+  html += '</div>';
+  app.innerHTML = html;
+}
+
+function reset(){
+  if (confirm('Reinitialiser toute la progression (defis + examens) ?')) {
+    localStorage.removeItem('cyber_ci');
+    location.reload();
+  }
+}
+
+render();
+</script>
+</body>
+</html>
